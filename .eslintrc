@@ -1,0 +1,77 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "airbnb/hooks"],
+  "rules": {
+    "react/jsx-filename-extension": [
+      "error",
+      {"extensions": [".js", ".jsx"]}
+    ],
+    "arrow-body-style": ["warn", "as-needed"],
+    "react/jsx-curly-brace-presence": [
+      "warn",
+      {"props": "never", "children": "never"}
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/state-in-constructor": "off",
+    "react/prop-types": ["warn"],
+    "semi": ["error", "never"],
+    "linebreak-style": "off",
+    "comma-dangle": ["error", "never"],
+    "object-curly-spacing": ["error", "never"],
+    "import/order": [
+      "error",
+      {
+        "groups": [["builtin", "external"], "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "jsx-quotes": ["error", "prefer-single"],
+    "react/forbid-prop-types": ["error", {"forbid": ["any"]}],
+    "import/prefer-default-export": "warn",
+    "react/no-array-index-key": "off",
+    "object-curly-newline": "off",
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": "parens-new-line",
+        "assignment": "parens-new-line",
+        "return": "parens-new-line",
+        "arrow": "parens-new-line",
+        "condition": "parens-new-line",
+        "logical": "ignore",
+        "prop": "ignore"
+      }
+    ],
+    "operator-linebreak": "off",
+    "implicit-arrow-linebreak": "off",
+    "no-confusing-arrow": "off",
+    "react/jsx-curly-newline": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-indent": "off",
+    "indent": "off",
+    "function-paren-newline": "off",
+    "curly": "error",
+    "no-nested-ternary": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "no-template-curly-in-string": "off",
+    "no-plusplus": "off"
+  }
+}

@@ -1,0 +1,20 @@
+// font sizes
+export const H1Text = '34px'
+export const H2Text = '27px'
+export const H3Text = '23px'
+export const TabsText = '21px'
+export const Subtitle1Text = '19px'
+export const LabelText = '16px'
+export const ButtonText = '16px'
+export const Subtitle2Text = '14px'
+export const BodyText = '14px'
+export const CaptionText = '13px'
+export const FooterText = '12px'
+export const OverlineText = '11px'
+
+// font weight
+export const LightFontWeight = '200'
+export const BookFontWeight = '300'
+export const MediumFontWeight = '500'
+export const SemiBoldFontWeight = '600'
+export const BoldFontWeight = '700'

@@ -1,0 +1,31 @@
+{
+  "cSpell.words": [
+    "antd",
+    "browserslist",
+    "datas",
+    "datasource",
+    "jsx",
+    "localstorage",
+    "logo",
+    "middlewares",
+    "multilines",
+    "myskypro",
+    "myskypro logo",
+    "react",
+    "react jsx wrap multilines",
+    "redux",
+    "redux middlewares",
+    "reduxjs",
+    "skypro",
+    "wrap"
+  ],
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.format.enable": true,
+  "eslint.run": "onType"
+}

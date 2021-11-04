@@ -1,0 +1,15 @@
+*
+!*/
+!*.js
+!*.ts
+!*.json
+.vscode
+node_modules
+dist
+public
+umd
+.cache
+/*.js
+
+## Custom files to ignore validations
+serviceWorker.js
