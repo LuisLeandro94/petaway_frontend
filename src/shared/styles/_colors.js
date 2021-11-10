@@ -1,8 +1,10 @@
 // page colors
-export const PageBackground = '#F8F8F8'
+export const White = '#F8F8F8'
 
-export const PrimaryColor = '#0065B5'
-export const SecondaryColor = '#0267B2'
+export const PrimaryColor = '#00A6AA'
+export const SecondaryColor = '#CECECE'
+export const TextColor = '#000000'
+export const DarkGray = '#6D6D6D'
 
 export const ErrorColor = '#550000'
 export const SuccessColor = '#000055'
