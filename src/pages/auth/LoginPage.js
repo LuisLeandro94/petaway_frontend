@@ -11,11 +11,18 @@ import Header from '../../shared/components/header/Header'
 import {
   ButtonContainer,
   Container,
+  Disclaimer,
+  DisclaimerLinks,
+  ForgotPassword,
+  FormContainer,
   FormWrapper,
   InputContainer,
   InputTitle,
   LoginInput,
+  LoginRedirect,
+  LoginRedirectLink,
   PasswordInput,
+  Separator,
   SignInButton,
   Testestestes,
   Title
@@ -63,25 +70,47 @@ const LoginPage = () => {
           <Form
             onSubmit={onSubmit}
             validate={validate}
-            render={({handleSubmit}) => (
-              <form onSubmit={handleSubmit}>
+            render={({handleSubmit, submitting}) => (
+              <FormContainer
+                onSubmit={handleSubmit}
+                style={{position: 'relative'}}
+              >
                 <Title>
                   <Translate id='LOGIN_TITLE' />
                 </Title>
                 <InputContainer>
                   <InputTitle>E-mail</InputTitle>
-                  <Field name='email' component='input' />
+                  <Field name='email' component={LoginInput} />
                 </InputContainer>
                 <InputContainer>
                   <InputTitle>Password</InputTitle>
-                  <Field name='password' component='input' />
+                  <Field name='password' component={PasswordInput} />
                 </InputContainer>
                 <ButtonContainer>
-                  <SignInButton type='submit'>Sign In</SignInButton>
+                  <SignInButton type='submit' disabled={submitting}>
+                    Sign In
+                  </SignInButton>
                 </ButtonContainer>
-              </form>
+              </FormContainer>
             )}
           />
+          <Disclaimer>
+            By signing in or signing up, I agree to PetAway.com's{' '}
+            <DisclaimerLinks href='/'>Terms of Service</DisclaimerLinks>{' '}
+            and <DisclaimerLinks href='/'>Privacy Policy</DisclaimerLinks>,
+            confirm that I am 18 years of age or older, and consent to
+            receiving email communication. This site is protected by
+            reCAPTCHA and the Google{' '}
+            <DisclaimerLinks href='/'>Privacy Policy</DisclaimerLinks> and{' '}
+            <DisclaimerLinks href='/'>Terms of Service</DisclaimerLinks>{' '}
+            apply.
+          </Disclaimer>
+          <ForgotPassword href='/'>Forgot your password?</ForgotPassword>
+          <Separator />
+          <LoginRedirect>
+            Don't have a PetAway account?{' '}
+            <LoginRedirectLink href='/'>Sign up now!</LoginRedirectLink>
+          </LoginRedirect>
         </FormWrapper>
       </Container>
     </>
