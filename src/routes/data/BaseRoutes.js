@@ -4,7 +4,7 @@ export default [
   {
     path: '/',
     component: DashboardPage,
-    isAuthenticated: false,
+    isAuthenticated: true,
     role: 1
   }
 ]

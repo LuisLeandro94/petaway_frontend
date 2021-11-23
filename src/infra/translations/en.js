@@ -9,5 +9,6 @@ export default {
   BECOME_WALKER: 'Become a Walker',
   SERVICES: 'Our Services',
   SIGNUP: 'Sign Up',
-  SIGNIN: 'Sign In'
+  SIGNIN: 'Sign In',
+  LOGIN_TITLE: 'Sign in to PetAway'
 }
