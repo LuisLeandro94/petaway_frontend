@@ -27,6 +27,6 @@ const MobileMenu = ({toggled}) => (
 )
 
 MobileMenu.propTypes = {
-  toggled: PropTypes.func.isRequired
+  toggled: PropTypes.bool.isRequired
 }
 export default MobileMenu
