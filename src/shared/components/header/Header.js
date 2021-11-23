@@ -32,7 +32,17 @@ const Header = ({isLogged}) => {
       <Container>
         <LogoContainer href='/'>
           <Logo src={PetAway} alt='PetAway Logo' />
-        </LogoContainer>
+        </LogoContainer>{' '}
+        <HamburgerContainer>
+          <HamburgerIcon
+            toggled={isOpen}
+            toggle={setOpen}
+            size={48}
+            duration={1}
+            color={DarkGray}
+            rounded
+          />
+        </HamburgerContainer>
         <LinksWrapper>
           <LinksList>
             <ListItem>
@@ -65,18 +75,8 @@ const Header = ({isLogged}) => {
             <Underline />
           </Operations>
         </OperationWrapper>
-        <HamburgerContainer>
-          <HamburgerIcon
-            toggled={isOpen}
-            toggle={setOpen}
-            size={48}
-            duration={1}
-            color={DarkGray}
-            rounded
-          />
-        </HamburgerContainer>
+        <MobileMenu toggled={isOpen} />
       </Container>
-      <MobileMenu toggled={isOpen} />
     </>
   )
 }

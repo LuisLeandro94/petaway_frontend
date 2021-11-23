@@ -13,6 +13,8 @@ export const Container = styled.nav`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: none;
 `
 
 export const LogoContainer = styled.a`
@@ -22,7 +24,9 @@ export const LogoContainer = styled.a`
 
   @media ${device.tabletL} {
     width: 100%;
-    text-align: left;
+    order: 2;
+    text-align: right;
+    padding: 15px;
   }
 `
 
@@ -149,6 +153,8 @@ export const HamburgerContainer = styled.div`
   padding: 15px;
 
   @media ${device.tabletL} {
+    order: 1;
     display: block;
+    width: 100%;
   }
 `

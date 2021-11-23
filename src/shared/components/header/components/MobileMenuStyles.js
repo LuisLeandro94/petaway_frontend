@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
 
 import {
   DarkGray,
@@ -10,14 +10,16 @@ import {ButtonText, Poppins, Subtitle} from '../../../styles/_texts'
 
 export const Wrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
-  height: 100%;
+  height: 100vh;
   background-color: ${DarkGray};
   padding: 50px 0;
-  float: right;
-  position: relative;
-  right: ${({toggled}) => (toggled ? '0%' : '-100%')};
-  transition: right 1s ease;
+  position: absolute;
+  left: 0;
+  transform: ${({toggled}) =>
+    toggled ? 'translateX(0)' : 'translateX(-100%)'};
+  transition: transform 1s ease;
+  z-index: 1000;
+  top: 95px;
 `
 
 export const List = styled.ul`
