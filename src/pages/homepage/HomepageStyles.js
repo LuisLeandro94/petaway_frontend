@@ -8,7 +8,13 @@ import {
   White
 } from '../../shared/styles/_colors'
 import {device} from '../../shared/styles/_responsive'
-import {Subtitle, Poppins, ButtonText} from '../../shared/styles/_texts'
+import {
+  Subtitle,
+  Poppins,
+  ButtonText,
+  SignUpText,
+  HeaderMenus
+} from '../../shared/styles/_texts'
 
 export const Container = styled.div`
   width: 100%;
@@ -38,6 +44,10 @@ export const PetawayLogo = styled.img`
   width: 100%;
   z-index: 2;
   margin-top: 150px;
+
+  @media ${device.desktop} {
+    margin-top: 100px;
+  }
 `
 
 export const Quote = styled.h1`
@@ -50,6 +60,21 @@ export const Quote = styled.h1`
   color: ${SecondaryColor};
   z-index: 2;
   margin-top: -150px;
+
+  @media ${device.desktopL} {
+    margin-top: -100px;
+  }
+  @media ${device.laptopL} {
+    text-align: center;
+  }
+  @media ${device.tablet} {
+    font-size: ${SignUpText};
+  }
+  @media ${device.mobileM} {
+    margin-top: -50px;
+    font-size: ${HeaderMenus};
+    line-height: 26px;
+  }
 `
 
 export const FindMoreButton = styled.button`
