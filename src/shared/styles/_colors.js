@@ -5,6 +5,7 @@ export const PrimaryColor = '#00A6AA'
 export const SecondaryColor = '#CECECE'
 export const TextColor = '#000000'
 export const DarkGray = '#6D6D6D'
+export const BorderColor = '#cecece'
 
 export const ErrorColor = '#550000'
 export const SuccessColor = '#000055'

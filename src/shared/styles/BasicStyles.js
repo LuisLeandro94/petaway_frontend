@@ -1,6 +1,6 @@
 import styled, {createGlobalStyle} from 'styled-components'
 
-import {H1Text} from './_texts'
+import {Subtitle} from './_texts'
 
 export const BasicStyles = createGlobalStyle`
   body {
@@ -53,7 +53,7 @@ export const BasicStyles = createGlobalStyle`
       }
       /* poppins-700 - latin */
       @font-face {
-        font-family: 'Poppins Bold';
+        font-family: 'PoppinsBold';
         font-style: normal;
         font-weight: 700;
         src: local(''),
@@ -92,5 +92,5 @@ export const PageLoadingContainer = styled.div`
 export const BaseTitle = styled.h1`
   margin: 0;
   padding: 0;
-  font-size: ${H1Text};
+  font-size: ${Subtitle};
 `
