@@ -1,6 +1,5 @@
 import React from 'react'
 
-import {Input} from 'antd'
 import {Field, Form} from 'react-final-form'
 import {Translate} from 'react-localize-redux'
 import {useHistory} from 'react-router'

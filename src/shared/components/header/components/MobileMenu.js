@@ -16,7 +16,7 @@ const MobileMenu = ({toggled}) => (
     <List>
       {MenuList.map((menu) => (
         <ListItem key={menu.id}>
-          <ListLink>
+          <ListLink href={menu.link}>
             {menu.name}
             <Underline />
           </ListLink>
