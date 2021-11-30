@@ -21,12 +21,14 @@ import {
 
 export const BodyWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background-color: ${SecondaryColor};
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 130px;
+  padding-bottom: 50px;
 `
 
 export const FormWrapper = styled.div`

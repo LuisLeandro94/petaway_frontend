@@ -15,6 +15,9 @@ export const Container = styled.nav`
   align-items: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   overflow: none;
+  position: fixed;
+  z-index: 3;
+  top: 0;
 `
 
 export const LogoContainer = styled.a`

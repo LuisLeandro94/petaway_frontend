@@ -18,7 +18,11 @@ const ApplicationRoutes = () => {
           exact
           path={route.path}
           render={(routerProps) => (
-            <AuthenticatedRoute route={route} routerProps={routerProps} />
+            <AuthenticatedRoute
+              route={route}
+              routerProps={routerProps}
+              header={route.header}
+            />
           )}
         />
       )
@@ -29,8 +33,13 @@ const ApplicationRoutes = () => {
         key={key}
         exact
         path={route.path}
+        header={route.header}
         component={(routerProps) => (
-          <UnauthenticatedRoute route={route} routerProps={routerProps} />
+          <UnauthenticatedRoute
+            route={route}
+            routerProps={routerProps}
+            header={route.header}
+          />
         )}
       />
     )

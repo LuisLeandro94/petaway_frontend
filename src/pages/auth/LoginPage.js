@@ -109,7 +109,9 @@ const LoginPage = () => {
           <Separator />
           <LoginRedirect>
             Don't have a PetAway account?{' '}
-            <LoginRedirectLink href='/'>Sign up now!</LoginRedirectLink>
+            <LoginRedirectLink href='/signup'>
+              Sign up now!
+            </LoginRedirectLink>
           </LoginRedirect>
         </FormWrapper>
       </Container>

@@ -15,7 +15,6 @@ import {
   DisclaimerText,
   FormText,
   Poppins,
-  PoppinsBold,
   SignUpText,
   Subtitle
 } from '../../shared/styles/_texts'
@@ -31,10 +30,11 @@ export const Container = styled.div`
   justify-content: center;
   align-content: center;
   align-items: center;
+  padding-top: 100px;
 `
 
 export const FormWrapper = styled.div`
-  max-height: 650px;
+  max-height: 610px;
   max-width: 550px;
   width: 100%;
   height: 100%;

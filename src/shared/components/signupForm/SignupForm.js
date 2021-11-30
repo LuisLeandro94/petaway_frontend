@@ -98,7 +98,7 @@ const SignUpForm = () => (
       <Separator />
       <LoginRedirect>
         Already have a PetAway account?{' '}
-        <LoginRedirectLink>Sign in now.</LoginRedirectLink>
+        <LoginRedirectLink href='/login'>Sign in now.</LoginRedirectLink>
       </LoginRedirect>
     </FormWrapper>
   </BodyWrapper>
