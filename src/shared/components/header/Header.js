@@ -66,11 +66,11 @@ const Header = ({isLogged}) => {
           </LinksList>
         </LinksWrapper>
         <OperationWrapper>
-          <Operations href='/'>
+          <Operations href='/signup'>
             <Translate id='SIGNUP' />
             <Underline />
           </Operations>
-          <Operations href='/'>
+          <Operations href='/login'>
             <Translate id='SIGNIN' />
             <Underline />
           </Operations>

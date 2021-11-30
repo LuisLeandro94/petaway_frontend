@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
+import Header from '../../shared/components/header/Header'
 import {
   PageContainer,
   PageLoadingContainer
@@ -16,7 +17,8 @@ const AuthenticatedRoute = ({
   route,
   ready,
   dispatch,
-  routerProps
+  routerProps,
+  header
 }) => {
   if (!ready) {
     return (
@@ -30,6 +32,15 @@ const AuthenticatedRoute = ({
   }
 
   const PageComponent = route.component
+
+  if (header === true) {
+    return (
+      <PageContainer>
+        <Header />
+        <PageComponent router={routerProps} user={user} />
+      </PageContainer>
+    )
+  }
 
   return (
     <PageContainer>

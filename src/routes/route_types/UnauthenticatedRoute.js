@@ -4,12 +4,13 @@ import {Spin} from 'antd'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
+import Header from '../../shared/components/header/Header'
 import {
   PageContainer,
   PageLoadingContainer
 } from '../../shared/styles/BasicStyles'
 
-const UnauthenticatedRoute = ({route, ready, routerProps}) => {
+const UnauthenticatedRoute = ({route, ready, routerProps, header}) => {
   if (!ready) {
     return (
       <PageLoadingContainer>
@@ -19,6 +20,16 @@ const UnauthenticatedRoute = ({route, ready, routerProps}) => {
   }
 
   const PageComponent = route.component
+
+  if (header === true) {
+    return (
+      <PageContainer>
+        <Header />
+        <PageComponent router={routerProps} />
+      </PageContainer>
+    )
+  }
+
   return (
     <PageContainer>
       <PageComponent router={routerProps} />
