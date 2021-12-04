@@ -6,6 +6,14 @@ import {PrimaryColor, TextColor, White} from '../../shared/styles/_colors'
 import {device} from '../../shared/styles/_responsive'
 import {Poppins, ResultTitle, TitleText} from '../../shared/styles/_texts'
 
+export const PageWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: ${({option}) => (option === 0 ? '1' : '0')};
+`
+
 export const BackgroundContainer = styled.div`
   background-image: url(${background});
   background-position: center;
