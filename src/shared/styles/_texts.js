@@ -1,5 +1,6 @@
 // font sizes
 export const TitleText = '68px'
+export const ServiceDesc = '48px'
 export const Subtitle = '36px'
 export const ButtonText = '28px'
 export const SignUpText = '26px'

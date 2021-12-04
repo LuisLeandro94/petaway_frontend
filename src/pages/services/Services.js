@@ -14,7 +14,17 @@ import {
   OptionDetail,
   OptionDetailWrapper,
   CollWrapper,
-  PageWrapper
+  PageWrapper,
+  BackWrapper,
+  BackButton,
+  BackText,
+  MenuContainer,
+  Content,
+  ServiceSubtitle,
+  ServiceTitle,
+  ButtonContainer,
+  BookNowButton,
+  SecondMenuContainer
 } from './ServicesStyles'
 
 const Services = () => {
@@ -23,7 +33,7 @@ const Services = () => {
   return (
     <>
       <PageWrapper option={selectedOption}>
-        <BackgroundContainer />
+        <BackgroundContainer option={selectedOption} />
         <Container>
           <PageTitle>Our Services</PageTitle>
           <OptionsWrapper justify='center'>
@@ -61,6 +71,44 @@ const Services = () => {
             </CollWrapper>
           </OptionsWrapper>
         </Container>
+      </PageWrapper>
+      <PageWrapper option={selectedOption}>
+        <BackgroundContainer />
+        <MenuContainer>
+          <BackWrapper onClick={() => setSelectedOption(0)}>
+            <BackButton />
+            <BackText>Back</BackText>
+          </BackWrapper>
+          <Content>
+            <ServiceTitle>
+              Your perfect pet sitter is also your perfect home sitter
+            </ServiceTitle>
+            <ServiceSubtitle>
+              Leave both your pet and your home in good hands
+            </ServiceSubtitle>
+            <ButtonContainer>
+              <BookNowButton>Book House Sitting</BookNowButton>
+            </ButtonContainer>
+          </Content>
+        </MenuContainer>
+      </PageWrapper>
+      <PageWrapper option={selectedOption}>
+        <BackgroundContainer />
+        <MenuContainer>
+          <BackWrapper onClick={() => setSelectedOption(0)}>
+            <BackButton />
+            <BackText>Back</BackText>
+          </BackWrapper>
+          <Content>
+            <ServiceTitle>Pet Walking Made Easy</ServiceTitle>
+            <ServiceSubtitle>
+              Treat your pet with a nice walk in the sun
+            </ServiceSubtitle>
+            <ButtonContainer>
+              <BookNowButton>Book A Walk</BookNowButton>
+            </ButtonContainer>
+          </Content>
+        </MenuContainer>
       </PageWrapper>
     </>
   )
