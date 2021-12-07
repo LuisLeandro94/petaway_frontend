@@ -46,20 +46,20 @@ const Header = ({isLogged}) => {
         <LinksWrapper>
           <LinksList>
             <ListItem>
-              <ItemImage href='/' src={Search} />
               <LinkItem href='/'>
+                <ItemImage src={Search} />
                 <Translate id='SEARCH' />
               </LinkItem>
             </ListItem>
             <ListItem>
-              <ItemImage href='/' src={Heart} />
               <LinkItem href='/'>
+                <ItemImage src={Heart} />
                 <Translate id='BECOME_WALKER' />
               </LinkItem>
             </ListItem>
             <ListItem>
-              <ItemImage href='/' src={Paw} />
-              <LinkItem href='/'>
+              <LinkItem href='/services'>
+                <ItemImage src={Paw} />
                 <Translate id='SERVICES' />
               </LinkItem>
             </ListItem>
