@@ -17,7 +17,9 @@ export const User = {
   password: 'Petaway123',
   jwt: 'teste',
   firstName: 'Luís',
-  lastName: 'Leandro'
+  lastName: 'Leandro',
+  logged: true,
+  type: 1
 }
 
 export const UserList = [User]

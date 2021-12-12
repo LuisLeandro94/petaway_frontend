@@ -1,11 +1,17 @@
 import React, {useState} from 'react'
 
+import {BellOutlined} from '@ant-design/icons'
+import {MenuDivider} from '@szhsin/react-menu'
+import '@szhsin/react-menu/dist/index.css'
+import '@szhsin/react-menu/dist/transitions/slide.css'
+import {Badge, Drawer} from 'antd'
 import {Translate} from 'react-localize-redux'
 
 import Heart from '../../../assets/Heart.png'
 import PetAway from '../../../assets/logo.png'
 import Paw from '../../../assets/Paw.png'
 import Search from '../../../assets/Search.png'
+import {User} from '../../mockup/Mockup'
 import {DarkGray} from '../../styles/_colors'
 import MobileMenu from './components/MobileMenu'
 import {
@@ -21,11 +27,25 @@ import {
   Operations,
   Underline,
   HamburgerIcon,
-  HamburgerContainer
+  HamburgerContainer,
+  UserWrapper,
+  UserAvatar,
+  Notifications,
+  UserMenu,
+  UserMenuListItem
 } from './HeaderStyles'
 
-const Header = ({isLogged}) => {
+const Header = () => {
   const [isOpen, setOpen] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const [notification, setNotification] = useState(false)
+  const [which, setWhich] = useState(0)
+  const showDrawer = () => {
+    setVisible(true)
+  }
+  const onClose = () => {
+    setVisible(false)
+  }
 
   return (
     <>
@@ -51,12 +71,14 @@ const Header = ({isLogged}) => {
                 <Translate id='SEARCH' />
               </LinkItem>
             </ListItem>
-            <ListItem>
-              <LinkItem href='/'>
-                <ItemImage src={Heart} />
-                <Translate id='BECOME_WALKER' />
-              </LinkItem>
-            </ListItem>
+            {!User.logged && (
+              <ListItem>
+                <LinkItem href='/'>
+                  <ItemImage src={Heart} />
+                  <Translate id='BECOME_WALKER' />
+                </LinkItem>
+              </ListItem>
+            )}
             <ListItem>
               <LinkItem href='/services'>
                 <ItemImage src={Paw} />
@@ -65,16 +87,71 @@ const Header = ({isLogged}) => {
             </ListItem>
           </LinksList>
         </LinksWrapper>
-        <OperationWrapper>
-          <Operations href='/signup'>
-            <Translate id='SIGNUP' />
-            <Underline />
-          </Operations>
-          <Operations href='/login'>
-            <Translate id='SIGNIN' />
-            <Underline />
-          </Operations>
-        </OperationWrapper>
+        {!User.logged && (
+          <OperationWrapper>
+            <Operations href='/signup'>
+              <Translate id='SIGNUP' />
+              <Underline />
+            </Operations>
+            <Operations href='/login'>
+              <Translate id='SIGNIN' />
+              <Underline />
+            </Operations>
+          </OperationWrapper>
+        )}
+        {User.logged && (
+          <>
+            <UserWrapper>
+              <Badge
+                count={5}
+                size='small'
+                onClick={() => setNotification(!notification)}
+              >
+                <Notifications>
+                  <BellOutlined
+                    style={{fontSize: '24px', color: '#cecece'}}
+                  />
+                </Notifications>
+              </Badge>
+              <Drawer
+                title='Notifications'
+                visible={notification}
+                onClose={() => setNotification(!notification)}
+                contentWrapperStyle={{
+                  marginTop: '95px'
+                }}
+                mask={false}
+                zIndex={2}
+                closable={false}
+              >
+                {/* TODO Add notification list */}
+                {/* Add notification list counter */}
+                asd
+              </Drawer>
+              <UserMenu
+                menuButton={
+                  <UserAvatar
+                    style={{
+                      color: '#00A6AA',
+                      backgroundColor: {DarkGray}
+                    }}
+                    size='large'
+                    onClick={showDrawer}
+                  >
+                    {User.firstName[0]}
+                    {User.lastName[0]}
+                  </UserAvatar>
+                }
+                transition
+              >
+                <UserMenuListItem>Profile</UserMenuListItem>
+                <UserMenuListItem>Settings</UserMenuListItem>
+                <MenuDivider />
+                <UserMenuListItem>Log out</UserMenuListItem>
+              </UserMenu>
+            </UserWrapper>
+          </>
+        )}
         <MobileMenu toggled={isOpen} />
       </Container>
     </>
