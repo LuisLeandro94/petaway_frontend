@@ -4,7 +4,7 @@ import {BellOutlined} from '@ant-design/icons'
 import {MenuDivider} from '@szhsin/react-menu'
 import '@szhsin/react-menu/dist/index.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
-import {Badge} from 'antd'
+import {Badge, Drawer} from 'antd'
 import {Translate} from 'react-localize-redux'
 
 import Heart from '../../../assets/Heart.png'
@@ -38,6 +38,7 @@ import {
 const Header = () => {
   const [isOpen, setOpen] = useState(false)
   const [visible, setVisible] = useState(false)
+  const [notification, setNotification] = useState(false)
   const [which, setWhich] = useState(0)
   const showDrawer = () => {
     setVisible(true)
@@ -101,13 +102,32 @@ const Header = () => {
         {User.logged && (
           <>
             <UserWrapper>
-              <Badge count={5} size='small'>
+              <Badge
+                count={5}
+                size='small'
+                onClick={() => setNotification(!notification)}
+              >
                 <Notifications>
                   <BellOutlined
                     style={{fontSize: '24px', color: '#cecece'}}
                   />
                 </Notifications>
               </Badge>
+              <Drawer
+                title='Notifications'
+                visible={notification}
+                onClose={() => setNotification(!notification)}
+                contentWrapperStyle={{
+                  marginTop: '95px'
+                }}
+                mask={false}
+                zIndex={2}
+                closable={false}
+              >
+                {/* TODO Add notification list */}
+                {/* Add notification list counter */}
+                asd
+              </Drawer>
               <UserMenu
                 menuButton={
                   <UserAvatar
@@ -129,18 +149,6 @@ const Header = () => {
                 <MenuDivider />
                 <UserMenuListItem>Log out</UserMenuListItem>
               </UserMenu>
-              {/* <Drawer
-                onClose={onClose}
-                visible={visible}
-                title={`Welcome ${User.firstName} ${User.lastName}`}
-                style={{height: '190px'}}
-                mask={false}
-              >
-                <MenuLinks>Profile</MenuLinks>
-                <MenuLinks>Settings</MenuLinks>
-                <LineSeparator />
-                <MenuLinks>Log out</MenuLinks>
-              </Drawer> */}
             </UserWrapper>
           </>
         )}
