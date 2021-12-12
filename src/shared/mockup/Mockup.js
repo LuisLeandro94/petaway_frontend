@@ -6,7 +6,8 @@ export const UserData = {
   state: 'Braga',
   zipCode: '4835-295',
   country: 'Portugal',
-  profilePicture: '../../assets/Logo_PetAway_V1.png',
+  profilePicture:
+    'https://static1-br.millenium.gg/articles/0/62/10/@/96996-kekw-article_image_t-1.png',
   birthdate: '16/07/1994',
   phoneNumber: '917688021'
 }
