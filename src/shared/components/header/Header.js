@@ -1,7 +1,10 @@
 import React, {useState} from 'react'
 
 import {BellOutlined} from '@ant-design/icons'
-import {Badge, Drawer} from 'antd'
+import {MenuDivider} from '@szhsin/react-menu'
+import '@szhsin/react-menu/dist/index.css'
+import '@szhsin/react-menu/dist/transitions/slide.css'
+import {Badge} from 'antd'
 import {Translate} from 'react-localize-redux'
 
 import Heart from '../../../assets/Heart.png'
@@ -9,7 +12,7 @@ import PetAway from '../../../assets/logo.png'
 import Paw from '../../../assets/Paw.png'
 import Search from '../../../assets/Search.png'
 import {User} from '../../mockup/Mockup'
-import {DarkGray, PrimaryColor} from '../../styles/_colors'
+import {DarkGray} from '../../styles/_colors'
 import MobileMenu from './components/MobileMenu'
 import {
   Container,
@@ -28,12 +31,8 @@ import {
   UserWrapper,
   UserAvatar,
   Notifications,
-  UserMenuWrapper,
-  UserMenuList,
-  UserMenuItem,
-  DrawerWrapper,
-  MenuLinks,
-  LineSeparator
+  UserMenu,
+  UserMenuListItem
 } from './HeaderStyles'
 
 const Header = () => {
@@ -109,18 +108,28 @@ const Header = () => {
                   />
                 </Notifications>
               </Badge>
-              <UserAvatar
-                style={{
-                  color: '#00A6AA',
-                  backgroundColor: {DarkGray}
-                }}
-                size='large'
-                onClick={showDrawer}
+              <UserMenu
+                menuButton={
+                  <UserAvatar
+                    style={{
+                      color: '#00A6AA',
+                      backgroundColor: {DarkGray}
+                    }}
+                    size='large'
+                    onClick={showDrawer}
+                  >
+                    {User.firstName[0]}
+                    {User.lastName[0]}
+                  </UserAvatar>
+                }
+                transition
               >
-                {User.firstName[0]}
-                {User.lastName[0]}
-              </UserAvatar>
-              <Drawer
+                <UserMenuListItem>Profile</UserMenuListItem>
+                <UserMenuListItem>Settings</UserMenuListItem>
+                <MenuDivider />
+                <UserMenuListItem>Log out</UserMenuListItem>
+              </UserMenu>
+              {/* <Drawer
                 onClose={onClose}
                 visible={visible}
                 title={`Welcome ${User.firstName} ${User.lastName}`}
@@ -131,7 +140,7 @@ const Header = () => {
                 <MenuLinks>Settings</MenuLinks>
                 <LineSeparator />
                 <MenuLinks>Log out</MenuLinks>
-              </Drawer>
+              </Drawer> */}
             </UserWrapper>
           </>
         )}

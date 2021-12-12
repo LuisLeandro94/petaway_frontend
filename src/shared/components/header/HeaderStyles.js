@@ -1,4 +1,5 @@
-import {Avatar, Drawer} from 'antd'
+import {Menu, MenuItem} from '@szhsin/react-menu'
+import {Avatar} from 'antd'
 import {Sling as Hamburger} from 'hamburger-react'
 import styled, {keyframes} from 'styled-components'
 
@@ -6,8 +7,7 @@ import {
   PrimaryColor,
   SecondaryColor,
   White,
-  TextColor,
-  DarkGray
+  TextColor
 } from '../../styles/_colors'
 import {device} from '../../styles/_responsive'
 import {
@@ -247,4 +247,17 @@ export const LineSeparator = styled.span`
   width: 256px;
   bottom: 50px;
   border: 1px solid ${SecondaryColor};
+`
+
+export const UserMenu = styled(Menu)`
+  .szh-menu {
+    background-color: ${SecondaryColor};
+    color: ${PrimaryColor};
+    min-width: 6rem;
+    left: -100px !important;
+  }
+`
+
+export const UserMenuListItem = styled(MenuItem)`
+  font-size: 16px;
 `
