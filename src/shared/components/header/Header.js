@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
 
+import {BellOutlined} from '@ant-design/icons'
+import {Badge, Drawer} from 'antd'
 import {Translate} from 'react-localize-redux'
 
 import Heart from '../../../assets/Heart.png'
 import PetAway from '../../../assets/logo.png'
 import Paw from '../../../assets/Paw.png'
 import Search from '../../../assets/Search.png'
-import {DarkGray} from '../../styles/_colors'
+import {User} from '../../mockup/Mockup'
+import {DarkGray, PrimaryColor} from '../../styles/_colors'
 import MobileMenu from './components/MobileMenu'
 import {
   Container,
@@ -21,11 +24,28 @@ import {
   Operations,
   Underline,
   HamburgerIcon,
-  HamburgerContainer
+  HamburgerContainer,
+  UserWrapper,
+  UserAvatar,
+  Notifications,
+  UserMenuWrapper,
+  UserMenuList,
+  UserMenuItem,
+  DrawerWrapper,
+  MenuLinks,
+  LineSeparator
 } from './HeaderStyles'
 
-const Header = ({isLogged}) => {
+const Header = () => {
   const [isOpen, setOpen] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const [which, setWhich] = useState(0)
+  const showDrawer = () => {
+    setVisible(true)
+  }
+  const onClose = () => {
+    setVisible(false)
+  }
 
   return (
     <>
@@ -51,12 +71,14 @@ const Header = ({isLogged}) => {
                 <Translate id='SEARCH' />
               </LinkItem>
             </ListItem>
-            <ListItem>
-              <LinkItem href='/'>
-                <ItemImage src={Heart} />
-                <Translate id='BECOME_WALKER' />
-              </LinkItem>
-            </ListItem>
+            {!User.logged && (
+              <ListItem>
+                <LinkItem href='/'>
+                  <ItemImage src={Heart} />
+                  <Translate id='BECOME_WALKER' />
+                </LinkItem>
+              </ListItem>
+            )}
             <ListItem>
               <LinkItem href='/services'>
                 <ItemImage src={Paw} />
@@ -65,16 +87,54 @@ const Header = ({isLogged}) => {
             </ListItem>
           </LinksList>
         </LinksWrapper>
-        <OperationWrapper>
-          <Operations href='/signup'>
-            <Translate id='SIGNUP' />
-            <Underline />
-          </Operations>
-          <Operations href='/login'>
-            <Translate id='SIGNIN' />
-            <Underline />
-          </Operations>
-        </OperationWrapper>
+        {!User.logged && (
+          <OperationWrapper>
+            <Operations href='/signup'>
+              <Translate id='SIGNUP' />
+              <Underline />
+            </Operations>
+            <Operations href='/login'>
+              <Translate id='SIGNIN' />
+              <Underline />
+            </Operations>
+          </OperationWrapper>
+        )}
+        {User.logged && (
+          <>
+            <UserWrapper>
+              <Badge count={5} size='small'>
+                <Notifications>
+                  <BellOutlined
+                    style={{fontSize: '24px', color: '#cecece'}}
+                  />
+                </Notifications>
+              </Badge>
+              <UserAvatar
+                style={{
+                  color: '#00A6AA',
+                  backgroundColor: {DarkGray}
+                }}
+                size='large'
+                onClick={showDrawer}
+              >
+                {User.firstName[0]}
+                {User.lastName[0]}
+              </UserAvatar>
+              <Drawer
+                onClose={onClose}
+                visible={visible}
+                title={`Welcome ${User.firstName} ${User.lastName}`}
+                style={{height: '190px'}}
+                mask={false}
+              >
+                <MenuLinks>Profile</MenuLinks>
+                <MenuLinks>Settings</MenuLinks>
+                <LineSeparator />
+                <MenuLinks>Log out</MenuLinks>
+              </Drawer>
+            </UserWrapper>
+          </>
+        )}
         <MobileMenu toggled={isOpen} />
       </Container>
     </>

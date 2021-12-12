@@ -1,9 +1,22 @@
+import {Avatar, Drawer} from 'antd'
 import {Sling as Hamburger} from 'hamburger-react'
 import styled, {keyframes} from 'styled-components'
 
-import {PrimaryColor, SecondaryColor, White} from '../../styles/_colors'
+import {
+  PrimaryColor,
+  SecondaryColor,
+  White,
+  TextColor,
+  DarkGray
+} from '../../styles/_colors'
 import {device} from '../../styles/_responsive'
-import {HeaderMenus, Poppins, SignUpText} from '../../styles/_texts'
+import {
+  FilterTitle,
+  FormText,
+  HeaderMenus,
+  Poppins,
+  SignUpText
+} from '../../styles/_texts'
 
 export const Container = styled.nav`
   width: 100%;
@@ -86,6 +99,15 @@ export const OperationWrapper = styled.div`
   }
 `
 
+export const UserWrapper = styled(OperationWrapper)`
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+`
+
 export const Underline = styled.div`
   opacity: 0;
   width: 0;
@@ -160,4 +182,69 @@ export const HamburgerContainer = styled.div`
     display: block;
     width: 100%;
   }
+`
+
+export const UserAvatar = styled(Avatar)`
+  margin-left: 30px;
+  cursor: pointer;
+`
+
+export const Notifications = styled.a``
+
+export const UserMenuWrapper = styled.div`
+  width: calc(auto + 105px);
+  background-color: ${White};
+  border-radius: 30px;
+  height: auto;
+  padding: 10px;
+  position: absolute;
+  z-index: 2;
+  padding-right: 20px;
+  right: 5%;
+`
+
+export const UserMenuList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+`
+
+export const UserMenuItem = styled.li`
+  font-family: ${Poppins};
+  font-size: ${FormText};
+  font-weight: normal;
+  color: ${TextColor};
+`
+
+export const MenuLinks = styled.a`
+  font-family: ${Poppins};
+  font-size: ${FilterTitle};
+  color: ${TextColor};
+  font-weight: 500;
+  display: block;
+
+  &:hover {
+    color: ${PrimaryColor};
+    transition: all 1s ease;
+    transform: skewX(-20deg);
+  }
+
+  &:last-of-type {
+    position: absolute;
+    bottom: 15px;
+  }
+`
+
+export const LineSeparator = styled.span`
+  position: absolute;
+  right: 0;
+  width: 256px;
+  bottom: 50px;
+  border: 1px solid ${SecondaryColor};
 `
