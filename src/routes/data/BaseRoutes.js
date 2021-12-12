@@ -1,5 +1,6 @@
 import Homepage from '../../pages/homepage/Homepage'
 import Services from '../../pages/services/Services'
+import UserProfile from '../../pages/userProfile/UserProfile'
 import SignUpForm from '../../shared/components/signupForm/SignupForm'
 
 export default [
@@ -20,6 +21,13 @@ export default [
   {
     path: '/services',
     component: Services,
+    isAuthenticated: false,
+    header: true,
+    role: 1
+  },
+  {
+    path: '/profile/:userId',
+    component: UserProfile,
     isAuthenticated: false,
     header: true,
     role: 1
