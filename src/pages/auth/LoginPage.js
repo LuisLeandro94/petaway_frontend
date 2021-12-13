@@ -4,8 +4,9 @@ import {Field, Form} from 'react-final-form'
 import {Translate} from 'react-localize-redux'
 import {useHistory} from 'react-router'
 
+import {AuthTokenKey} from '../../infra/config/LocalStorageKeys'
+import {Login} from '../../infra/requests/AuthRequests'
 import FormValidator from '../../infra/services/validations/FormValidator'
-import {Login} from '../../shared/client/Auth'
 import Header from '../../shared/components/header/Header'
 import {
   ButtonContainer,
@@ -23,37 +24,25 @@ import {
   PasswordInput,
   Separator,
   SignInButton,
-  Testestestes,
   Title
 } from './AuthStyles'
-
-const onSubmit = (values) => {
-  console.log(values)
-}
 
 const validate = FormValidator.make({
   email: 'required',
   password: 'required'
 })
 
-// TODO Form appears to be non-selectable, have to change it
-// TODO create custom inputs to use with react-final-form
 const LoginPage = () => {
   const history = useHistory()
 
-  const responseLogin = async (response) => {
+  const formData = {}
+
+  const LoginResponse = async (response) => {
     try {
-      const data = {
-        email: response.email,
-        password: response.password
-      }
+      const result = await Login(response)
 
-      const result = await Login(data)
-
-      if (result) {
-        // userSave({
-        //   ...result.data
-        // })
+      if (result.success) {
+        localStorage.setItem(AuthTokenKey, result.data.result)
         history.push('/')
       }
     } catch (e) {
@@ -67,8 +56,9 @@ const LoginPage = () => {
       <Container>
         <FormWrapper>
           <Form
-            onSubmit={onSubmit}
+            onSubmit={LoginResponse}
             validate={validate}
+            initialValues={formData}
             render={({handleSubmit, submitting}) => (
               <FormContainer
                 onSubmit={handleSubmit}
@@ -77,14 +67,32 @@ const LoginPage = () => {
                 <Title>
                   <Translate id='LOGIN_TITLE' />
                 </Title>
-                <InputContainer>
-                  <InputTitle>E-mail</InputTitle>
-                  <Field name='email' component={LoginInput} />
-                </InputContainer>
-                <InputContainer>
-                  <InputTitle>Password</InputTitle>
-                  <Field name='password' component={PasswordInput} />
-                </InputContainer>
+                <Field name='email'>
+                  {({input, meta}) => (
+                    <InputContainer>
+                      <InputTitle>E-mail</InputTitle>
+                      <LoginInput
+                        {...input}
+                        type='text'
+                        placeholder='First Name'
+                        meta={meta}
+                      />
+                    </InputContainer>
+                  )}
+                </Field>
+                <Field name='password'>
+                  {({input, meta}) => (
+                    <InputContainer>
+                      <InputTitle>Password</InputTitle>
+                      <PasswordInput
+                        {...input}
+                        type='password'
+                        placeholder='First Name'
+                        meta={meta}
+                      />
+                    </InputContainer>
+                  )}
+                </Field>
                 <ButtonContainer>
                   <SignInButton type='submit' disabled={submitting}>
                     Sign In

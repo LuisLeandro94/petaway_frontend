@@ -1,9 +1,6 @@
 import {initialize, addTranslationForLanguage} from 'react-localize-redux'
 
 import {AuthTokenKey} from '../../infra/config/LocalStorageKeys'
-import {
-  GetInfo
-} from '../../infra/requests/BaseRequests'
 import EN from '../../infra/translations/en'
 import {updateInfo} from '../data/info/InfoActions'
 import {userSave} from '../data/user/UserActions'

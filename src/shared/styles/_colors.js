@@ -7,6 +7,6 @@ export const TextColor = '#000000'
 export const DarkGray = '#6D6D6D'
 export const BorderColor = '#cecece'
 
-export const ErrorColor = '#550000'
+export const ErrorColor = '#ff0000'
 export const SuccessColor = '#000055'
 export const WarningColor = '#005500'

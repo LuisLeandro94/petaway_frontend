@@ -2,8 +2,8 @@ import {Input} from 'antd'
 import styled from 'styled-components'
 
 import {
-  BorderColor,
   DarkGray,
+  ErrorColor,
   PrimaryColor,
   SecondaryColor,
   TextColor,
@@ -99,7 +99,10 @@ export const InputTitle = styled.p`
 export const LoginInput = styled(Input)`
   height: 50px;
   background: ${White};
-  border: 1px solid ${BorderColor};
+  border: ${({meta}) =>
+    meta.touched && !meta.valid
+      ? `1px solid ${ErrorColor}`
+      : `1px solid ${SecondaryColor}`};
   box-sizing: border-box;
   border-radius: 10px;
 `
@@ -107,7 +110,10 @@ export const LoginInput = styled(Input)`
 export const PasswordInput = styled(Input.Password)`
   height: 50px;
   background: ${White};
-  border: 1px solid ${BorderColor};
+  border: ${({meta}) =>
+    meta.touched && !meta.valid
+      ? `1px solid ${ErrorColor}`
+      : `1px solid ${SecondaryColor}`};
   box-sizing: border-box;
   border-radius: 10px;
 
@@ -221,4 +227,9 @@ export const LoginRedirectLink = styled.a`
   &:hover {
     color: ${SecondaryColor};
   }
+`
+
+export const Error = styled.span`
+  font-family: ${Poppins};
+  color: ${ErrorColor};
 `
