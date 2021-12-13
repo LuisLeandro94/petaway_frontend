@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import {
   DarkGray,
+  ErrorColor,
   PrimaryColor,
   SecondaryColor,
   TextColor,
@@ -104,9 +105,12 @@ export const SignupInput = styled(Input)`
 
 export const PasswordInput = styled(Input.Password)`
   background: ${White};
-  border: 1px solid ${SecondaryColor};
   box-sizing: border-box;
   border-radius: 10px;
+  border: ${({meta}) =>
+    meta.touched && !meta.valid
+      ? `1px solid ${ErrorColor}`
+      : `1px solid ${SecondaryColor}`};
   .ant-input {
     background: ${White};
   }
