@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {BellOutlined} from '@ant-design/icons'
 import {MenuDivider} from '@szhsin/react-menu'
@@ -6,11 +6,13 @@ import '@szhsin/react-menu/dist/index.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
 import {Badge, Drawer} from 'antd'
 import {Translate} from 'react-localize-redux'
+import {useHistory} from 'react-router'
 
 import Heart from '../../../assets/Heart.png'
 import PetAway from '../../../assets/logo.png'
 import Paw from '../../../assets/Paw.png'
 import Search from '../../../assets/Search.png'
+import {AuthTokenKey} from '../../../infra/config/LocalStorageKeys'
 import {User} from '../../mockup/Mockup'
 import {DarkGray} from '../../styles/_colors'
 import MobileMenu from './components/MobileMenu'
@@ -39,12 +41,26 @@ const Header = () => {
   const [isOpen, setOpen] = useState(false)
   const [visible, setVisible] = useState(false)
   const [notification, setNotification] = useState(false)
-  const [which, setWhich] = useState(0)
+  const [logged, setLogged] = useState(0)
   const showDrawer = () => {
     setVisible(true)
   }
   const onClose = () => {
     setVisible(false)
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem(AuthTokenKey)
+    if (token !== '@AUTH_TOKEN') {
+      setLogged(0)
+    } else {
+      setLogged(1)
+    }
+  })
+
+  const logoutAndRedirect = () => {
+    localStorage.setItem(AuthTokenKey, '@AUTH_TOKEN')
+    window.location.reload(false)
   }
 
   return (
@@ -71,7 +87,7 @@ const Header = () => {
                 <Translate id='SEARCH' />
               </LinkItem>
             </ListItem>
-            {!User.logged && (
+            {logged !== 0 && (
               <ListItem>
                 <LinkItem href='/'>
                   <ItemImage src={Heart} />
@@ -87,7 +103,7 @@ const Header = () => {
             </ListItem>
           </LinksList>
         </LinksWrapper>
-        {!User.logged && (
+        {logged !== 0 && (
           <OperationWrapper>
             <Operations href='/signup'>
               <Translate id='SIGNUP' />
@@ -99,7 +115,8 @@ const Header = () => {
             </Operations>
           </OperationWrapper>
         )}
-        {User.logged && (
+        <MobileMenu toggled={isOpen} />
+        {logged === 0 && (
           <>
             <UserWrapper>
               <Badge
@@ -147,12 +164,13 @@ const Header = () => {
                 <UserMenuListItem>Profile</UserMenuListItem>
                 <UserMenuListItem>Settings</UserMenuListItem>
                 <MenuDivider />
-                <UserMenuListItem>Log out</UserMenuListItem>
+                <UserMenuListItem onClick={() => logoutAndRedirect()}>
+                  Log out
+                </UserMenuListItem>
               </UserMenu>
             </UserWrapper>
           </>
         )}
-        <MobileMenu toggled={isOpen} />
       </Container>
     </>
   )
