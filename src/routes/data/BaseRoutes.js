@@ -26,7 +26,7 @@ export default [
     role: 1
   },
   {
-    path: '/profile/:userId',
+    path: '/profile',
     component: UserProfile,
     isAuthenticated: false,
     header: true,

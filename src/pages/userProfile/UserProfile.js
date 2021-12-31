@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {EditOutlined, UserOutlined} from '@ant-design/icons'
 import {Avatar, Button} from 'antd'
 
+import {GetUserByJwt} from '../../infra/requests/UserRequests'
 import {User, UserData} from '../../shared/mockup/Mockup'
 import {PrimaryColor} from '../../shared/styles/_colors'
 import PersonalInfo from './components/PersonalInfo'
@@ -18,8 +19,15 @@ import {
 
 const UserProfile = () => {
   const [edit, setEdit] = useState(false)
+  const [user, setUser] = useState({})
+
+  useEffect(() => {
+    GetUserByJwt().then((result) => setUser(result.data.result))
+  }, [])
+
   return (
     <Content>
+      {console.log(user)}
       <Wrapper>
         <HalfPage>
           <Avatar
@@ -28,10 +36,10 @@ const UserProfile = () => {
             style={{border: `2px solid ${PrimaryColor}`}}
           />
           <UserName>
-            {User.firstName} {User.lastName}
+            {user.userData?.firstName} {user.userData?.lastName}
           </UserName>
-          <UserEmail>{User.email}</UserEmail>
-          <UserEmail>{UserData.country}</UserEmail>
+          <UserEmail>{user.email}</UserEmail>
+          <UserEmail>{user.userData?.country}</UserEmail>
           <EditButtonDiv>
             <EditButton type='primary' icon={<EditOutlined />}>
               Edit
@@ -39,7 +47,7 @@ const UserProfile = () => {
           </EditButtonDiv>
         </HalfPage>
         <HalfPage>
-          <PersonalInfo />
+          <PersonalInfo user={user} />
         </HalfPage>
       </Wrapper>
     </Content>
