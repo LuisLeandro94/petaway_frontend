@@ -95,7 +95,10 @@ export const InputField = styled(Field)`
 
 export const SignupInput = styled(Input)`
   background: ${White};
-  border: 1px solid ${SecondaryColor};
+  border: ${({meta}) =>
+    meta.touched && !meta.valid
+      ? `1px solid ${ErrorColor}`
+      : `1px solid ${SecondaryColor}`};
   box-sizing: border-box;
   border-radius: 10px;
   .ant-input {
