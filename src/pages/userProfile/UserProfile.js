@@ -5,6 +5,7 @@ import {Avatar, Button} from 'antd'
 
 import {User, UserData} from '../../shared/mockup/Mockup'
 import {PrimaryColor} from '../../shared/styles/_colors'
+import EditInfo from './components/EditInfo'
 import PersonalInfo from './components/PersonalInfo'
 import {
   Content,
@@ -20,28 +21,42 @@ const UserProfile = () => {
   const [edit, setEdit] = useState(false)
   return (
     <Content>
-      <Wrapper>
-        <HalfPage>
-          <Avatar
-            size={{xs: 100, sm: 100, md: 100, lg: 100, xl: 120, xxl: 140}}
-            src={UserData.profilePicture}
-            style={{border: `2px solid ${PrimaryColor}`}}
-          />
-          <UserName>
-            {User.firstName} {User.lastName}
-          </UserName>
-          <UserEmail>{User.email}</UserEmail>
-          <UserEmail>{UserData.country}</UserEmail>
-          <EditButtonDiv>
-            <EditButton type='primary' icon={<EditOutlined />}>
-              Edit
-            </EditButton>
-          </EditButtonDiv>
-        </HalfPage>
-        <HalfPage>
-          <PersonalInfo />
-        </HalfPage>
-      </Wrapper>
+      {!edit && (
+        <Wrapper>
+          <HalfPage>
+            <Avatar
+              size={{
+                xs: 100,
+                sm: 100,
+                md: 100,
+                lg: 100,
+                xl: 120,
+                xxl: 140
+              }}
+              src={UserData.profilePicture}
+              style={{border: `2px solid ${PrimaryColor}`}}
+            />
+            <UserName>
+              {User.firstName} {User.lastName}
+            </UserName>
+            <UserEmail>{User.email}</UserEmail>
+            <UserEmail>{UserData.country}</UserEmail>
+            <EditButtonDiv>
+              <EditButton
+                type='primary'
+                icon={<EditOutlined />}
+                onClick={() => setEdit(true)}
+              >
+                Edit
+              </EditButton>
+            </EditButtonDiv>
+          </HalfPage>
+          <HalfPage>
+            <PersonalInfo />
+          </HalfPage>
+        </Wrapper>
+      )}
+      {edit && <EditInfo />}
     </Content>
   )
 }
