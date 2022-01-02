@@ -41,7 +41,11 @@ const UserProfile = () => {
           <UserEmail>{user.email}</UserEmail>
           <UserEmail>{user.userData?.country}</UserEmail>
           <EditButtonDiv>
-            <EditButton type='primary' icon={<EditOutlined />}>
+            <EditButton
+              type='primary'
+              icon={<EditOutlined />}
+              href='/profile/edit'
+            >
               Edit
             </EditButton>
           </EditButtonDiv>
