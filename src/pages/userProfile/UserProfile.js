@@ -6,6 +6,7 @@ import {Avatar, Button} from 'antd'
 import {GetUserByJwt} from '../../infra/requests/UserRequests'
 import {User, UserData} from '../../shared/mockup/Mockup'
 import {PrimaryColor} from '../../shared/styles/_colors'
+import EditInfo from './components/EditInfo'
 import PersonalInfo from './components/PersonalInfo'
 import {
   Content,

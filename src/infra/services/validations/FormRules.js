@@ -54,7 +54,8 @@ class FormRules {
   }
 
   static email(label, rule, value) {
-    const expression = /^(([^<>()\\[\]\\.,;:\s@\\"]+(\.[^<>()\\[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\]\\.,;:\s@\\"]+\.)+[^<>()[\]\\.,;:\s@\\"]{2,})$/i
+    const expression =
+      /^(([^<>()\\[\]\\.,;:\s@\\"]+(\.[^<>()\\[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\]\\.,;:\s@\\"]+\.)+[^<>()[\]\\.,;:\s@\\"]{2,})$/i
     const isInvalid = expression.test(value) === false
     if (isInvalid) {
       return {_error: `${label}_${rule}_INVALID`.toUpperCase()}
