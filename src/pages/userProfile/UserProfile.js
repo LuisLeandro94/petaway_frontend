@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {EditOutlined, UserOutlined} from '@ant-design/icons'
 import {Avatar, Button} from 'antd'
 
+import {GetUserByJwt} from '../../infra/requests/UserRequests'
 import {User, UserData} from '../../shared/mockup/Mockup'
 import {PrimaryColor} from '../../shared/styles/_colors'
 import EditInfo from './components/EditInfo'
@@ -19,44 +20,41 @@ import {
 
 const UserProfile = () => {
   const [edit, setEdit] = useState(false)
+  const [user, setUser] = useState({})
+
+  useEffect(() => {
+    GetUserByJwt().then((result) => setUser(result.data.result))
+  }, [])
+
   return (
     <Content>
-      {!edit && (
-        <Wrapper>
-          <HalfPage>
-            <Avatar
-              size={{
-                xs: 100,
-                sm: 100,
-                md: 100,
-                lg: 100,
-                xl: 120,
-                xxl: 140
-              }}
-              src={UserData.profilePicture}
-              style={{border: `2px solid ${PrimaryColor}`}}
-            />
-            <UserName>
-              {User.firstName} {User.lastName}
-            </UserName>
-            <UserEmail>{User.email}</UserEmail>
-            <UserEmail>{UserData.country}</UserEmail>
-            <EditButtonDiv>
-              <EditButton
-                type='primary'
-                icon={<EditOutlined />}
-                onClick={() => setEdit(true)}
-              >
-                Edit
-              </EditButton>
-            </EditButtonDiv>
-          </HalfPage>
-          <HalfPage>
-            <PersonalInfo />
-          </HalfPage>
-        </Wrapper>
-      )}
-      {edit && <EditInfo />}
+      {console.log(user)}
+      <Wrapper>
+        <HalfPage>
+          <Avatar
+            size={{xs: 100, sm: 100, md: 100, lg: 100, xl: 120, xxl: 140}}
+            src={UserData.profilePicture}
+            style={{border: `2px solid ${PrimaryColor}`}}
+          />
+          <UserName>
+            {user.userData?.firstName} {user.userData?.lastName}
+          </UserName>
+          <UserEmail>{user.email}</UserEmail>
+          <UserEmail>{user.userData?.country}</UserEmail>
+          <EditButtonDiv>
+            <EditButton
+              type='primary'
+              icon={<EditOutlined />}
+              href='/profile/edit'
+            >
+              Edit
+            </EditButton>
+          </EditButtonDiv>
+        </HalfPage>
+        <HalfPage>
+          <PersonalInfo user={user} />
+        </HalfPage>
+      </Wrapper>
     </Content>
   )
 }

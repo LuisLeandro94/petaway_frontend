@@ -42,6 +42,7 @@ const Header = () => {
   const [visible, setVisible] = useState(false)
   const [notification, setNotification] = useState(false)
   const [logged, setLogged] = useState(0)
+  const history = useHistory()
   const showDrawer = () => {
     setVisible(true)
   }
@@ -60,6 +61,7 @@ const Header = () => {
 
   const logoutAndRedirect = () => {
     localStorage.setItem(AuthTokenKey, '@AUTH_TOKEN')
+    history.push('/')
     window.location.reload(false)
   }
 
@@ -161,7 +163,9 @@ const Header = () => {
                 }
                 transition
               >
-                <UserMenuListItem>Profile</UserMenuListItem>
+                <UserMenuListItem href='/profile'>
+                  Profile
+                </UserMenuListItem>
                 <UserMenuListItem>Settings</UserMenuListItem>
                 <MenuDivider />
                 <UserMenuListItem onClick={() => logoutAndRedirect()}>

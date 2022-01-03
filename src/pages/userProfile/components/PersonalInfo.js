@@ -1,6 +1,5 @@
 import React from 'react'
 
-import {User, UserData} from '../../../shared/mockup/Mockup'
 import {
   BlackText,
   Wrapper,
@@ -9,7 +8,7 @@ import {
   Title
 } from './PersonalInfoStyles'
 
-const PersonalInfo = () => (
+const PersonalInfo = ({user}) => (
   <>
     <Wrapper>
       <EachFieldWrapper>
@@ -17,23 +16,23 @@ const PersonalInfo = () => (
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>First Name</BlackText>
-        <Text>{User.firstName}</Text>
+        <Text>{user.userData?.firstName}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>Last Name</BlackText>
-        <Text>{User.lastName}</Text>
+        <Text>{user.userData?.lastName}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>E-mail</BlackText>
-        <Text>{User.email}</Text>
+        <Text>{user.email}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>Birth Date</BlackText>
-        <Text>{UserData.birthdate}</Text>
+        <Text>{user.userData?.birthdate}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>Phone Number</BlackText>
-        <Text>{UserData.phoneNumber}</Text>
+        <Text>{user.userData?.phoneNumber}</Text>
       </EachFieldWrapper>
     </Wrapper>
     <Wrapper>
@@ -42,25 +41,25 @@ const PersonalInfo = () => (
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>Address Line 1</BlackText>
-        <Text>{UserData.address1}</Text>
+        <Text>{user.userData?.address1}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>Address Line 2</BlackText>
         <Text>
-          {UserData.address2}, {UserData.zipCode}
+          {user.userData?.address2}, {user.userData?.zip}
         </Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>City</BlackText>
-        <Text>{UserData.city}</Text>
+        <Text>{user.userData?.city}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>State</BlackText>
-        <Text>{UserData.state}</Text>
+        <Text>{user.userData?.state}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>Country</BlackText>
-        <Text>{UserData.country}</Text>
+        <Text>{user.userData?.country}</Text>
       </EachFieldWrapper>
     </Wrapper>
   </>

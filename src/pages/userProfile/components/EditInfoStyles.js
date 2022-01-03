@@ -1,11 +1,15 @@
 import styled from 'styled-components'
 
-import {TextColor, White} from '../../../shared/styles/_colors'
+import {
+  PrimaryColor,
+  TextColor,
+  White
+} from '../../../shared/styles/_colors'
 import {device} from '../../../shared/styles/_responsive'
 import {
+  ButtonText,
   FilterTitle,
-  Poppins,
-  ResultTitle
+  Poppins
 } from '../../../shared/styles/_texts'
 
 export const Wrapper = styled.div`
@@ -53,4 +57,38 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   margin: 30px;
+`
+
+export const SubmitButton = styled.button`
+  background: ${PrimaryColor};
+  max-width: 270px;
+  width: 100%;
+  height: 60px;
+  border: 3px solid ${PrimaryColor};
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  font-family: ${Poppins};
+  font-weight: 600;
+  font-size: ${ButtonText};
+  line-height: 36px;
+  letter-spacing: 0.1em;
+  color: ${White};
+  cursor: pointer;
+  @media ${device.laptopS} {
+    width: 70%;
+    height: 50px;
+  }
+  &:hover {
+    background: rgba(0, 166, 170, 0.8);
+    border: none;
+    color: ${White};
+    transition: all 0.5s ease;
+  }
+`
+
+export const ButtonContainer = styled.div`
+  width: 100%;
+  position: relative;
+  text-align: center;
+  margin-top: 30px;
 `

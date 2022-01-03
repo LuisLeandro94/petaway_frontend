@@ -1,33 +1,35 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
-import {Input} from 'antd'
+import {Input, message} from 'antd'
 import {Field, Form} from 'react-final-form'
 
-import {User, UserData} from '../../../shared/mockup/Mockup'
+import {EditUser, GetUserByJwt} from '../../../infra/requests/UserRequests'
 import {
+  ButtonContainer,
   Container,
   FormWrapper,
   Separator,
+  SubmitButton,
   Title,
   Wrapper
 } from './EditInfoStyles'
 import FileField from './FileFieldInput'
 
 const EditInfo = () => {
-  const submitFunc = (values) => {
-    User.email = values.email
-    User.firstName = values.firstName
-    User.lastName = values.lastName
-    User.password = values.password
-    UserData.address1 = values.address1
-    UserData.address2 = values.address2
-    UserData.birthdate = values.birthdate
-    UserData.city = values.city
-    UserData.country = values.country
-    UserData.phoneNumber = values.phoneNumber
-    UserData.profilePicture = values.profilePicture[0].path
-    UserData.state = values.state
-    UserData.zipCode = values.zipCode
+  const [user, setUser] = useState({})
+
+  useEffect(() => {
+    GetUserByJwt().then((result) => setUser(result.data.result))
+  }, [])
+  console.log(user)
+
+  const UserEdit = (values) => {
+    try {
+      EditUser(values)
+      window.location.reload(false)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   const validate = (values) => {
@@ -42,95 +44,227 @@ const EditInfo = () => {
       <Container>
         <Form
           style={{margin: '20px'}}
-          onSubmit={submitFunc}
+          onSubmit={UserEdit}
           validate={validate}
-          render={({handleSubmit, submitting}) => (
-            <FormWrapper onSubmit={handleSubmit}>
-              <Field name='profilePicture' component={FileField} />
+          render={({handleSubmit, submitting, form}) => (
+            <FormWrapper
+              onSubmit={async (event) => {
+                await handleSubmit(event)
+                form.reset()
+              }}
+            >
+              {/* profilePhoto must be object */}
+              {/* <Field name='profilePhoto' component={FileField} /> */}
+              <Field name='profilePhoto'>
+                {({input, meta}) => (
+                  <>
+                    <Title>Profile Photo</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.profilePhoto}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>First Name</Title>
-              <Field
-                name='firstName'
-                component={Input}
-                placeholder={User.firstName}
-              />
+              <Field name='firstName'>
+                {({input, meta}) => (
+                  <>
+                    <Title>First Name</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.firstName}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>Last Name</Title>
-              <Field
-                name='lastName'
-                component={Input}
-                placeholder={User.lastName}
-              />
+              <Field name='lastName'>
+                {({input, meta}) => (
+                  <>
+                    <Title>Last Name</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.lastName}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>E-Mail</Title>
-              <Field
-                name='email'
-                component={Input}
-                placeholder={User.email}
-              />
+              <Field name='email'>
+                {({input, meta}) => (
+                  <>
+                    <Title>E-Mail</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.email}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>Password</Title>
-              <Field
-                component={Input.Password}
-                name='password'
-                placeholder='New Password'
-              />
+              <Field name='password'>
+                {({input, meta}) => (
+                  <>
+                    <Title>Password</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder='New Password'
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>Address Line 1</Title>
-              <Field
-                component={Input}
-                name='address1'
-                placeholder={UserData.address1}
-              />
+              <Field name='address_1'>
+                {({input, meta}) => (
+                  <>
+                    <Title>Address Line 1</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.address_1}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>Address Line 2</Title>
-              <Field
-                component={Input}
-                name='address2'
-                placeholder={UserData.address2}
-              />
+              <Field name='address_2'>
+                {({input, meta}) => (
+                  <>
+                    <Title>Address Line 2</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.address_2}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>City</Title>
-              <Field
-                component={Input}
-                name='city'
-                placeholder={UserData.city}
-              />
+              <Field name='city'>
+                {({input, meta}) => (
+                  <>
+                    <Title>City</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.city}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>State</Title>
-              <Field
-                component={Input}
-                name='state'
-                placeholder={UserData.state}
-              />
+              <Field name='state'>
+                {({input, meta}) => (
+                  <>
+                    <Title>State</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.state}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>Zip Code</Title>
-              <Field
-                component={Input}
-                name='zipCode'
-                placeholder={UserData.zipCode}
-              />
+              <Field name='zip'>
+                {({input, meta}) => (
+                  <>
+                    <Title>Zip Code</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.zip}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>Address Line 1</Title>
-              <Field
-                component={Input}
-                name='country'
-                placeholder={UserData.country}
-              />
+              <Field name='country'>
+                {({input, meta}) => (
+                  <>
+                    <Title>Country</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.country}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>Birth Date</Title>
-              <Field
-                component={Input}
-                name='birthdate'
-                placeholder={UserData.birthdate}
-              />
+              <Field name='birthdate'>
+                {({input, meta}) => (
+                  <>
+                    <Title>Birthdate</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.birthdate}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
               <Separator />
-              <Title>Phone Number</Title>
-              <Field
-                component={Input}
-                name='phoneNumber'
-                placeholder={UserData.phoneNumber}
-              />
+              <Field name='phoneNumber'>
+                {({input, meta}) => (
+                  <>
+                    <Title>Phone Number</Title>
+                    <Input
+                      {...input}
+                      type='text'
+                      placeholder={user.userData?.phoneNumber}
+                    />
+                    {meta.error && meta.touched && (
+                      <span>{meta.error}</span>
+                    )}
+                  </>
+                )}
+              </Field>
+              <ButtonContainer>
+                <SubmitButton disabled={submitting}>Submit</SubmitButton>
+              </ButtonContainer>
             </FormWrapper>
           )}
         />
