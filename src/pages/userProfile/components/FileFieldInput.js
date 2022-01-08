@@ -6,7 +6,13 @@ import {useDropzone} from 'react-dropzone'
 
 import {UserData} from '../../../shared/mockup/Mockup'
 
-const FileField = ({required, input, dropZoneProps, ...props}) => {
+const FileField = ({
+  required,
+  input,
+  dropZoneProps,
+  onChange,
+  ...props
+}) => {
   const onDrop = useCallback(
     (files) => {
       input.onChange(files)
@@ -27,7 +33,7 @@ const FileField = ({required, input, dropZoneProps, ...props}) => {
   ))
 
   return (
-    <div {...getRootProps()}>
+    <div {...getRootProps()} onChange={onChange}>
       <input {...getInputProps()} />
       <Badge
         style={{

@@ -32,12 +32,5 @@ export default [
     isAuthenticated: false,
     header: true,
     role: 1
-  },
-  {
-    path: '/profile/edit',
-    component: EditInfo,
-    isAuthenticated: false,
-    header: true,
-    role: 1
   }
 ]

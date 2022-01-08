@@ -1,4 +1,4 @@
-import {Button} from 'antd'
+import {Button, Menu} from 'antd'
 import styled from 'styled-components'
 
 import {
@@ -12,8 +12,11 @@ import {device} from '../../shared/styles/_responsive'
 import {
   ButtonText,
   DisclaimerText,
+  HeaderMenus,
   Poppins
 } from '../../shared/styles/_texts'
+
+const {Item} = Menu
 
 export const Content = styled.div`
   width: 100%;
@@ -40,10 +43,9 @@ export const EditButton = styled(Button)`
 
 export const Wrapper = styled.div`
   width: 75%;
-  min-height: 580px;
   background-color: ${White};
   margin: auto;
-  margin-top: 140px;
+  margin-top: 80px;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -87,4 +89,30 @@ export const UserEmail = styled.p`
   font-weight: 400;
   color: ${DarkGray};
   margin: 0;
+`
+
+export const MenuItem = styled(Item)`
+  .ant-menu-item-active.customclass {
+    &:hover {
+      color: green !important;
+    }
+  }
+`
+
+export const MenuWrapper = styled.span`
+  .ant-menu-item {
+    font-family: ${Poppins};
+    font-weight: 500;
+    font-size: ${HeaderMenus};
+    padding: 0px 50px !important;
+  }
+  .ant-menu-item-active,
+  .ant-menu-item-selected {
+    color: #00a6aa !important;
+  }
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover::after,
+  .ant-menu-horizontal:not(.ant-menu-dark)
+    > .ant-menu-item-selected::after {
+    border-bottom: 2px solid #00a6aa;
+  }
 `
