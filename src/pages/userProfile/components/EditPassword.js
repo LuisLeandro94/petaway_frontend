@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import {Input} from 'antd'
 import {Field, Form} from 'react-final-form'
 
-import {EditUser, GetUserByJwt} from '../../../infra/requests/UserRequests'
+import {EditPwd, GetUserByJwt} from '../../../infra/requests/UserRequests'
 import {
   ButtonContainer,
   Container,
@@ -22,9 +22,19 @@ const EditPassword = () => {
     GetUserByJwt().then((result) => setUser(result.data.result))
   }, [])
 
-  const UserEdit = (values) => {
+  const PasswordEdit = (values) => {
     try {
-      EditPassword(values.password)
+      if (
+        values.password !== values.confirm_password &&
+        values.current_password === user.password
+      ) {
+        alert("Passwords don't match")
+        return
+      }
+      const pwd = {
+        password: values.password
+      }
+      EditPwd(pwd)
       window.location.reload(false)
     } catch (e) {
       console.error(e)
@@ -33,9 +43,7 @@ const EditPassword = () => {
 
   const required = (value) => (value ? undefined : 'Required')
   const minValue = (min) => (value) =>
-    isNaN(value) || value >= min
-      ? undefined
-      : `Should be at least ${min} characters long`
+    value >= min ? undefined : `Should be at least ${min} characters long`
   const composeValidators =
     (...validators) =>
     (value) =>
@@ -49,7 +57,7 @@ const EditPassword = () => {
       <Container>
         <Form
           style={{margin: '20px'}}
-          onSubmit={UserEdit}
+          onSubmit={PasswordEdit}
           render={({handleSubmit, submitting, form, values}) => (
             <FormWrapper
               onSubmit={async (event) => {
@@ -75,7 +83,10 @@ const EditPassword = () => {
                   )}
                 </Field>
                 <Separator />
-                <Field name='current_password' validate={required}>
+                <Field
+                  name='current_password'
+                  validate={composeValidators(required, minValue(9))}
+                >
                   {({input, meta}) => (
                     <>
                       <Title>Password</Title>
@@ -91,7 +102,10 @@ const EditPassword = () => {
                   )}
                 </Field>
                 <Separator />
-                <Field name='password'>
+                <Field
+                  name='password'
+                  validate={composeValidators(required, minValue(9))}
+                >
                   {({input, meta}) => (
                     <>
                       <Title>New Password</Title>
@@ -107,7 +121,10 @@ const EditPassword = () => {
                   )}
                 </Field>
                 <Separator />
-                <Field name='confirm_password'>
+                <Field
+                  name='confirm_password'
+                  validate={composeValidators(required, minValue(9))}
+                >
                   {({input, meta}) => (
                     <>
                       <Title>Confirm Password</Title>
@@ -126,7 +143,6 @@ const EditPassword = () => {
               <ButtonContainer>
                 <SubmitButton disabled={submitting}>Submit</SubmitButton>
               </ButtonContainer>
-              <pre>{JSON.stringify(values, 0, 2)}</pre>
             </FormWrapper>
           )}
         />

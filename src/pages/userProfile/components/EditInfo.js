@@ -30,7 +30,7 @@ const EditInfo = () => {
   const UserEdit = (values) => {
     try {
       EditUser(values)
-      window.location.reload(false)
+      // window.location.reload(false)
     } catch (e) {
       console.error(e)
     }

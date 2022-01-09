@@ -1,18 +1,15 @@
 import React, {useEffect, useState} from 'react'
 
-import {EditOutlined, UserOutlined} from '@ant-design/icons'
-import {Menu, Avatar, Button} from 'antd'
+import {Menu, Avatar} from 'antd'
 
 import {GetUserByJwt} from '../../infra/requests/UserRequests'
-import {User, UserData} from '../../shared/mockup/Mockup'
+import {UserData} from '../../shared/mockup/Mockup'
 import {PrimaryColor} from '../../shared/styles/_colors'
 import EditInfo from './components/EditInfo'
 import EditPassword from './components/EditPassword'
 import PersonalInfo from './components/PersonalInfo'
 import {
   Content,
-  EditButton,
-  EditButtonDiv,
   HalfPage,
   MenuItem,
   MenuWrapper,
