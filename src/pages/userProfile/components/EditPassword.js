@@ -34,8 +34,11 @@ const EditPassword = () => {
       const pwd = {
         password: values.password
       }
-      EditPwd(pwd)
-      window.location.reload(false)
+      EditPwd(pwd).then((res) => {
+        if (res.data.success) {
+          window.location.reload(false)
+        }
+      })
     } catch (e) {
       console.error(e)
     }

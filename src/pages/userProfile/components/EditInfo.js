@@ -29,8 +29,11 @@ const EditInfo = () => {
 
   const UserEdit = (values) => {
     try {
-      EditUser(values)
-      // window.location.reload(false)
+      EditUser(values).then((res) => {
+        if (res.data.success) {
+          window.location.reload(false)
+        }
+      })
     } catch (e) {
       console.error(e)
     }
