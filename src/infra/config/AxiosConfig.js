@@ -8,7 +8,7 @@ const ConstructError = (response) => {
   if (response?.data?.messages && response.data.messages.length > 0) {
     return response.data.messages[0]
   }
-  return 'The server sent a undefined error request'
+  return `Server responded with code ${response?.data?.code} \n\n ${response?.data?.result}`
 }
 
 // setup default client
