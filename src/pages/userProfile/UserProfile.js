@@ -126,7 +126,6 @@ const UserProfile = () => {
             <p>Some contents...</p>
           </Modal>
         </DeletePopUp>
-        )
       </Content>
     </>
   )

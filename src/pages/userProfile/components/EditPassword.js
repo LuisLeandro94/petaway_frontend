@@ -93,7 +93,7 @@ const EditPassword = () => {
                   {({input, meta}) => (
                     <>
                       <Title>Password</Title>
-                      <Input
+                      <Input.Password
                         {...input}
                         type='text'
                         placeholder='Current Password'
@@ -112,7 +112,7 @@ const EditPassword = () => {
                   {({input, meta}) => (
                     <>
                       <Title>New Password</Title>
-                      <Input
+                      <Input.Password
                         {...input}
                         type='text'
                         placeholder='New Password'
@@ -131,7 +131,7 @@ const EditPassword = () => {
                   {({input, meta}) => (
                     <>
                       <Title>Confirm Password</Title>
-                      <Input
+                      <Input.Password
                         {...input}
                         type='text'
                         placeholder='Confirm Password'

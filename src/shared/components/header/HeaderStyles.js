@@ -144,6 +144,11 @@ export const Operations = styled.a`
     color: ${SecondaryColor};
     transition: color 0.5s ease;
   }
+
+  /* &:first-of-type {
+    border: 1px solid ${SecondaryColor};
+    border-radius: 15px;
+  } */
 `
 
 export const MenuUnderline = styled(Underline)`
