@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import {
   DarkGray,
+  ErrorColor,
   PrimaryColor,
   SecondaryColor,
   TextColor,
@@ -114,5 +115,12 @@ export const MenuWrapper = styled.span`
   .ant-menu-horizontal:not(.ant-menu-dark)
     > .ant-menu-item-selected::after {
     border-bottom: 2px solid #00a6aa;
+  }
+`
+
+export const DeletePopUp = styled.span`
+  .ant-btn-primary {
+    background: ${ErrorColor} !important;
+    border-color: ${ErrorColor} !important;
   }
 `

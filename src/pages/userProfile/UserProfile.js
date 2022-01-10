@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react'
 
-import {Menu, Avatar} from 'antd'
+import {Menu, Avatar, Modal} from 'antd'
+import {useHistory} from 'react-router'
 
-import {GetUserByJwt} from '../../infra/requests/UserRequests'
+import {AuthTokenKey} from '../../infra/config/LocalStorageKeys'
+import {DeleteUser, GetUserByJwt} from '../../infra/requests/UserRequests'
 import {UserData} from '../../shared/mockup/Mockup'
 import {PrimaryColor} from '../../shared/styles/_colors'
 import EditInfo from './components/EditInfo'
@@ -10,6 +12,7 @@ import EditPassword from './components/EditPassword'
 import PersonalInfo from './components/PersonalInfo'
 import {
   Content,
+  DeletePopUp,
   HalfPage,
   MenuItem,
   MenuWrapper,
@@ -22,6 +25,7 @@ const UserProfile = () => {
   const [user, setUser] = useState({})
   const [currentPage, setCurrentPage] = useState(1)
   const [current, setCurrent] = useState('profile')
+  const history = useHistory()
 
   useEffect(() => {
     GetUserByJwt().then((result) => setUser(result.data.result))
@@ -34,6 +38,20 @@ const UserProfile = () => {
   const handleClick = (e) => {
     console.log('click ', e)
     setCurrent(e.key)
+  }
+
+  const UserDelete = async () => {
+    try {
+      DeleteUser().then((res) => {
+        if (res.success) {
+          localStorage.setItem(AuthTokenKey, '@AUTH_TOKEN')
+          history.push('/')
+          window.location.reload(false)
+        }
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return (
@@ -57,6 +75,13 @@ const UserProfile = () => {
           </MenuItem>
           <MenuItem key='password' onClick={() => changePage(3)}>
             Change Password
+          </MenuItem>
+          <MenuItem
+            key='deleteUser'
+            onClick={() => changePage(4)}
+            style={{color: 'red', marginLeft: 'auto'}}
+          >
+            Delete User
           </MenuItem>
         </Menu>
       </MenuWrapper>
@@ -89,6 +114,19 @@ const UserProfile = () => {
         )}
         {currentPage === 2 && <EditInfo />}
         {currentPage === 3 && <EditPassword />}
+        <DeletePopUp>
+          <Modal
+            title='Basic Modal'
+            visible={currentPage === 4}
+            onOk={UserDelete}
+            onCancel={() => setCurrentPage(1)}
+          >
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </Modal>
+        </DeletePopUp>
+        )
       </Content>
     </>
   )

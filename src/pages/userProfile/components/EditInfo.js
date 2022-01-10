@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import {Input} from 'antd'
+import FileBase64 from 'react-file-base64'
 import {Field, Form} from 'react-final-form'
 
 import {EditUser, GetUserByJwt} from '../../../infra/requests/UserRequests'
@@ -19,17 +20,22 @@ import FileField from './FileFieldInput'
 
 const EditInfo = () => {
   const [user, setUser] = useState({})
-  const [file, setFile] = useState(null)
-  const [base64URL, setBase64URL] = useState('')
+  const [file, setFile] = useState([])
 
   useEffect(() => {
     GetUserByJwt().then((result) => setUser(result.data.result))
   }, [])
   console.log(user)
+  console.log(file)
 
   const UserEdit = (values) => {
     try {
-      EditUser(values).then((res) => {
+      debugger
+      const userValues = {
+        profilePhoto: file.base64,
+        ...values
+      }
+      EditUser(userValues).then((res) => {
         if (res.data.success) {
           window.location.reload(false)
         }
@@ -44,46 +50,6 @@ const EditInfo = () => {
       return console.log('ERRO')
     }
     return console.log(values)
-  }
-
-  const getBase64 = (files) =>
-    new Promise((resolve) => {
-      let fileInfo
-      let baseURL = ''
-      // Criar o FileReader
-      const reader = new FileReader()
-
-      // Converter pra b64
-      reader.readAsDataURL(files)
-
-      // Dar load
-      reader.onload = () => {
-        // Criar o objeto
-        console.log('Called', reader)
-        baseURL = reader.result
-        console.log(baseURL)
-        resolve(baseURL)
-      }
-      console.log(fileInfo)
-    })
-
-  const handleFileInputChange = (e) => {
-    debugger
-    console.log(e.target.files[0])
-
-    setFile(e.target.files[0])
-
-    getBase64(file)
-      .then((result) => {
-        file.base64 = result
-        console.log('File Is', file)
-        setBase64URL(result.path)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-
-    setFile(e.target.files[0])
   }
 
   return (
@@ -101,25 +67,14 @@ const EditInfo = () => {
               }}
             >
               <PictureFramer>
-                {/* profilePhoto must be object */}
-                {/* <Field
-                  name='profilePhoto'
-                  component={FileField}
-                  onChange={handleFileInputChange}
-                /> */}
                 <Field name='profilePhoto'>
                   {({input, meta}) => (
-                    <>
-                      <Title>Profile Photo</Title>
-                      <Input
-                        {...input}
-                        type='text'
-                        placeholder={user.userData?.profilePhoto}
-                      />
-                      {meta.error && meta.touched && (
-                        <span>{meta.error}</span>
-                      )}
-                    </>
+                    <FileBase64
+                      {...input}
+                      multiple={false}
+                      value={user.profilePhoto}
+                      onDone={setFile}
+                    />
                   )}
                 </Field>
                 <Separator />
