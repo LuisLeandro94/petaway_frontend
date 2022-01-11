@@ -13,6 +13,7 @@ import PetAway from '../../../assets/logo.png'
 import Paw from '../../../assets/Paw.png'
 import Search from '../../../assets/Search.png'
 import {AuthTokenKey} from '../../../infra/config/LocalStorageKeys'
+import {GetUserByJwt} from '../../../infra/requests/UserRequests'
 import {User} from '../../mockup/Mockup'
 import {DarkGray} from '../../styles/_colors'
 import MobileMenu from './components/MobileMenu'
@@ -42,6 +43,7 @@ const Header = () => {
   const [visible, setVisible] = useState(false)
   const [notification, setNotification] = useState(false)
   const [logged, setLogged] = useState(0)
+  const [user, setUser] = useState({})
   const history = useHistory()
   const showDrawer = () => {
     setVisible(true)
@@ -57,7 +59,8 @@ const Header = () => {
     } else {
       setLogged(1)
     }
-  })
+    GetUserByJwt().then((result) => setUser(result.data.result))
+  }, [])
 
   const logoutAndRedirect = () => {
     localStorage.setItem(AuthTokenKey, '@AUTH_TOKEN')
@@ -68,6 +71,7 @@ const Header = () => {
   return (
     <>
       <Container>
+        {console.log(user?.userData)}
         <LogoContainer href='/'>
           <Logo src={PetAway} alt='PetAway Logo' />
         </LogoContainer>{' '}
@@ -149,17 +153,25 @@ const Header = () => {
               </Drawer>
               <UserMenu
                 menuButton={
-                  <UserAvatar
-                    style={{
-                      color: '#00A6AA',
-                      backgroundColor: {DarkGray}
-                    }}
-                    size='large'
-                    onClick={showDrawer}
-                  >
-                    {User.firstName[0]}
-                    {User.lastName[0]}
-                  </UserAvatar>
+                  user?.userData?.profilePhoto === null ? (
+                    <UserAvatar
+                      style={{
+                        color: '#00A6AA',
+                        backgroundColor: {DarkGray}
+                      }}
+                      size='large'
+                      onClick={showDrawer}
+                    >
+                      {User.firstName[0]}
+                      {User.lastName[0]}
+                    </UserAvatar>
+                  ) : (
+                    <UserAvatar
+                      size='large'
+                      onClick={showDrawer}
+                      src={user?.userData?.profilePhoto}
+                    />
+                  )
                 }
                 transition
               >
