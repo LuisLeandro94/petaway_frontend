@@ -1,5 +1,6 @@
 import React from 'react'
 
+import {sha256} from 'js-sha256'
 import {Field, Form} from 'react-final-form'
 import {Translate} from 'react-localize-redux'
 import {useHistory} from 'react-router'
@@ -39,7 +40,12 @@ const LoginPage = () => {
 
   const LoginResponse = async (response) => {
     try {
-      const result = await Login(response)
+      const pwd = sha256(response.password + process.env.SECRET)
+      const data = {
+        ...response,
+        password: pwd
+      }
+      const result = await Login(data)
 
       if (result.success) {
         localStorage.setItem(AuthTokenKey, result.data.result)
