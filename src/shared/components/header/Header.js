@@ -48,22 +48,20 @@ const Header = () => {
   const showDrawer = () => {
     setVisible(true)
   }
-  const onClose = () => {
-    setVisible(false)
-  }
 
   useEffect(() => {
     const token = localStorage.getItem(AuthTokenKey)
-    if (token !== '@AUTH_TOKEN') {
-      setLogged(0)
-    } else {
+    console.log(token)
+    if (token !== null && token !== 'null') {
       setLogged(1)
+      GetUserByJwt().then((result) => setUser(result.data.result))
+    } else {
+      setLogged(0)
     }
-    GetUserByJwt().then((result) => setUser(result.data.result))
   }, [])
 
   const logoutAndRedirect = () => {
-    localStorage.setItem(AuthTokenKey, '@AUTH_TOKEN')
+    localStorage.setItem(AuthTokenKey, 'null')
     history.push('/')
     window.location.reload(false)
   }
@@ -93,7 +91,7 @@ const Header = () => {
                 <Translate id='SEARCH' />
               </LinkItem>
             </ListItem>
-            {logged !== 0 && (
+            {logged === 0 && (
               <ListItem>
                 <LinkItem href='/'>
                   <ItemImage src={Heart} />
@@ -109,7 +107,7 @@ const Header = () => {
             </ListItem>
           </LinksList>
         </LinksWrapper>
-        {logged !== 0 && (
+        {logged === 0 && (
           <OperationWrapper>
             <Operations href='/signup'>
               <Translate id='SIGNUP' />
@@ -122,7 +120,7 @@ const Header = () => {
           </OperationWrapper>
         )}
         <MobileMenu toggled={isOpen} />
-        {logged === 0 && (
+        {logged !== 0 && (
           <>
             <UserWrapper>
               <Badge
@@ -153,7 +151,7 @@ const Header = () => {
               </Drawer>
               <UserMenu
                 menuButton={
-                  user?.userData?.profilePhoto === null ? (
+                  logged === 0 ? (
                     <UserAvatar
                       style={{
                         color: '#00A6AA',

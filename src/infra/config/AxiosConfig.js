@@ -46,7 +46,6 @@ client.setupInterceptors = () => {
       if (error && error.response && error.response.status === 401) {
         localStorage.clear()
         // eslint-disable-next-line no-restricted-globals
-        location.replace('/login')
       }
 
       return {...error.response, success: false}

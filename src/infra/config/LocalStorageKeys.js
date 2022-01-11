@@ -1,2 +1,2 @@
 // localstorage tokens definitions
-export const AuthTokenKey = '@AUTH_TOKEN'
+export const AuthTokenKey = 'null'
