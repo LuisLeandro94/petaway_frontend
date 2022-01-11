@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {message} from 'antd'
+import {sha256} from 'js-sha256'
 import {Form} from 'react-final-form'
 import {useHistory} from 'react-router'
 
@@ -39,9 +40,15 @@ const validate = FormValidator.make({
 
 const SignUpForm = () => {
   const history = useHistory()
-  const SignUpResponse = async (data) => {
+
+  const SignUpResponse = (values) => {
     try {
-      const response = await SignUp(data)
+      const pwd = sha256(values.password + process.env.SECRET)
+      const data = {
+        ...values,
+        password: pwd
+      }
+      const response = SignUp(data)
 
       if (response.success) {
         history.push('/')
@@ -51,17 +58,6 @@ const SignUpForm = () => {
     }
   }
 
-  const failure = (error) => {
-    message.error({
-      content: `${error}`,
-      className: 'custom-class',
-      style: {
-        marginTop: '20vh'
-      },
-      maxCount: 1
-    })
-  }
-
   return (
     <BodyWrapper>
       <FormWrapper>
@@ -69,7 +65,7 @@ const SignUpForm = () => {
         <Form
           onSubmit={SignUpResponse}
           validate={validate}
-          render={({handleSubmit, submitting, values}) => (
+          render={({handleSubmit, submitting}) => (
             <FormContainer onSubmit={handleSubmit}>
               <InputField name='firstName'>
                 {({input, meta}) => (

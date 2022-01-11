@@ -17,6 +17,7 @@
     "final-form": "^4.20.4",
     "framer-motion": "^4.1.17",
     "hamburger-react": "^2.4.1",
+    "js-sha256": "^0.9.0",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.33",
