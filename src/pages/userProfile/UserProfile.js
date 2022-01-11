@@ -98,7 +98,7 @@ const UserProfile = () => {
                   xl: 120,
                   xxl: 140
                 }}
-                src={UserData.profilePicture}
+                src={user.userData?.profilePhoto}
                 style={{border: `2px solid ${PrimaryColor}`}}
               />
               <UserName>

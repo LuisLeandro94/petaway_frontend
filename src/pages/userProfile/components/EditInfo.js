@@ -54,6 +54,7 @@ const EditInfo = () => {
 
   return (
     <Wrapper>
+      {console.log(file?.base64)}
       <Container>
         <Form
           style={{margin: '20px'}}
