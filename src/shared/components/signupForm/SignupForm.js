@@ -121,7 +121,6 @@ const SignUpForm = () => {
               <ButtonContainer>
                 <SignUpButton disabled={submitting}>Sign Up</SignUpButton>
               </ButtonContainer>
-              <pre>{JSON.stringify(values, 0, 2)}</pre>
             </FormContainer>
           )}
         />

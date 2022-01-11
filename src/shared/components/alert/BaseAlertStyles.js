@@ -19,12 +19,13 @@ const DefineColor = ({type}) => {
 export const AlertContainer = styled.div`
   position: relative;
   z-index: 9999;
+  white-space: pre-line;
 `
 
 export const AlertBar = styled.div`
   position: absolute;
-  top: -14px;
-  left: -40px;
+  top: -24px;
+  left: -26px;
   height: calc(100% + 30px);
   width: 10px;
   background: ${DefineColor};

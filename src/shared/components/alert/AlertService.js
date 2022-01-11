@@ -25,7 +25,7 @@ class AlertService {
   }
 
   error = (title, description) => {
-    message.success({
+    message.error({
       content: (
         <BaseAlert type='error' title={title} description={description} />
       ),

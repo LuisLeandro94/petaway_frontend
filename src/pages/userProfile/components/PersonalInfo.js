@@ -41,12 +41,12 @@ const PersonalInfo = ({user}) => (
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>Address Line 1</BlackText>
-        <Text>{user.userData?.address1}</Text>
+        <Text>{user.userData?.address_1}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
         <BlackText>Address Line 2</BlackText>
         <Text>
-          {user.userData?.address2}, {user.userData?.zip}
+          {user.userData?.address_2}, {user.userData?.zip}
         </Text>
       </EachFieldWrapper>
       <EachFieldWrapper>

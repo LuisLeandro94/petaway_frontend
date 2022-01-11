@@ -13,7 +13,6 @@ import {
 
 const BaseAlert = ({title, description, type, callback}) => (
   <AlertContainer>
-    <AlertBar type={type} />
     <CloseIcon role='button' onClick={() => message.destroy()} />
     <AlertTitle>{title}</AlertTitle>
     <AlertDescription>{description}</AlertDescription>

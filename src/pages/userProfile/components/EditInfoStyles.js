@@ -17,7 +17,6 @@ export const Wrapper = styled.div`
   min-height: 580px;
   background-color: ${White};
   margin: auto;
-  margin-top: 140px;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -30,13 +29,18 @@ export const Wrapper = styled.div`
   }
 `
 
+export const PasswordWrapper = styled(Wrapper)`
+  margin-top: 50px;
+`
+
 export const FormWrapper = styled.form`
-  width: 50%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin: auto;
+  flex-wrap: wrap;
 `
 
 export const Separator = styled.div`
@@ -91,4 +95,15 @@ export const ButtonContainer = styled.div`
   position: relative;
   text-align: center;
   margin-top: 30px;
+`
+
+export const HalfScreen = styled.div`
+  width: 45%;
+  margin-left: auto;
+  margin-right: auto;
+`
+
+export const PictureFramer = styled.div`
+  width: 100%;
+  text-align: center;
 `
