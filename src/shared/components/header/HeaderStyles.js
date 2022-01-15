@@ -1,5 +1,5 @@
 import {Menu, MenuItem} from '@szhsin/react-menu'
-import {Avatar} from 'antd'
+import {Avatar, Button} from 'antd'
 import {Sling as Hamburger} from 'hamburger-react'
 import styled, {keyframes} from 'styled-components'
 
@@ -265,4 +265,13 @@ export const UserMenu = styled(Menu)`
 
 export const UserMenuListItem = styled(MenuItem)`
   font-size: 16px;
+  color: ${PrimaryColor};
 `
+
+export const GoToProfileBtn = styled(Button)`
+  .ant-btn {
+    background-color: ${PrimaryColor} !important;
+  }
+`
+
+export const GoBackBtn = styled(Button)``

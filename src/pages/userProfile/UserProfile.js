@@ -44,7 +44,7 @@ const UserProfile = () => {
     try {
       DeleteUser().then((res) => {
         if (res.success) {
-          localStorage.setItem(AuthTokenKey, '@AUTH_TOKEN')
+          localStorage.setItem(AuthTokenKey, 'null')
           history.push('/')
           window.location.reload(false)
         }
