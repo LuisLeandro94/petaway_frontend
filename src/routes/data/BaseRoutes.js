@@ -1,7 +1,6 @@
-import Homepage from '../../pages/homepage/Homepage'
 import Services from '../../pages/services/Services'
-import EditInfo from '../../pages/userProfile/components/EditInfo'
 import UserProfile from '../../pages/userProfile/UserProfile'
+import BecomeWalkerForm from '../../shared/components/becomeWalkerForm/BecomeWalkerForm'
 import SignUpForm from '../../shared/components/signupForm/SignupForm'
 
 export default [
@@ -22,6 +21,13 @@ export default [
   {
     path: '/profile',
     component: UserProfile,
+    isAuthenticated: false,
+    header: true,
+    role: 1
+  },
+  {
+    path: '/becomeWalker',
+    component: BecomeWalkerForm,
     isAuthenticated: false,
     header: true,
     role: 1

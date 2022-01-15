@@ -5,6 +5,7 @@ import {MenuDivider} from '@szhsin/react-menu'
 import '@szhsin/react-menu/dist/index.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
 import {Badge, Drawer} from 'antd'
+import Modal from 'antd/lib/modal/Modal'
 import {Translate} from 'react-localize-redux'
 import {useHistory} from 'react-router'
 
@@ -14,7 +15,6 @@ import Paw from '../../../assets/Paw.png'
 import Search from '../../../assets/Search.png'
 import {AuthTokenKey} from '../../../infra/config/LocalStorageKeys'
 import {GetUserByJwt} from '../../../infra/requests/UserRequests'
-import {User} from '../../mockup/Mockup'
 import {DarkGray} from '../../styles/_colors'
 import MobileMenu from './components/MobileMenu'
 import {
@@ -35,7 +35,9 @@ import {
   UserAvatar,
   Notifications,
   UserMenu,
-  UserMenuListItem
+  UserMenuListItem,
+  GoBackBtn,
+  GoToProfileBtn
 } from './HeaderStyles'
 
 const Header = () => {
@@ -44,6 +46,7 @@ const Header = () => {
   const [notification, setNotification] = useState(false)
   const [logged, setLogged] = useState(0)
   const [user, setUser] = useState({})
+  const [filledFields, setFilledFields] = useState(false)
   const history = useHistory()
   const showDrawer = () => {
     setVisible(true)
@@ -66,10 +69,54 @@ const Header = () => {
     window.location.reload(false)
   }
 
+  const checkRequiredFields = () => {
+    if (
+      user.userData.address_1 != null &&
+      user.userData.phoneNumber != null
+    ) {
+      history.push('/becomeWalker')
+    } else {
+      setFilledFields(!filledFields)
+    }
+  }
+
+  const redirectToProfile = () => {
+    history.push('/profile')
+  }
+
+  const closeAndStay = () => {
+    setFilledFields(!filledFields)
+  }
+
   return (
     <>
+      <Modal
+        title='Warning: Profile must be filled'
+        visible={filledFields}
+        onOk={redirectToProfile}
+        onCancel={closeAndStay}
+        footer={[
+          <GoBackBtn key='back' onClick={closeAndStay}>
+            Go Back
+          </GoBackBtn>,
+          <GoToProfileBtn
+            key='submit'
+            type='primary'
+            onClick={redirectToProfile}
+            style={{
+              backgroundColor: '#00A6AA',
+              borderColor: '#00A6AA'
+            }}
+          >
+            Go To Profile
+          </GoToProfileBtn>
+        ]}
+      >
+        <p>In order to become a part of our community of Walkers,</p>
+        <p>you have to fill your personal information.</p>
+        <p>Please do that before you proceed.</p>
+      </Modal>
       <Container>
-        {console.log(user?.userData)}
         <LogoContainer href='/'>
           <Logo src={PetAway} alt='PetAway Logo' />
         </LogoContainer>{' '}
@@ -151,7 +198,7 @@ const Header = () => {
               </Drawer>
               <UserMenu
                 menuButton={
-                  logged === 0 ? (
+                  user?.userData?.profilePhoto === null ? (
                     <UserAvatar
                       style={{
                         color: '#00A6AA',
@@ -160,8 +207,8 @@ const Header = () => {
                       size='large'
                       onClick={showDrawer}
                     >
-                      {User.firstName[0]}
-                      {User.lastName[0]}
+                      {user?.userData?.firstName[0].toUpperCase()}
+                      {user?.userData?.lastName[0].toUpperCase()}
                     </UserAvatar>
                   ) : (
                     <UserAvatar
@@ -177,6 +224,12 @@ const Header = () => {
                   Profile
                 </UserMenuListItem>
                 <UserMenuListItem>Settings</UserMenuListItem>
+                <UserMenuListItem
+                  style={{color: 'red'}}
+                  onClick={checkRequiredFields}
+                >
+                  Become a Walker
+                </UserMenuListItem>
                 <MenuDivider />
                 <UserMenuListItem onClick={() => logoutAndRedirect()}>
                   Log out
