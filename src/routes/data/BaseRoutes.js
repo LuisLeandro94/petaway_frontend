@@ -1,3 +1,4 @@
+import Search from '../../pages/search/Search'
 import Services from '../../pages/services/Services'
 import UserProfile from '../../pages/userProfile/UserProfile'
 import BecomeWalkerForm from '../../shared/components/becomeWalkerForm/BecomeWalkerForm'
@@ -28,6 +29,13 @@ export default [
   {
     path: '/becomeWalker',
     component: BecomeWalkerForm,
+    isAuthenticated: false,
+    header: true,
+    role: 1
+  },
+  {
+    path: '/search',
+    component: Search,
     isAuthenticated: false,
     header: true,
     role: 1

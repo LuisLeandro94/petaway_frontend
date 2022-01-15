@@ -133,7 +133,7 @@ const Header = () => {
         <LinksWrapper>
           <LinksList>
             <ListItem>
-              <LinkItem href='/'>
+              <LinkItem href='/search'>
                 <ItemImage src={Search} />
                 <Translate id='SEARCH' />
               </LinkItem>
