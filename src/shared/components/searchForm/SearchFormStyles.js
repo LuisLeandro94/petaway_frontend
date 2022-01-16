@@ -11,7 +11,6 @@ import {device} from '../../styles/_responsive'
 import {
   ButtonText,
   FilterTitle,
-  FormText,
   Poppins,
   ResultTitle
 } from '../../styles/_texts'
@@ -20,7 +19,7 @@ export const FilterWrapper = styled.div`
   height: 85vh;
   width: 29%;
   background-color: ${White};
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   left: 10px;
   border-radius: 5px;

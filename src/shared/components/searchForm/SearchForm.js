@@ -60,7 +60,7 @@ const SearchFilters = () => {
           onSubmit={onSubmit}
           validate={validate}
           initialValues={{...formData}}
-          render={({handleSubmit, submitting, values, pristine}) => (
+          render={({handleSubmit, submitting, pristine}) => (
             <FormContainer onSubmit={handleSubmit}>
               <Selection>
                 <Field name='service'>
