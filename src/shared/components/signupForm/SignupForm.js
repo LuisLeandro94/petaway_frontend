@@ -48,11 +48,11 @@ const SignUpForm = () => {
         ...values,
         password: pwd
       }
-      const response = SignUp(data)
-
-      if (response.success) {
-        history.push('/')
-      }
+      const response = SignUp(data).then((res) => {
+        if (res.success) {
+          history.push('/login')
+        }
+      })
     } catch (e) {
       console.error(e)
     }
