@@ -13,6 +13,7 @@ import {
 } from '../../../shared/styles/_texts'
 
 export const Wrapper = styled.div`
+  margin-top: 50px !important;
   width: 75%;
   min-height: 580px;
   background-color: ${White};

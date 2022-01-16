@@ -54,7 +54,6 @@ const EditInfo = () => {
 
   return (
     <Wrapper>
-      {console.log(file?.base64)}
       <Container>
         <Form
           style={{margin: '20px'}}
@@ -106,6 +105,7 @@ const EditInfo = () => {
                         {...input}
                         type='text'
                         placeholder={user.userData?.firstName}
+                        value={user.userData?.firstName}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -122,6 +122,7 @@ const EditInfo = () => {
                         {...input}
                         type='text'
                         placeholder={user.userData?.lastName}
+                        value={user.userData?.lastName}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -220,6 +221,7 @@ const EditInfo = () => {
                         {...input}
                         type='text'
                         placeholder={user.userData?.zip}
+                        value={user.userData?.zip}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
