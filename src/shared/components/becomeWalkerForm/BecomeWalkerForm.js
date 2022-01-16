@@ -45,11 +45,11 @@ const BecomeWalkerForm = () => {
         services: values.services.map(Number),
         pets: values.pets.map(Number)
       }
-      const response = AddWalker(data)
-
-      if (response.success) {
-        setFilledFields(!filledFields)
-      }
+      AddWalker(data).then((res) => {
+        if (res.success) {
+          setFilledFields(!filledFields)
+        }
+      })
     } catch (e) {
       console.error(e)
     }

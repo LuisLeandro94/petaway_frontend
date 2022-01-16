@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
 import {Input} from 'antd'
 import FileBase64 from 'react-file-base64'
 import {Field, Form} from 'react-final-form'
 
-import {EditUser, GetUserByJwt} from '../../../infra/requests/UserRequests'
+import {EditUser} from '../../../infra/requests/UserRequests'
 import {
   ButtonContainer,
   Container,
@@ -16,17 +16,9 @@ import {
   Title,
   Wrapper
 } from './EditInfoStyles'
-import FileField from './FileFieldInput'
 
-const EditInfo = () => {
-  const [user, setUser] = useState({})
+const EditInfo = ({user}) => {
   const [file, setFile] = useState([])
-
-  useEffect(() => {
-    GetUserByJwt().then((result) => setUser(result.data.result))
-  }, [])
-  console.log(user)
-  console.log(file)
 
   const UserEdit = (values) => {
     try {
@@ -59,6 +51,11 @@ const EditInfo = () => {
           style={{margin: '20px'}}
           onSubmit={UserEdit}
           validate={validate}
+          initialValues={{
+            firstName: user.userData.firstName,
+            lastName: user.userData.lastName,
+            zip: user.userData.zip
+          }}
           render={({handleSubmit, submitting, form, values}) => (
             <FormWrapper
               onSubmit={async (event) => {
