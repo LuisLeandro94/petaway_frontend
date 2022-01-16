@@ -5,6 +5,7 @@ import {Field, Form} from 'react-final-form'
 
 import Calendar from '../../../assets/Calendar.png'
 import Repeat from '../../../assets/Repeat.png'
+import {GetAllWalkers} from '../../../infra/requests/WalkerRequests'
 import {
   FilterWrapper,
   FormContainer,
@@ -18,26 +19,12 @@ import {
   SecondarySelection
 } from './SearchFormStyles'
 
-const services = ['Pet Sitting', 'Pet Walking']
-const servicesChildren = services.map((key) => (
-  <Select.Option key={key}>{key}</Select.Option>
-))
-
-const pets = ['Dogs', 'Cats', 'Furrets', 'Crocodiles']
-const petsChildren = pets.map((key) => (
-  <Select.Option key={key}>{key}</Select.Option>
-))
-
 const recursion = [
   {image: Calendar, text: 'One Time'},
   {image: Repeat, text: 'Repeat Weekly'}
 ]
 
 const times = ['1', '2', '3+']
-
-const onSubmit = (values) => {
-  console.log(values)
-}
 
 const validate = (values) => {
   if (!values) {
@@ -51,19 +38,38 @@ const formData = {
   city: ''
 }
 
-const SearchFilters = () => {
-  const a = []
+const SearchFilters = ({pets, services, setSearchResult}) => {
+  const servicesChildren = services.map((service) => (
+    <Select.Option key={service.id}>{service.type}</Select.Option>
+  ))
+
+  const SearchWalkers = (values) => {
+    try {
+      console.log(values)
+      const data = {
+        services: values.services,
+        pets: values.pets,
+        city: values.city
+      }
+      const response = GetAllWalkers(data).then((res) =>
+        setSearchResult(res.data.result)
+      )
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   return (
     <>
       <FilterWrapper>
         <Form
-          onSubmit={onSubmit}
+          onSubmit={SearchWalkers}
           validate={validate}
           initialValues={{...formData}}
           render={({handleSubmit, submitting, pristine}) => (
             <FormContainer onSubmit={handleSubmit}>
               <Selection>
-                <Field name='service'>
+                <Field name='services'>
                   {({input, meta}) => (
                     <InputWrapper>
                       <InputTitle>Service Type</InputTitle>
@@ -113,7 +119,7 @@ const SearchFilters = () => {
                 </Field>
               </Selection>
               <Selection>
-                <Field name='pet_type'>
+                <Field name='pets'>
                   {({input, meta}) => (
                     <>
                       <InputTitle style={{paddingTop: '10px'}}>
@@ -121,7 +127,7 @@ const SearchFilters = () => {
                       </InputTitle>
                       <Radio.Group {...input}>
                         {pets.map((pet) => (
-                          <Radio value={pet}>{pet}</Radio>
+                          <Radio value={pet.id}>{pet.type}</Radio>
                         ))}
                       </Radio.Group>
                     </>

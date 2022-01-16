@@ -8,7 +8,7 @@ import {
   White
 } from '../../styles/_colors'
 import {device} from '../../styles/_responsive'
-import {Poppins} from '../../styles/_texts'
+import {ButtonText, FilterTitle, Poppins} from '../../styles/_texts'
 
 export const ResultsWrapper = styled.div`
   height: 85vh;
@@ -94,4 +94,33 @@ export const EmailContainer = styled.p`
   font-family: ${Poppins};
   font-weight: 400;
   color: ${DarkGray};
+`
+
+export const NoResultsWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const NoResultsContainer = styled.div`
+  width: 100%;
+  height: 30%;
+  text-align: center;
+`
+
+export const NoResultsHeader = styled.h1`
+  font-family: ${Poppins};
+  font-weight: 600;
+  font-size: ${ButtonText};
+  color: ${PrimaryColor};
+`
+
+export const NoResultsText = styled.p`
+  font-family: ${Poppins};
+  font-weight: 400;
+  font-size: ${FilterTitle};
+  color: ${DarkGray};
+  font-style: italic;
 `

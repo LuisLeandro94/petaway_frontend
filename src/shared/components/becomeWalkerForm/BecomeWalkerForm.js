@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import {Select} from 'antd'
 import Modal from 'antd/lib/modal/Modal'
 import {Field, Form} from 'react-final-form'
 import {useHistory} from 'react-router'
 
+import {GetAllPets} from '../../../infra/requests/PetsRequests'
+import {GetAllServices} from '../../../infra/requests/ServicesRequests'
 import {AddWalker} from '../../../infra/requests/WalkerRequests'
 import {GoToProfileBtn} from '../header/HeaderStyles'
 import {
@@ -28,12 +30,22 @@ const validate = (values) => {
 
 const BecomeWalkerForm = () => {
   const [filledFields, setFilledFields] = useState(false)
+  const [petList, setPetList] = useState([])
+  const [servicesList, setServicesList] = useState([])
   const history = useHistory()
 
+  useEffect(() => {
+    GetAllPets().then((res) => setPetList(res.data.result))
+    GetAllServices().then((res) => setServicesList(res.data.result))
+  }, [])
+
   const BecomeWalker = (values) => {
-    debugger
     try {
-      const response = AddWalker(values)
+      const data = {
+        services: values.services.map(Number),
+        pets: values.pets.map(Number)
+      }
+      const response = AddWalker(data)
 
       if (response.success) {
         setFilledFields(!filledFields)
@@ -48,14 +60,12 @@ const BecomeWalkerForm = () => {
     history.push('/')
   }
 
-  const services = ['Pet Sitting', 'PetWalking']
-  const servicesChildren = services.map((key) => (
-    <Select.Option key={key}>{key}</Select.Option>
+  const servicesChildren = servicesList.map((service) => (
+    <Select.Option key={service.id}>{service.type}</Select.Option>
   ))
 
-  const pets = ['Dogs', 'Cats', 'Furrets', 'Crocodiles']
-  const petsChildren = pets.map((key) => (
-    <Select.Option key={key}>{key}</Select.Option>
+  const petsChildren = petList.map((pet) => (
+    <Select.Option key={pet.id}>{pet.type}</Select.Option>
   ))
 
   const formData = {
