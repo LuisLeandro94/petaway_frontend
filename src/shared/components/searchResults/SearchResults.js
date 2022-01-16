@@ -4,6 +4,7 @@ import {Avatar} from 'antd'
 
 import PlaceholderImage from '../../../assets/Repeat.png'
 import {PrimaryColor} from '../../styles/_colors'
+import SimpleMap, {MapContainer} from '../gmaps/GMap'
 import {
   CardWrapper,
   DetailsContainer,
@@ -109,7 +110,9 @@ const SearchResults = () => {
             </CardWrapper>
           ))}
         </ResultsContainer>
-        <DetailsContainer>asd</DetailsContainer>
+        <DetailsContainer>
+          <SimpleMap />
+        </DetailsContainer>
       </ResultsWrapper>
     </>
   )
