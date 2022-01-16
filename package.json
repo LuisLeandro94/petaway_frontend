@@ -16,6 +16,8 @@
     "axios": "^0.19.2",
     "final-form": "^4.20.4",
     "framer-motion": "^4.1.17",
+    "google-map-react": "^2.1.10",
+    "google-maps-react": "^2.0.6",
     "hamburger-react": "^2.4.1",
     "js-sha256": "^0.9.0",
     "lodash": "^4.17.19",
