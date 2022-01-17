@@ -54,7 +54,6 @@ const Header = () => {
 
   useEffect(() => {
     const token = localStorage.getItem(AuthTokenKey)
-    console.log(token)
     if (token !== null && token !== 'null') {
       setLogged(1)
       GetUserByJwt().then((result) => setUser(result.data.result))

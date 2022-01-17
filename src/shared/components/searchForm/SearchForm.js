@@ -38,7 +38,13 @@ const formData = {
   city: ''
 }
 
-const SearchFilters = ({pets, services, setSearchResult}) => {
+const SearchFilters = ({
+  pets,
+  services,
+  setSearchResult,
+  setRequestPet,
+  setRequestService
+}) => {
   const servicesChildren = services.map((service) => (
     <Select.Option key={service.id}>{service.type}</Select.Option>
   ))
@@ -51,6 +57,8 @@ const SearchFilters = ({pets, services, setSearchResult}) => {
         pets: values.pets,
         city: values.city
       }
+      setRequestService(parseInt(data.services, 10))
+      setRequestPet(data.pets)
       const response = GetAllWalkers(data).then((res) =>
         setSearchResult(res.data.result)
       )

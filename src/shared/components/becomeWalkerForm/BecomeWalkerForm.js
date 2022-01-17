@@ -21,13 +21,6 @@ import {
   SignUpButton
 } from './BecomeWalkerFormStyles'
 
-const validate = (values) => {
-  if (!values) {
-    return console.log('ERRO')
-  }
-  return console.log(values)
-}
-
 const BecomeWalkerForm = () => {
   const [filledFields, setFilledFields] = useState(false)
   const [petList, setPetList] = useState([])
@@ -103,7 +96,6 @@ const BecomeWalkerForm = () => {
         <FormTitle>Want to be a part of our team of Walkers?</FormTitle>
         <Form
           onSubmit={BecomeWalker}
-          validate={validate}
           initialValues={{...formData}}
           render={({handleSubmit, submitting, values, pristine}) => (
             <FormContainer onSubmit={handleSubmit}>
