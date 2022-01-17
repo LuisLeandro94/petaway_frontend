@@ -14,9 +14,15 @@ import PetAway from '../../../assets/logo.png'
 import Paw from '../../../assets/Paw.png'
 import Search from '../../../assets/Search.png'
 import {AuthTokenKey} from '../../../infra/config/LocalStorageKeys'
+import {
+  GetUserEvents,
+  GetWalkerEvents
+} from '../../../infra/requests/EventsRequests'
 import {GetUserByJwt} from '../../../infra/requests/UserRequests'
+import {GetWalkerById} from '../../../infra/requests/WalkerRequests'
 import {DarkGray} from '../../styles/_colors'
 import MobileMenu from './components/MobileMenu'
+import useDidMountEffect from './DidMount'
 import {
   Container,
   LinksList,
@@ -47,20 +53,46 @@ const Header = () => {
   const [logged, setLogged] = useState(0)
   const [user, setUser] = useState({})
   const [filledFields, setFilledFields] = useState(false)
+  const [userType, setUserType] = useState({})
+  const [eventList, setEventList] = useState([])
   const history = useHistory()
   const showDrawer = () => {
     setVisible(true)
+  }
+
+  function GetUser() {
+    GetUserByJwt().then((result) => setUser(result.data.result))
   }
 
   useEffect(() => {
     const token = localStorage.getItem(AuthTokenKey)
     if (token !== null && token !== 'null') {
       setLogged(1)
-      GetUserByJwt().then((result) => setUser(result.data.result))
+      GetUser()
+      console.log(user)
     } else {
       setLogged(0)
     }
   }, [])
+
+  useDidMountEffect(() => {
+    // if (userType.result === null) {
+    //   GetUserEvents(user.id).then((result) =>
+    //     setEventList(result.data.result)
+    //   )
+    // } else {
+    //   GetWalkerEvents(user.id).then((result) =>
+    //     setEventList(result.data.result)
+    //   )
+    // }
+    if (user.isWalker) {
+      GetWalker
+    }
+  }, [user])
+
+  const getEvents = () => {}
+
+  console.log(eventList)
 
   const logoutAndRedirect = () => {
     localStorage.setItem(AuthTokenKey, 'null')
