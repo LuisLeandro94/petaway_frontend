@@ -215,6 +215,9 @@ const Header = () => {
                       size='large'
                       onClick={showDrawer}
                       src={user?.userData?.profilePhoto}
+                      style={{
+                        border: '2px solid #cecece'
+                      }}
                     />
                   )
                 }
@@ -223,7 +226,6 @@ const Header = () => {
                 <UserMenuListItem href='/profile'>
                   Profile
                 </UserMenuListItem>
-                <UserMenuListItem>Settings</UserMenuListItem>
                 <UserMenuListItem
                   style={{color: 'red'}}
                   onClick={checkRequiredFields}
