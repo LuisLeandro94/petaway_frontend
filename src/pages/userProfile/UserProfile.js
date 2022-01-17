@@ -112,7 +112,7 @@ const UserProfile = () => {
             </HalfPage>
           </Wrapper>
         )}
-        {currentPage === 2 && <EditInfo />}
+        {currentPage === 2 && <EditInfo user={user} setUser={setUser} />}
         {currentPage === 3 && <EditPassword />}
         <DeletePopUp>
           <Modal
