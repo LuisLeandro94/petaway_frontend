@@ -8,5 +8,5 @@ export const GetAllWalkers = async (data) =>
     `/v1/walkers?services=[${data.services}]&pets=[${data.pets}]&city=${data.city}`
   )
 
-export const GetWalkerById = async (userId) =>
+export const GetWalkerByUId = async (userId) =>
   await client.get(`/v1/walkers/${userId}`)

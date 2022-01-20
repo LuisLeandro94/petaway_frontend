@@ -278,7 +278,6 @@ const EditInfo = ({user}) => {
               <ButtonContainer>
                 <SubmitButton disabled={submitting}>Submit</SubmitButton>
               </ButtonContainer>
-              <pre>{JSON.stringify(values, 0, 2)}</pre>
             </FormWrapper>
           )}
         />
