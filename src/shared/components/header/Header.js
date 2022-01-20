@@ -159,9 +159,6 @@ const Header = () => {
         status: 2
       }
       const result = await UpdateEventStatus(data)
-
-      if (result.success) {
-      }
     } catch (e) {
       console.error(e)
     }
@@ -174,9 +171,6 @@ const Header = () => {
         status: 3
       }
       const result = await UpdateEventStatus(data)
-
-      if (result.success) {
-      }
     } catch (e) {
       console.error(e)
     }
@@ -226,15 +220,17 @@ const Header = () => {
         </HamburgerContainer>
         <LinksWrapper>
           <LinksList>
-            <ListItem>
-              <LinkItem href='/search'>
-                <ItemImage src={Search} />
-                <Translate id='SEARCH' />
-              </LinkItem>
-            </ListItem>
+            {logged !== 0 && (
+              <ListItem>
+                <LinkItem href='/search'>
+                  <ItemImage src={Search} />
+                  <Translate id='SEARCH' />
+                </LinkItem>
+              </ListItem>
+            )}
             {logged === 0 && (
               <ListItem>
-                <LinkItem href='/'>
+                <LinkItem href='/signup'>
                   <ItemImage src={Heart} />
                   <Translate id='BECOME_WALKER' />
                 </LinkItem>

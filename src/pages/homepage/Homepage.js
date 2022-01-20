@@ -19,7 +19,7 @@ const Homepage = () => (
         An animal’s eyes have the power to speak a great language.
       </Quote>
       <ButtonContainer>
-        <a href='https://www.youtube.com/watch?v=PUjvaMWKeBI'>
+        <a href='/'>
           <FindMoreButton href='/'>Find More</FindMoreButton>
         </a>
       </ButtonContainer>
