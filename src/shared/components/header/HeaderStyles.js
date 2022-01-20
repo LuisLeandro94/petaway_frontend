@@ -1,5 +1,5 @@
 import {Menu, MenuItem} from '@szhsin/react-menu'
-import {Avatar, Button} from 'antd'
+import {Avatar, Button, Drawer, Tabs} from 'antd'
 import {Sling as Hamburger} from 'hamburger-react'
 import styled, {keyframes} from 'styled-components'
 
@@ -7,10 +7,14 @@ import {
   PrimaryColor,
   SecondaryColor,
   White,
-  TextColor
+  TextColor,
+  BorderColor,
+  DarkGray,
+  ErrorColor
 } from '../../styles/_colors'
 import {device} from '../../styles/_responsive'
 import {
+  BoldFontWeight,
   FilterTitle,
   FormText,
   HeaderMenus,
@@ -275,3 +279,146 @@ export const GoToProfileBtn = styled(Button)`
 `
 
 export const GoBackBtn = styled(Button)``
+
+export const NotificationDrawer = styled(Drawer)`
+  .ant-drawer-header {
+    text-align: center;
+
+    .ant-drawer-title {
+      font-size: 18px;
+      font-weight: ${BoldFontWeight};
+    }
+  }
+`
+
+export const NotificationTabs = styled.span`
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: ${PrimaryColor} !important;
+    font-weight: 500;
+
+    &:hover {
+      color: ${PrimaryColor} !important;
+    }
+  }
+`
+
+export const EventCard = styled.div`
+  border-bottom: 2px solid ${BorderColor};
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10pxpx;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+`
+
+export const EventDetails = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 5px;
+  font-family: ${Poppins};
+  font-size: 14px;
+`
+
+export const EventRightSide = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  text-align: end;
+`
+
+export const EventDate = styled.p`
+  width: 50%;
+  margin: 0;
+  color: ${BorderColor};
+  font-size: 10px;
+  font-style: italic;
+  margin-right: 10px;
+`
+
+export const EventButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin: 10px;
+  width: 100%;
+  height: 100%;
+`
+
+export const RejectButton = styled.button`
+  background-color: ${White};
+  border: 2px solid ${ErrorColor};
+  height: 50%;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 10px;
+  transition: all 1s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: #ff000075;
+  }
+`
+
+export const AcceptButton = styled.button`
+  background-color: ${PrimaryColor};
+  border: 2px solid ${PrimaryColor};
+  height: 50%;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 1s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: #00a7aa7b;
+    border: 2px solid ${PrimaryColor};
+  }
+`
+
+export const DetailsWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+`
+
+export const EventName = styled.p`
+  height: 25%;
+  width: 100%;
+  margin: 0;
+  font-size: 15px;
+`
+export const EventPet = styled.p`
+  height: 25%;
+  width: 100%;
+  margin: 0;
+`
+export const EventService = styled.p`
+  height: 25%;
+  width: 100%;
+  margin: 0;
+`
+export const EventSender = styled.span`
+  height: 25%;
+  width: 100%;
+  margin: 0;
+  font-weight: ${BoldFontWeight};
+  color: ${DarkGray};
+`
+
+export const ItalicSpan = styled.span`
+  font-style: italic;
+`

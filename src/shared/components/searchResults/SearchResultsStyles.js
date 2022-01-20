@@ -53,13 +53,13 @@ export const CardWrapper = styled.div`
 `
 
 export const AvatarWrapper = styled.div`
-  width: 40%;
+  width: 35%;
   display: flex;
   justify-content: center;
 `
 
 export const DetailsWrapper = styled.div`
-  width: 70%;
+  width: 35%;
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -123,4 +123,18 @@ export const NoResultsText = styled.p`
   font-size: ${FilterTitle};
   color: ${DarkGray};
   font-style: italic;
+`
+
+export const RequestWrapper = styled.div`
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+`
+
+export const RequestService = styled.button`
+  height: 20%;
+  margin-bottom: 10%;
+  margin-right: 10%;
 `

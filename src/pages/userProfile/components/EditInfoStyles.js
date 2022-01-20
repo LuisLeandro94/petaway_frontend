@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 import {
+  BorderColor,
+  DarkGray,
   PrimaryColor,
   TextColor,
   White
@@ -53,7 +55,7 @@ export const Title = styled.p`
   font-family: ${Poppins};
   font-weight: bold;
   font-size: ${FilterTitle};
-  color: ${TextColor};
+  color: ${DarkGray};
   margin: 0;
   align-self: flex-start;
 `

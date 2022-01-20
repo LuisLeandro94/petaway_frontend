@@ -4,7 +4,7 @@ import {BellOutlined} from '@ant-design/icons'
 import {MenuDivider} from '@szhsin/react-menu'
 import '@szhsin/react-menu/dist/index.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
-import {Badge, Drawer} from 'antd'
+import {Badge, Button, Drawer, Tabs} from 'antd'
 import Modal from 'antd/lib/modal/Modal'
 import {Translate} from 'react-localize-redux'
 import {useHistory} from 'react-router'
@@ -14,9 +14,17 @@ import PetAway from '../../../assets/logo.png'
 import Paw from '../../../assets/Paw.png'
 import Search from '../../../assets/Search.png'
 import {AuthTokenKey} from '../../../infra/config/LocalStorageKeys'
+import {
+  GetUserEvents,
+  GetWalkerEvents,
+  UpdateEventStatus
+} from '../../../infra/requests/EventsRequests'
 import {GetUserByJwt} from '../../../infra/requests/UserRequests'
+import {GetWalkerByUId} from '../../../infra/requests/WalkerRequests'
 import {DarkGray} from '../../styles/_colors'
+import EventContainer from './components/EventContainer'
 import MobileMenu from './components/MobileMenu'
+import useDidMountEffect from './DidMount'
 import {
   Container,
   LinksList,
@@ -37,8 +45,12 @@ import {
   UserMenu,
   UserMenuListItem,
   GoBackBtn,
-  GoToProfileBtn
+  GoToProfileBtn,
+  NotificationDrawer,
+  NotificationTabs
 } from './HeaderStyles'
+
+const {TabPane} = Tabs
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false)
@@ -46,7 +58,10 @@ const Header = () => {
   const [notification, setNotification] = useState(false)
   const [logged, setLogged] = useState(0)
   const [user, setUser] = useState({})
+  const [walker, setWalker] = useState({})
   const [filledFields, setFilledFields] = useState(false)
+  const [incomingEvents, setIncomingEvents] = useState([])
+  const [outgoingEvents, setOutgoingEvents] = useState([])
   const history = useHistory()
   const showDrawer = () => {
     setVisible(true)
@@ -54,14 +69,63 @@ const Header = () => {
 
   useEffect(() => {
     const token = localStorage.getItem(AuthTokenKey)
-    console.log(token)
     if (token !== null && token !== 'null') {
       setLogged(1)
-      GetUserByJwt().then((result) => setUser(result.data.result))
+      const GetUser = async () => {
+        const {data, success} = await GetUserByJwt()
+
+        if (success) {
+          setUser(data.result)
+        }
+      }
+      GetUser()
     } else {
       setLogged(0)
     }
   }, [])
+
+  useDidMountEffect(() => {
+    if (user.isWalker) {
+      const GetWalker = async () => {
+        const {data, success} = await GetWalkerByUId(user.id)
+
+        if (success) {
+          setWalker(data.result)
+        }
+      }
+      GetWalker()
+    }
+  }, [user])
+
+  const getEventList = async () => {
+    setNotification(!notification)
+    if (user.isWalker) {
+      const GetOutgoingWalkerEvents = async () => {
+        const {data, success} = await GetUserEvents()
+        if (success) {
+          setOutgoingEvents(data.result)
+        }
+      }
+      const GetIncomingWalkerEvents = async () => {
+        const {data, success} = await GetWalkerEvents(walker?.id)
+        if (success) {
+          setIncomingEvents(data.result)
+        }
+      }
+      GetOutgoingWalkerEvents()
+      GetIncomingWalkerEvents()
+    }
+    if (!user.isWalker) {
+      const GetAllUserEvents = async () => {
+        const {data, success} = await GetUserEvents()
+
+        if (success) {
+          setOutgoingEvents(data.result)
+        }
+      }
+      GetAllUserEvents()
+    }
+  }
 
   const logoutAndRedirect = () => {
     localStorage.setItem(AuthTokenKey, 'null')
@@ -86,6 +150,36 @@ const Header = () => {
 
   const closeAndStay = () => {
     setFilledFields(!filledFields)
+  }
+
+  const rejectEvent = async (id) => {
+    try {
+      const data = {
+        eventId: id,
+        status: 2
+      }
+      const result = await UpdateEventStatus(data)
+
+      if (result.success) {
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const acceptEvent = async (id) => {
+    try {
+      const data = {
+        eventId: id,
+        status: 3
+      }
+      const result = await UpdateEventStatus(data)
+
+      if (result.success) {
+      }
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return (
@@ -170,32 +264,49 @@ const Header = () => {
         {logged !== 0 && (
           <>
             <UserWrapper>
-              <Badge
-                count={5}
-                size='small'
-                onClick={() => setNotification(!notification)}
-              >
+              <Badge count={5} size='small' onClick={getEventList}>
                 <Notifications>
                   <BellOutlined
                     style={{fontSize: '24px', color: '#cecece'}}
                   />
                 </Notifications>
               </Badge>
-              <Drawer
-                title='Notifications'
+              <NotificationDrawer
+                title='Service Requests'
                 visible={notification}
                 onClose={() => setNotification(!notification)}
                 contentWrapperStyle={{
-                  marginTop: '95px'
+                  marginTop: '95px',
+                  fontFamily: 'Poppins',
+                  overflow: 'scroll'
                 }}
+                bodyStyle={{padding: '0 24px 24px', overflow: 'scroll'}}
                 mask={false}
+                keyboard
                 zIndex={2}
                 closable={false}
+                width={400}
               >
-                {/* TODO Add notification list */}
-                {/* Add notification list counter */}
-                asd
-              </Drawer>
+                <NotificationTabs>
+                  <Tabs type='card' defaultActiveKey='1'>
+                    <TabPane tab='Incoming' key='1'>
+                      {incomingEvents.map((event) => (
+                        <EventContainer
+                          event={event}
+                          incoming
+                          rejectEvent={rejectEvent}
+                          acceptEvent={acceptEvent}
+                        />
+                      ))}
+                    </TabPane>
+                    <TabPane tab='Outgoing' key='2'>
+                      {outgoingEvents.map((event) => (
+                        <EventContainer event={event} />
+                      ))}
+                    </TabPane>
+                  </Tabs>
+                </NotificationTabs>
+              </NotificationDrawer>
               <UserMenu
                 menuButton={
                   user?.userData?.profilePhoto === null ? (
