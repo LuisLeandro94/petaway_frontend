@@ -23,7 +23,8 @@ import {
   ServiceSubtitle,
   ServiceTitle,
   ButtonContainer,
-  BookNowButton
+  BookNowButton,
+  SecondMenuContainer
 } from './ServicesStyles'
 
 const Services = () => {

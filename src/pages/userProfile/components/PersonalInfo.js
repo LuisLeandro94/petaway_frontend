@@ -1,7 +1,5 @@
 import React from 'react'
 
-import {PropTypes} from 'prop-types'
-
 import {
   BlackText,
   Wrapper,
@@ -66,9 +64,5 @@ const PersonalInfo = ({user}) => (
     </Wrapper>
   </>
 )
-
-PersonalInfo.propTypes = {
-  user: PropTypes.object.isRequired
-}
 
 export default PersonalInfo

@@ -80,7 +80,7 @@ const LoginPage = () => {
                       <LoginInput
                         {...input}
                         type='text'
-                        placeholder='E-mail'
+                        placeholder='First Name'
                         meta={meta}
                       />
                     </InputContainer>
@@ -93,7 +93,7 @@ const LoginPage = () => {
                       <PasswordInput
                         {...input}
                         type='password'
-                        placeholder='Password'
+                        placeholder='First Name'
                         meta={meta}
                       />
                     </InputContainer>

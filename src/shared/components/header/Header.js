@@ -4,7 +4,7 @@ import {BellOutlined} from '@ant-design/icons'
 import {MenuDivider} from '@szhsin/react-menu'
 import '@szhsin/react-menu/dist/index.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
-import {Badge, Tabs} from 'antd'
+import {Badge, Button, Drawer, Tabs} from 'antd'
 import Modal from 'antd/lib/modal/Modal'
 import {Translate} from 'react-localize-redux'
 import {useHistory} from 'react-router'
@@ -159,6 +159,9 @@ const Header = () => {
         status: 2
       }
       const result = await UpdateEventStatus(data)
+
+      if (result.success) {
+      }
     } catch (e) {
       console.error(e)
     }
@@ -171,6 +174,9 @@ const Header = () => {
         status: 3
       }
       const result = await UpdateEventStatus(data)
+
+      if (result.success) {
+      }
     } catch (e) {
       console.error(e)
     }
@@ -220,14 +226,12 @@ const Header = () => {
         </HamburgerContainer>
         <LinksWrapper>
           <LinksList>
-            {logged !== 0 && (
-              <ListItem>
-                <LinkItem href='/search'>
-                  <ItemImage src={Search} />
-                  <Translate id='SEARCH' />
-                </LinkItem>
-              </ListItem>
-            )}
+            <ListItem>
+              <LinkItem href='/search'>
+                <ItemImage src={Search} />
+                <Translate id='SEARCH' />
+              </LinkItem>
+            </ListItem>
             {logged === 0 && (
               <ListItem>
                 <LinkItem href='/'>
