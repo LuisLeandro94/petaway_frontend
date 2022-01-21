@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {Avatar} from 'antd'
+import {PropTypes} from 'prop-types'
 
 import {CreateEvent} from '../../../infra/requests/EventsRequests'
 import {PrimaryColor} from '../../styles/_colors'
@@ -33,15 +34,13 @@ const SearchResults = ({
 }) => {
   const SendRequest = (data) => {
     try {
-      debugger
       const values = {
         walkerId: data,
         petId: requestPet,
         serviceId: requestService,
         date: new Date()
       }
-      console.log(values)
-      const response = CreateEvent(values).then((res) => {
+      CreateEvent(values).then((res) => {
         if (res.success) {
           setResultState(!resultState)
         }
@@ -56,8 +55,8 @@ const SearchResults = ({
       <ResultsWrapper>
         {searchResult.length !== 0 && (
           <ResultsContainer>
-            {searchResult.map((walker) => (
-              <CardWrapper>
+            {searchResult.map((walker, index) => (
+              <CardWrapper key={index}>
                 <AvatarWrapper>
                   <Avatar
                     size={{
@@ -74,7 +73,6 @@ const SearchResults = ({
                 </AvatarWrapper>
                 <DetailsWrapper>
                   <NameContainer>
-                    {console.log(walker)}
                     {walker.user.userData.firstName
                       .charAt(0)
                       .toUpperCase() +
@@ -122,6 +120,14 @@ const SearchResults = ({
       </ResultsWrapper>
     </>
   )
+}
+
+SearchResults.propTypes = {
+  searchResult: PropTypes.array.isRequired,
+  requestService: PropTypes.number.isRequired,
+  requestPet: PropTypes.number.isRequired,
+  setResultState: PropTypes.func.isRequired,
+  resultState: PropTypes.bool.isRequired
 }
 
 export default SearchResults
