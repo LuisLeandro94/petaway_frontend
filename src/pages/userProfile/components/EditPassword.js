@@ -24,10 +24,7 @@ const EditPassword = () => {
 
   const PasswordEdit = (values) => {
     try {
-      if (
-        values.password !== values.confirm_password &&
-        values.current_password === user.password
-      ) {
+      if (values.password !== values.confirm_password) {
         alert("Passwords don't match")
         return
       }
@@ -61,7 +58,7 @@ const EditPassword = () => {
         <Form
           style={{margin: '20px'}}
           onSubmit={PasswordEdit}
-          render={({handleSubmit, submitting, form, values}) => (
+          render={({handleSubmit, submitting, form}) => (
             <FormWrapper
               onSubmit={async (event) => {
                 await handleSubmit(event)
@@ -78,25 +75,6 @@ const EditPassword = () => {
                         type='text'
                         value={user.email}
                         disabled
-                      />
-                      {meta.error && meta.touched && (
-                        <span>{meta.error}</span>
-                      )}
-                    </>
-                  )}
-                </Field>
-                <Separator />
-                <Field
-                  name='current_password'
-                  validate={composeValidators(required, minValue(9))}
-                >
-                  {({input, meta}) => (
-                    <>
-                      <Title>Password</Title>
-                      <Input.Password
-                        {...input}
-                        type='text'
-                        placeholder='Current Password'
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>

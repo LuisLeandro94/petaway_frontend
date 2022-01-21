@@ -1,6 +1,5 @@
 import React from 'react'
 
-import {message} from 'antd'
 import {sha256} from 'js-sha256'
 import {Form} from 'react-final-form'
 import {useHistory} from 'react-router'
@@ -26,10 +25,6 @@ import {
   SignupInput
 } from './SignupFormStyles'
 
-const onSubmit = (values) => {
-  console.log(values)
-}
-
 const validate = FormValidator.make({
   email: 'required|email',
   password: 'required',
@@ -48,7 +43,7 @@ const SignUpForm = () => {
         ...values,
         password: pwd
       }
-      const response = SignUp(data).then((res) => {
+      SignUp(data).then((res) => {
         if (res.success) {
           history.push('/login')
         }

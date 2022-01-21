@@ -2,6 +2,7 @@ import React, {useCallback} from 'react'
 
 import {CameraOutlined} from '@ant-design/icons'
 import {Avatar, Badge} from 'antd'
+import {PropTypes} from 'prop-types'
 import {useDropzone} from 'react-dropzone'
 
 import {UserData} from '../../../shared/mockup/Mockup'
@@ -60,6 +61,20 @@ const FileField = ({
       </Badge>
     </div>
   )
+}
+
+FileField.propTypes = {
+  required: PropTypes.bool,
+  input: PropTypes.string,
+  dropZoneProps: PropTypes.object,
+  onChange: PropTypes.func
+}
+
+FileField.defaultProps = {
+  required: false,
+  input: '',
+  dropZoneProps: {},
+  onChange: () => {}
 }
 
 export default FileField

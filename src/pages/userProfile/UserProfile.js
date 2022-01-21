@@ -5,7 +5,6 @@ import {useHistory} from 'react-router'
 
 import {AuthTokenKey} from '../../infra/config/LocalStorageKeys'
 import {DeleteUser, GetUserByJwt} from '../../infra/requests/UserRequests'
-import {UserData} from '../../shared/mockup/Mockup'
 import {PrimaryColor} from '../../shared/styles/_colors'
 import EditInfo from './components/EditInfo'
 import EditPassword from './components/EditPassword'
@@ -36,7 +35,6 @@ const UserProfile = () => {
   }
 
   const handleClick = (e) => {
-    console.log('click ', e)
     setCurrent(e.key)
   }
 
