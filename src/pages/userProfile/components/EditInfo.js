@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 
 import {Input} from 'antd'
+import {PropTypes} from 'prop-types'
 import FileBase64 from 'react-file-base64'
 import {Field, Form} from 'react-final-form'
 
@@ -22,7 +23,6 @@ const EditInfo = ({user}) => {
 
   const UserEdit = (values) => {
     try {
-      debugger
       const userValues = {
         profilePhoto: file.base64,
         ...values
@@ -44,6 +44,19 @@ const EditInfo = ({user}) => {
     return console.log(values)
   }
 
+  const formData = {
+    firstName: user?.userData?.firstName,
+    lastName: user?.userData?.lastName,
+    address_1: user?.userData?.address_1,
+    address_2: user?.userData?.address_2,
+    city: user?.userData?.city,
+    state: user?.userData?.state,
+    zip: user?.userData?.zip,
+    country: user?.userData?.country,
+    birthdate: user?.userData?.birthdate,
+    phoneNumber: user?.userData?.phoneNumber
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -51,12 +64,8 @@ const EditInfo = ({user}) => {
           style={{margin: '20px'}}
           onSubmit={UserEdit}
           validate={validate}
-          initialValues={{
-            firstName: user.userData.firstName,
-            lastName: user.userData.lastName,
-            zip: user.userData.zip
-          }}
-          render={({handleSubmit, submitting, form, values}) => (
+          initialValues={formData}
+          render={({handleSubmit, submitting, form}) => (
             <FormWrapper
               onSubmit={async (event) => {
                 await handleSubmit(event)
@@ -70,6 +79,7 @@ const EditInfo = ({user}) => {
                       {...input}
                       multiple={false}
                       value={user.profilePhoto}
+                      meta={meta}
                       onDone={setFile}
                     />
                   )}
@@ -101,8 +111,8 @@ const EditInfo = ({user}) => {
                       <Input
                         {...input}
                         type='text'
-                        placeholder={user.userData?.firstName}
-                        value={user.userData?.firstName}
+                        value={input.value}
+                        onChange={input.onChange}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -118,8 +128,8 @@ const EditInfo = ({user}) => {
                       <Input
                         {...input}
                         type='text'
-                        placeholder={user.userData?.lastName}
-                        value={user.userData?.lastName}
+                        value={input.value}
+                        onChange={input.onChange}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -127,22 +137,6 @@ const EditInfo = ({user}) => {
                     </>
                   )}
                 </Field>
-                {/* <Separator />
-                <Field name='password'>
-                  {({input, meta}) => (
-                    <>
-                      <Title>Password</Title>
-                      <Input
-                        {...input}
-                        type='password'
-                        placeholder='New Password'
-                      />
-                      {meta.error && meta.touched && (
-                        <span>{meta.error}</span>
-                      )}
-                    </>
-                  )}
-                </Field> */}
                 <Separator />
               </HalfScreen>
               <HalfScreen>
@@ -153,7 +147,8 @@ const EditInfo = ({user}) => {
                       <Input
                         {...input}
                         type='text'
-                        placeholder={user.userData?.address_1}
+                        value={input.value}
+                        onChange={input.onChange}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -169,7 +164,8 @@ const EditInfo = ({user}) => {
                       <Input
                         {...input}
                         type='text'
-                        placeholder={user.userData?.address_2}
+                        value={input.value}
+                        onChange={input.onChange}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -185,7 +181,8 @@ const EditInfo = ({user}) => {
                       <Input
                         {...input}
                         type='text'
-                        placeholder={user.userData?.city}
+                        value={input.value}
+                        onChange={input.onChange}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -201,7 +198,8 @@ const EditInfo = ({user}) => {
                       <Input
                         {...input}
                         type='text'
-                        placeholder={user.userData?.state}
+                        value={input.value}
+                        onChange={input.onChange}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -217,8 +215,8 @@ const EditInfo = ({user}) => {
                       <Input
                         {...input}
                         type='text'
-                        placeholder={user.userData?.zip}
-                        value={user.userData?.zip}
+                        value={input.value}
+                        onChange={input.onChange}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -234,7 +232,8 @@ const EditInfo = ({user}) => {
                       <Input
                         {...input}
                         type='text'
-                        placeholder={user.userData?.country}
+                        value={input.value}
+                        onChange={input.onChange}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -250,7 +249,8 @@ const EditInfo = ({user}) => {
                       <Input
                         {...input}
                         type='text'
-                        placeholder={user.userData?.birthdate}
+                        value={input.value}
+                        onChange={input.onChange}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -266,7 +266,8 @@ const EditInfo = ({user}) => {
                       <Input
                         {...input}
                         type='text'
-                        placeholder={user.userData?.phoneNumber}
+                        value={input.value}
+                        onChange={input.onChange}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -284,6 +285,10 @@ const EditInfo = ({user}) => {
       </Container>
     </Wrapper>
   )
+}
+
+EditInfo.propTypes = {
+  user: PropTypes.object.isRequired
 }
 
 export default EditInfo

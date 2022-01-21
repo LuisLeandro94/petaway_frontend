@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import {CloseCircleOutlined, CheckCircleOutlined} from '@ant-design/icons'
+import {PropTypes} from 'prop-types'
 
 import {
   AcceptButton,
@@ -82,6 +83,13 @@ const EventContainer = ({event, acceptEvent, rejectEvent, incoming}) => {
       </EventRightSide>
     </EventCard>
   )
+}
+
+EventContainer.propTypes = {
+  event: PropTypes.object.isRequired,
+  acceptEvent: PropTypes.func.isRequired,
+  rejectEvent: PropTypes.func.isRequired,
+  incoming: PropTypes.array.isRequired
 }
 
 export default EventContainer

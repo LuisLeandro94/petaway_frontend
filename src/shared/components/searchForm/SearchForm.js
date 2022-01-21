@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {Select, Input, Radio} from 'antd'
+import {PropTypes} from 'prop-types'
 import {Field, Form} from 'react-final-form'
 
 import Calendar from '../../../assets/Calendar.png'
@@ -51,7 +52,6 @@ const SearchFilters = ({
 
   const SearchWalkers = (values) => {
     try {
-      console.log(values)
       const data = {
         services: values.services,
         pets: values.pets,
@@ -59,9 +59,7 @@ const SearchFilters = ({
       }
       setRequestService(parseInt(data.services, 10))
       setRequestPet(data.pets)
-      const response = GetAllWalkers(data).then((res) =>
-        setSearchResult(res.data.result)
-      )
+      GetAllWalkers(data).then((res) => setSearchResult(res.data.result))
     } catch (e) {
       console.error(e)
     }
@@ -114,9 +112,10 @@ const SearchFilters = ({
                       <Radio.Group
                         {...input}
                         defaultValue={recursion[0].text}
+                        meta={meta}
                       >
-                        {recursion.map((rec) => (
-                          <Radio.Button value={rec.text}>
+                        {recursion.map((rec, index) => (
+                          <Radio.Button value={rec.text} key={index}>
                             <RecursionImage src={rec.image} />
                             <RecursionText>{rec.text}</RecursionText>
                           </Radio.Button>
@@ -133,9 +132,11 @@ const SearchFilters = ({
                       <InputTitle style={{paddingTop: '10px'}}>
                         Pet Type(s)
                       </InputTitle>
-                      <Radio.Group {...input}>
-                        {pets.map((pet) => (
-                          <Radio value={pet.id}>{pet.type}</Radio>
+                      <Radio.Group {...input} meta={meta}>
+                        {pets.map((pet, index) => (
+                          <Radio value={pet.id} key={index}>
+                            {pet.type}
+                          </Radio>
                         ))}
                       </Radio.Group>
                     </>
@@ -149,9 +150,11 @@ const SearchFilters = ({
                       <InputTitle style={{paddingTop: '10px'}}>
                         How many walks per day?
                       </InputTitle>
-                      <Radio.Group {...input}>
-                        {times.map((time) => (
-                          <Radio.Button value={time}>{time}</Radio.Button>
+                      <Radio.Group {...input} meta={meta}>
+                        {times.map((time, index) => (
+                          <Radio.Button value={time} key={index}>
+                            {time}
+                          </Radio.Button>
                         ))}
                       </Radio.Group>
                     </>
@@ -172,6 +175,14 @@ const SearchFilters = ({
       </FilterWrapper>
     </>
   )
+}
+
+SearchFilters.propTypes = {
+  pets: PropTypes.array.isRequired,
+  services: PropTypes.array.isRequired,
+  setSearchResult: PropTypes.func.isRequired,
+  setRequestPet: PropTypes.func.isRequired,
+  setRequestService: PropTypes.func.isRequired
 }
 
 export default SearchFilters
