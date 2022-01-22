@@ -19,7 +19,8 @@ import {
   FormText,
   HeaderMenus,
   Poppins,
-  SignUpText
+  SignUpText,
+  Subtitle
 } from '../../styles/_texts'
 
 export const Container = styled.nav`
@@ -96,6 +97,7 @@ export const OperationWrapper = styled.div`
   color: ${White};
   font-size: ${SignUpText};
   width: 53%;
+  display: flex;
 
   @media ${device.tabletL} {
     width: 100%;
@@ -421,4 +423,46 @@ export const EventSender = styled.span`
 
 export const ItalicSpan = styled.span`
   font-style: italic;
+`
+export const LanguageSelec = styled.select`
+  margin-right: 55px;
+  border: none;
+  float: right;
+  margin-top: -24px;
+  width: 42px;
+  word-wrap: normal;
+  font-family: 'Campton';
+  font-size: ${FormText};
+  overflow: visible;
+  text-transform: uppercase;
+  margin: auto;
+  font-family: 'Poppins';
+  border-radius: 10px;
+  background-color: transparent;
+  color: ${White};
+  font-size: ${HeaderMenus};
+`
+
+export const LangOption = styled.option`
+  color: ${TextColor};
+`
+
+export const LanguageSelector = styled(LanguageSelec)`
+  margin-right: 0;
+  margin-right: 10px;
+`
+
+export const MobileLanguageSelector = styled(LanguageSelec)`
+  font-size: ${Subtitle};
+  width: 75px;
+`
+
+export const LanguageWrapper = styled.div`
+  width: 30%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
 `

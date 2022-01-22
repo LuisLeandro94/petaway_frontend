@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 
 import {CloseCircleOutlined, CheckCircleOutlined} from '@ant-design/icons'
 import {PropTypes} from 'prop-types'
+import {Translate} from 'react-localize-redux'
 
 import {
   AcceptButton,
@@ -37,19 +38,25 @@ const EventContainer = ({event, acceptEvent, rejectEvent, incoming}) => {
   return (
     <EventCard eventStatus={event?.status}>
       <EventDetails>
-        <EventSender>From</EventSender>
+        <EventSender>
+          <Translate id='FROM' />
+        </EventSender>
         <DetailsWrapper>
           <EventName>
             {event?.user?.userData?.firstName}{' '}
             {event?.user?.userData?.lastName}
           </EventName>
           <EventPet>
-            <ItalicSpan>Pet:</ItalicSpan>
+            <ItalicSpan>
+              <Translate id='PET' />:
+            </ItalicSpan>
             {'  '}
             {event?.pet?.type}
           </EventPet>
           <EventService>
-            <ItalicSpan>Service:</ItalicSpan>
+            <ItalicSpan>
+              <Translate id='SERVICE' />:
+            </ItalicSpan>
             {'  '}
             {event?.service?.type}
           </EventService>
@@ -62,10 +69,10 @@ const EventContainer = ({event, acceptEvent, rejectEvent, incoming}) => {
           {event?.status === 1 && incoming && (
             <>
               <RejectButton onClick={() => rejectEvent(event?.id)}>
-                Reject
+                <Translate id='REJECT' />
               </RejectButton>
               <AcceptButton onClick={() => acceptEvent(event?.id)}>
-                Accept
+                <Translate id='ACCEPT' />
               </AcceptButton>
             </>
           )}

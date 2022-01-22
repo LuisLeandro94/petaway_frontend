@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import {Select} from 'antd'
 import Modal from 'antd/lib/modal/Modal'
 import {Field, Form} from 'react-final-form'
+import {Translate, withLocalize} from 'react-localize-redux'
 import {useHistory} from 'react-router'
 
 import {GetAllPets} from '../../../infra/requests/PetsRequests'
@@ -21,7 +22,7 @@ import {
   SignUpButton
 } from './BecomeWalkerFormStyles'
 
-const BecomeWalkerForm = () => {
+const BecomeWalkerForm = ({translate}) => {
   const [filledFields, setFilledFields] = useState(false)
   const [petList, setPetList] = useState([])
   const [servicesList, setServicesList] = useState([])
@@ -69,7 +70,7 @@ const BecomeWalkerForm = () => {
   return (
     <BodyWrapper>
       <Modal
-        title='Welcome to our team!'
+        title={translate('WELCOME_TEAM')}
         visible={filledFields}
         onOk={redirectToHome}
         footer={[
@@ -82,18 +83,18 @@ const BecomeWalkerForm = () => {
               borderColor: '#00A6AA'
             }}
           >
-            Go To Home
+            <Translate id='GO_HOME' />
           </GoToProfileBtn>
         ]}
       >
         <p>
-          Thank you for becoming a member of our Walker community! Now, you
-          can start receiving service requests and earning money to do what
-          you love the most: taking care of pets! 💚
+          <Translate id='BECOME_WALKER_MODAL' />
         </p>
       </Modal>
       <FormWrapper>
-        <FormTitle>Want to be a part of our team of Walkers?</FormTitle>
+        <FormTitle>
+          <Translate id='WANT_TO_BE_PART' />
+        </FormTitle>
         <Form
           onSubmit={BecomeWalker}
           initialValues={{...formData}}
@@ -104,14 +105,14 @@ const BecomeWalkerForm = () => {
                   {({input, meta}) => (
                     <InputWrapper>
                       <InputTitle>
-                        Which services do you want to provide?
+                        <Translate id='WHICH_SERVICES' />
                       </InputTitle>
                       <Select
                         {...input}
                         meta={meta}
                         mode='multiple'
                         style={{width: '100%'}}
-                        placeholder='Please select'
+                        placeholder={translate('PLEASE_SELECT')}
                         defaultValue={[]}
                         allowClear
                       >
@@ -126,14 +127,14 @@ const BecomeWalkerForm = () => {
                   {({input, meta}) => (
                     <InputWrapper>
                       <InputTitle>
-                        What kind of pets are you interested in?
+                        <Translate id='WHAT_PETS' />
                       </InputTitle>
                       <Select
                         {...input}
                         meta={meta}
                         mode='multiple'
                         style={{width: '100%'}}
-                        placeholder='Please select'
+                        placeholder={translate('PLEASE_SELECT')}
                         defaultValue={[]}
                         allowClear
                       >
@@ -148,10 +149,9 @@ const BecomeWalkerForm = () => {
                   type='submit'
                   disabled={submitting || pristine}
                 >
-                  Become a Walker!
+                  <Translate id='BECOME_WALKER' />
                 </SignUpButton>
               </ButtonContainer>
-              <pre>{JSON.stringify(values, 0, 2)}</pre>
             </FormContainer>
           )}
         />
@@ -160,4 +160,4 @@ const BecomeWalkerForm = () => {
   )
 }
 
-export default BecomeWalkerForm
+export default withLocalize(BecomeWalkerForm)

@@ -1,5 +1,6 @@
 import React from 'react'
 
+import {Translate} from 'react-localize-redux'
 import {useHistory} from 'react-router'
 
 import PageNotFound from '../../assets/page_not_found.svg'
@@ -22,16 +23,17 @@ const NotFound = () => {
       <StyledNotFoundGroup>
         <StyledNotFoundLogo src={PageNotFound} />
         <Margin size={30} />
-        <StyledTitle>Oops... Page not found!</StyledTitle>
+        <StyledTitle>
+          <Translate id='OOPS_NOT_FOUND' />
+        </StyledTitle>
         <Margin size={30} />
         <StyledDescription>
-          We apologize for the inconvenience. <br /> Apparently, the page
-          that you are trying to find has been erased or never existed.
+          <Translate id='APOLOGY' />
         </StyledDescription>
         <Margin size={40} />
         <MarginBackNotFound>
           <BackButton onClick={() => history.push('/')}>
-            Back to Home
+            <Translate id='BACK_HOME' />
           </BackButton>
         </MarginBackNotFound>
       </StyledNotFoundGroup>

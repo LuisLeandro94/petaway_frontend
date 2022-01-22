@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {PropTypes} from 'prop-types'
+import {Translate} from 'react-localize-redux'
 
 import {
   BlackText,
@@ -14,53 +15,77 @@ const PersonalInfo = ({user}) => (
   <>
     <Wrapper>
       <EachFieldWrapper>
-        <Title>Personal Information</Title>
+        <Title>
+          <Translate id='PERSONAL_INFORMATION' />
+        </Title>
       </EachFieldWrapper>
       <EachFieldWrapper>
-        <BlackText>First Name</BlackText>
+        <BlackText>
+          <Translate id='FIRST_NAME' />
+        </BlackText>
         <Text>{user.userData?.firstName}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
-        <BlackText>Last Name</BlackText>
+        <BlackText>
+          <Translate id='LAST_NAME' />
+        </BlackText>
         <Text>{user.userData?.lastName}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
-        <BlackText>E-mail</BlackText>
+        <BlackText>
+          <Translate id='EMAIL' />
+        </BlackText>
         <Text>{user.email}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
-        <BlackText>Birth Date</BlackText>
+        <BlackText>
+          <Translate id='BIRTHDATE' />
+        </BlackText>
         <Text>{user.userData?.birthdate}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
-        <BlackText>Phone Number</BlackText>
+        <BlackText>
+          <Translate id='PHONE_NUMBER' />
+        </BlackText>
         <Text>{user.userData?.phoneNumber}</Text>
       </EachFieldWrapper>
     </Wrapper>
     <Wrapper>
       <EachFieldWrapper>
-        <Title>Address</Title>
+        <Title>
+          <Translate id='ADDRESS' />
+        </Title>
       </EachFieldWrapper>
       <EachFieldWrapper>
-        <BlackText>Address Line 1</BlackText>
+        <BlackText>
+          <Translate id='ADDRESS_LINE_1' />
+        </BlackText>
         <Text>{user.userData?.address_1}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
-        <BlackText>Address Line 2</BlackText>
+        <BlackText>
+          <Translate id='ADDRESS_LINE_2' />
+        </BlackText>
         <Text>
           {user.userData?.address_2}, {user.userData?.zip}
         </Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
-        <BlackText>City</BlackText>
+        <BlackText>
+          <Translate id='CITY' />
+        </BlackText>
         <Text>{user.userData?.city}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
-        <BlackText>State</BlackText>
+        <BlackText>
+          <Translate id='STATE' />
+        </BlackText>
         <Text>{user.userData?.state}</Text>
       </EachFieldWrapper>
       <EachFieldWrapper>
-        <BlackText>Country</BlackText>
+        <BlackText>
+          <Translate id='COUNTRY' />
+        </BlackText>
         <Text>{user.userData?.country}</Text>
       </EachFieldWrapper>
     </Wrapper>

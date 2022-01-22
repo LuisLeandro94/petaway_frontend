@@ -4,7 +4,8 @@ import {sha256} from 'js-sha256'
 import {values} from 'lodash'
 import {PropTypes} from 'prop-types'
 import {Field, Form} from 'react-final-form'
-import {Translate} from 'react-localize-redux'
+import {Translate, withLocalize} from 'react-localize-redux'
+import {useHistory} from 'react-router'
 
 import {AuthTokenKey} from '../../infra/config/LocalStorageKeys'
 import {Login} from '../../infra/requests/AuthRequests'
@@ -35,8 +36,9 @@ const validate = FormValidator.make({
   password: 'required'
 })
 
-const LoginPage = ({router, dispatch}) => {
+const LoginPage = ({dispatch, translate}) => {
   const formData = {}
+  const history = useHistory()
 
   const LoginResponse = async (response) => {
     try {
@@ -50,7 +52,7 @@ const LoginPage = ({router, dispatch}) => {
       if (result.success) {
         localStorage.setItem(AuthTokenKey, result.data.result)
         dispatch(userSave({email: values.email, name: values.firstName}))
-        router.history.push('/')
+        history.push('/')
       }
     } catch (e) {
       console.error(e)
@@ -77,11 +79,13 @@ const LoginPage = ({router, dispatch}) => {
                 <Field name='email'>
                   {({input, meta}) => (
                     <InputContainer>
-                      <InputTitle>E-mail</InputTitle>
+                      <InputTitle>
+                        <Translate id='EMAIL' />
+                      </InputTitle>
                       <LoginInput
                         {...input}
                         type='text'
-                        placeholder='E-mail'
+                        placeholder={translate('EMAIL')}
                         meta={meta}
                       />
                     </InputContainer>
@@ -90,11 +94,13 @@ const LoginPage = ({router, dispatch}) => {
                 <Field name='password'>
                   {({input, meta}) => (
                     <InputContainer>
-                      <InputTitle>Password</InputTitle>
+                      <InputTitle>
+                        <Translate id='PASSWORD' />
+                      </InputTitle>
                       <PasswordInput
                         {...input}
                         type='password'
-                        placeholder='Password'
+                        placeholder={translate('PASSWORD')}
                         meta={meta}
                       />
                     </InputContainer>
@@ -102,29 +108,31 @@ const LoginPage = ({router, dispatch}) => {
                 </Field>
                 <ButtonContainer>
                   <SignInButton type='submit' disabled={submitting}>
-                    Sign In
+                    <Translate id='SIGNIN' />
                   </SignInButton>
                 </ButtonContainer>
               </FormContainer>
             )}
           />
           <Disclaimer>
-            By signing in or signing up, I agree to PetAway.com's{' '}
-            <DisclaimerLinks href='/'>Terms of Service</DisclaimerLinks>{' '}
-            and <DisclaimerLinks href='/'>Privacy Policy</DisclaimerLinks>,
-            confirm that I am 18 years of age or older, and consent to
-            receiving email communication. This site is protected by
-            reCAPTCHA and the Google{' '}
-            <DisclaimerLinks href='/'>Privacy Policy</DisclaimerLinks> and{' '}
-            <DisclaimerLinks href='/'>Terms of Service</DisclaimerLinks>{' '}
-            apply.
+            <Translate id='TERMS1' />{' '}
+            <DisclaimerLinks href='/'>
+              <Translate id='TERMS2' />
+            </DisclaimerLinks>{' '}
+            <Translate id='TERMS3' />{' '}
+            <DisclaimerLinks href='/'>
+              <Translate id='TERMS4' />
+            </DisclaimerLinks>
+            <Translate id='TERMS5' />
           </Disclaimer>
-          <ForgotPassword href='/'>Forgot your password?</ForgotPassword>
+          <ForgotPassword href='/'>
+            <Translate id='FORGOT_PASSWORD' />
+          </ForgotPassword>
           <Separator />
           <LoginRedirect>
-            Don't have a PetAway account?{' '}
+            <Translate id='NO_ACCOUNT' />{' '}
             <LoginRedirectLink href='/signup'>
-              Sign up now!
+              <Translate id='SIGNUP_NOW' />
             </LoginRedirectLink>
           </LoginRedirect>
         </FormWrapper>
@@ -134,8 +142,7 @@ const LoginPage = ({router, dispatch}) => {
 }
 
 LoginPage.propTypes = {
-  router: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
-export default LoginPage
+export default withLocalize(LoginPage)
