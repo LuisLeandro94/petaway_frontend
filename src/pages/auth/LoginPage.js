@@ -1,13 +1,15 @@
 import React from 'react'
 
 import {sha256} from 'js-sha256'
+import {values} from 'lodash'
+import {PropTypes} from 'prop-types'
 import {Field, Form} from 'react-final-form'
 import {Translate} from 'react-localize-redux'
-import {useHistory} from 'react-router'
 
 import {AuthTokenKey} from '../../infra/config/LocalStorageKeys'
 import {Login} from '../../infra/requests/AuthRequests'
 import FormValidator from '../../infra/services/validations/FormValidator'
+import {userSave} from '../../redux/data/user/UserActions'
 import Header from '../../shared/components/header/Header'
 import {
   ButtonContainer,
@@ -33,9 +35,7 @@ const validate = FormValidator.make({
   password: 'required'
 })
 
-const LoginPage = () => {
-  const history = useHistory()
-
+const LoginPage = ({router, dispatch}) => {
   const formData = {}
 
   const LoginResponse = async (response) => {
@@ -49,7 +49,8 @@ const LoginPage = () => {
 
       if (result.success) {
         localStorage.setItem(AuthTokenKey, result.data.result)
-        history.push('/')
+        dispatch(userSave({email: values.email, name: values.firstName}))
+        router.history.push('/')
       }
     } catch (e) {
       console.error(e)
@@ -130,6 +131,11 @@ const LoginPage = () => {
       </Container>
     </>
   )
+}
+
+LoginPage.propTypes = {
+  router: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 export default LoginPage
