@@ -2,6 +2,7 @@ import React from 'react'
 
 import {Avatar} from 'antd'
 import {PropTypes} from 'prop-types'
+import {Translate} from 'react-localize-redux'
 
 import {CreateEvent} from '../../../infra/requests/EventsRequests'
 import {PrimaryColor} from '../../styles/_colors'
@@ -93,7 +94,7 @@ const SearchResults = ({
                 </DetailsWrapper>
                 <RequestWrapper>
                   <RequestService onClick={() => SendRequest(walker.id)}>
-                    Request Service
+                    <Translate id='REQUEST_SERVICE' />
                   </RequestService>
                 </RequestWrapper>
               </CardWrapper>
@@ -105,10 +106,10 @@ const SearchResults = ({
             <NoResultsWrapper>
               <NoResultsContainer>
                 <NoResultsHeader>
-                  Oops... Guess there's no Walkers that fit your criteria.
+                  <Translate id='NO_WALKERS' />
                 </NoResultsHeader>
                 <NoResultsText>
-                  Try again with different filters!
+                  <Translate id='TRY_FILTERS' />
                 </NoResultsText>
               </NoResultsContainer>
             </NoResultsWrapper>

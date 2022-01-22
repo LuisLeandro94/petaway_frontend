@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import {Menu, Avatar, Modal} from 'antd'
+import {Translate, withLocalize} from 'react-localize-redux'
 import {useHistory} from 'react-router'
 
 import {AuthTokenKey} from '../../infra/config/LocalStorageKeys'
@@ -20,7 +21,7 @@ import {
   Wrapper
 } from './UserProfileStyles'
 
-const UserProfile = () => {
+const UserProfile = ({translate}) => {
   const [user, setUser] = useState({})
   const [currentPage, setCurrentPage] = useState(1)
   const [current, setCurrent] = useState('profile')
@@ -66,20 +67,20 @@ const UserProfile = () => {
           }}
         >
           <MenuItem key='profile' onClick={() => changePage(1)}>
-            Profile
+            <Translate id='PROFILE' />
           </MenuItem>
           <MenuItem key='edit' onClick={() => changePage(2)}>
-            Edit Profile
+            <Translate id='EDIT_PROFILE' />
           </MenuItem>
           <MenuItem key='password' onClick={() => changePage(3)}>
-            Change Password
+            <Translate id='CHANGE_PASSWORD' />
           </MenuItem>
           <MenuItem
             key='deleteUser'
             onClick={() => changePage(4)}
             style={{color: 'red', marginLeft: 'auto'}}
           >
-            Delete User
+            <Translate id='DELETE_USER' />
           </MenuItem>
         </Menu>
       </MenuWrapper>
@@ -114,14 +115,14 @@ const UserProfile = () => {
         {currentPage === 3 && <EditPassword />}
         <DeletePopUp>
           <Modal
-            title='Basic Modal'
+            title={translate('WARNING_DELETE')}
             visible={currentPage === 4}
             onOk={UserDelete}
             onCancel={() => setCurrentPage(1)}
           >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <p>
+              <Translate id='DELETE_TEXT' />
+            </p>
           </Modal>
         </DeletePopUp>
       </Content>
@@ -129,4 +130,4 @@ const UserProfile = () => {
   )
 }
 
-export default UserProfile
+export default withLocalize(UserProfile)

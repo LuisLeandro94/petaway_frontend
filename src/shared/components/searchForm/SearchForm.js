@@ -3,6 +3,7 @@ import React from 'react'
 import {Select, Input, Radio} from 'antd'
 import {PropTypes} from 'prop-types'
 import {Field, Form} from 'react-final-form'
+import {Translate, withLocalize} from 'react-localize-redux'
 
 import Calendar from '../../../assets/Calendar.png'
 import Repeat from '../../../assets/Repeat.png'
@@ -21,8 +22,8 @@ import {
 } from './SearchFormStyles'
 
 const recursion = [
-  {image: Calendar, text: 'One Time'},
-  {image: Repeat, text: 'Repeat Weekly'}
+  {image: Calendar, text: 'ONE_TIME'},
+  {image: Repeat, text: 'REPEAT_WEEKLY'}
 ]
 
 const times = ['1', '2', '3+']
@@ -44,7 +45,8 @@ const SearchFilters = ({
   services,
   setSearchResult,
   setRequestPet,
-  setRequestService
+  setRequestService,
+  translate
 }) => {
   const servicesChildren = services.map((service) => (
     <Select.Option key={service.id}>{service.type}</Select.Option>
@@ -78,11 +80,13 @@ const SearchFilters = ({
                 <Field name='services'>
                   {({input, meta}) => (
                     <InputWrapper>
-                      <InputTitle>Service Type</InputTitle>
+                      <InputTitle>
+                        <Translate id='SERVICE_TYPE' />
+                      </InputTitle>
                       <Select
                         {...input}
                         meta={meta}
-                        placeholder='Choose your service'
+                        placeholder={translate('CHOOSE_SERVICE')}
                       >
                         {servicesChildren}
                       </Select>
@@ -95,7 +99,7 @@ const SearchFilters = ({
                   {({input, meta}) => (
                     <InputWrapper>
                       <InputTitle>
-                        Where do you want this service?
+                        <Translate id='WHERE_THIS_SERVICE' />
                       </InputTitle>
                       <Input {...input} meta={meta} placeholder='City' />
                     </InputWrapper>
@@ -107,7 +111,7 @@ const SearchFilters = ({
                   {({input, meta}) => (
                     <>
                       <InputTitle>
-                        How often do you need dog walking?
+                        <Translate id='RECURSION' />
                       </InputTitle>
                       <Radio.Group
                         {...input}
@@ -115,9 +119,14 @@ const SearchFilters = ({
                         meta={meta}
                       >
                         {recursion.map((rec, index) => (
-                          <Radio.Button value={rec.text} key={index}>
+                          <Radio.Button
+                            value={translate(rec.text)}
+                            key={index}
+                          >
                             <RecursionImage src={rec.image} />
-                            <RecursionText>{rec.text}</RecursionText>
+                            <RecursionText>
+                              {translate(rec.text)}
+                            </RecursionText>
                           </Radio.Button>
                         ))}
                       </Radio.Group>
@@ -130,7 +139,7 @@ const SearchFilters = ({
                   {({input, meta}) => (
                     <>
                       <InputTitle style={{paddingTop: '10px'}}>
-                        Pet Type(s)
+                        <Translate id='PET_TYPE' />
                       </InputTitle>
                       <Radio.Group {...input} meta={meta}>
                         {pets.map((pet, index) => (
@@ -148,7 +157,7 @@ const SearchFilters = ({
                   {({input, meta}) => (
                     <>
                       <InputTitle style={{paddingTop: '10px'}}>
-                        How many walks per day?
+                        <Translate id='HOW_MANY_WALKS' />
                       </InputTitle>
                       <Radio.Group {...input} meta={meta}>
                         {times.map((time, index) => (
@@ -166,7 +175,7 @@ const SearchFilters = ({
                   type='submit'
                   disabled={submitting || pristine}
                 >
-                  Search
+                  <Translate id='SEARCH' />
                 </SignUpButton>
               </ButtonContainer>
             </FormContainer>
@@ -185,4 +194,4 @@ SearchFilters.propTypes = {
   setRequestService: PropTypes.func.isRequired
 }
 
-export default SearchFilters
+export default withLocalize(SearchFilters)

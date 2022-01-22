@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
 
 import {Col} from 'antd'
+import {isEmpty} from 'lodash'
 import {FaDog} from 'react-icons/fa'
 import {GiDogHouse} from 'react-icons/gi'
+import {Translate} from 'react-localize-redux'
+import {useHistory} from 'react-router'
 
 import {PrimaryColor} from '../../shared/styles/_colors'
 import {
@@ -26,15 +29,29 @@ import {
   BookNowButton
 } from './ServicesStyles'
 
-const Services = () => {
+const Services = ({user}) => {
   const [selectedOption, setSelectedOption] = useState(0)
+  const history = useHistory()
+
+  const redirect = () => {
+    try {
+      if (isEmpty(user)) {
+        history.push('/login')
+      }
+      history.push('/search')
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <>
       <PageWrapper option={selectedOption}>
         <BackgroundContainer option={selectedOption} />
         <Container>
-          <PageTitle>Our Services</PageTitle>
+          <PageTitle>
+            <Translate id='SERVICES' />
+          </PageTitle>
           <OptionsWrapper justify='center'>
             <CollWrapper
               as={Col}
@@ -49,7 +66,9 @@ const Services = () => {
                 <GiDogHouse size={100} color={PrimaryColor} />
               </OptionContainer>
               <OptionDetail>
-                <OptionDetailWrapper>Pet Sitting</OptionDetailWrapper>
+                <OptionDetailWrapper>
+                  <Translate id='PET_SITTING' />
+                </OptionDetailWrapper>
               </OptionDetail>
             </CollWrapper>
             <CollWrapper
@@ -65,7 +84,9 @@ const Services = () => {
                 <FaDog size={100} color={PrimaryColor} />
               </OptionContainer>
               <OptionDetail>
-                <OptionDetailWrapper>Pet Walking</OptionDetailWrapper>
+                <OptionDetailWrapper>
+                  <Translate id='PET_WALKING' />
+                </OptionDetailWrapper>
               </OptionDetail>
             </CollWrapper>
           </OptionsWrapper>
@@ -76,17 +97,21 @@ const Services = () => {
         <MenuContainer>
           <BackWrapper onClick={() => setSelectedOption(0)}>
             <BackButton />
-            <BackText>Back</BackText>
+            <BackText>
+              <Translate id='BACK' />
+            </BackText>
           </BackWrapper>
           <Content>
             <ServiceTitle>
-              Your perfect pet sitter is also your perfect home sitter
+              <Translate id='SITTING_TITLE' />
             </ServiceTitle>
             <ServiceSubtitle>
-              Leave both your pet and your home in good hands
+              <Translate id='SITTING_TEXT' />
             </ServiceSubtitle>
             <ButtonContainer>
-              <BookNowButton>Book House Sitting</BookNowButton>
+              <BookNowButton onClick={redirect}>
+                <Translate id='BOOK_SITTING' />
+              </BookNowButton>
             </ButtonContainer>
           </Content>
         </MenuContainer>
@@ -96,15 +121,21 @@ const Services = () => {
         <MenuContainer>
           <BackWrapper onClick={() => setSelectedOption(0)}>
             <BackButton />
-            <BackText>Back</BackText>
+            <BackText>
+              <Translate id='BACK' />
+            </BackText>
           </BackWrapper>
           <Content>
-            <ServiceTitle>Pet Walking Made Easy</ServiceTitle>
+            <ServiceTitle>
+              <Translate id='WALKING_TITLE' />
+            </ServiceTitle>
             <ServiceSubtitle>
-              Treat your pet with a nice walk in the sun
+              <Translate id='WALKING_TEXT' />
             </ServiceSubtitle>
             <ButtonContainer>
-              <BookNowButton>Book A Walk</BookNowButton>
+              <BookNowButton onClick={redirect}>
+                <Translate id='BOOK_WALK' />
+              </BookNowButton>
             </ButtonContainer>
           </Content>
         </MenuContainer>

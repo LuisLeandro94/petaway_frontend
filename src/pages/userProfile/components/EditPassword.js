@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 
 import {Input} from 'antd'
 import {Field, Form} from 'react-final-form'
+import {Translate, withLocalize} from 'react-localize-redux'
 
 import {EditPwd, GetUserByJwt} from '../../../infra/requests/UserRequests'
 import {
@@ -15,7 +16,7 @@ import {
   Title
 } from './EditInfoStyles'
 
-const EditPassword = () => {
+const EditPassword = ({translate}) => {
   const [user, setUser] = useState({})
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const EditPassword = () => {
   const PasswordEdit = (values) => {
     try {
       if (values.password !== values.confirm_password) {
-        alert("Passwords don't match")
+        alert(translate('PASSWORDS_NO_MATCH'))
         return
       }
       const pwd = {
@@ -41,9 +42,11 @@ const EditPassword = () => {
     }
   }
 
-  const required = (value) => (value ? undefined : 'Required')
+  const required = (value) => (value ? undefined : translate('REQUIRED'))
   const minValue = (min) => (value) =>
-    value >= min ? undefined : `Should be at least ${min} characters long`
+    value >= min
+      ? undefined
+      : `${translate('MIN_CHARS_1')} ${min} ${translate('MIN_CHARS_2')}`
   const composeValidators =
     (...validators) =>
     (value) =>
@@ -69,7 +72,9 @@ const EditPassword = () => {
                 <Field name='email'>
                   {({input, meta}) => (
                     <>
-                      <Title>E-Mail</Title>
+                      <Title>
+                        <Translate id='EMAIL' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -89,11 +94,13 @@ const EditPassword = () => {
                 >
                   {({input, meta}) => (
                     <>
-                      <Title>New Password</Title>
+                      <Title>
+                        <Translate id='NEW_PASSWORD' />
+                      </Title>
                       <Input.Password
                         {...input}
                         type='text'
-                        placeholder='New Password'
+                        placeholder={translate('NEW_PASSWORD')}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -108,11 +115,13 @@ const EditPassword = () => {
                 >
                   {({input, meta}) => (
                     <>
-                      <Title>Confirm Password</Title>
+                      <Title>
+                        <Translate id='CONFIRM_PASSWORD' />
+                      </Title>
                       <Input.Password
                         {...input}
                         type='text'
-                        placeholder='Confirm Password'
+                        placeholder={translate('CONFIRM_PASSWORD')}
                       />
                       {meta.error && meta.touched && (
                         <span>{meta.error}</span>
@@ -122,7 +131,9 @@ const EditPassword = () => {
                 </Field>
               </HalfScreen>
               <ButtonContainer>
-                <SubmitButton disabled={submitting}>Submit</SubmitButton>
+                <SubmitButton disabled={submitting}>
+                  <Translate id='SUBMIT' />
+                </SubmitButton>
               </ButtonContainer>
             </FormWrapper>
           )}
@@ -132,4 +143,4 @@ const EditPassword = () => {
   )
 }
 
-export default EditPassword
+export default withLocalize(EditPassword)

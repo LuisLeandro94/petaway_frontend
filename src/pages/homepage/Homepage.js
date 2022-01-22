@@ -1,5 +1,7 @@
 import React from 'react'
 
+import {Translate} from 'react-localize-redux'
+
 import Logo from '../../assets/PetAway_logo.png'
 import {
   BackgroundContainer,
@@ -16,11 +18,13 @@ const Homepage = () => (
     <Container>
       <PetawayLogo src={Logo} />
       <Quote>
-        An animal’s eyes have the power to speak a great language.
+        <Translate id='HOME_QUOTE' />
       </Quote>
       <ButtonContainer>
         <a href='/'>
-          <FindMoreButton href='/'>Find More</FindMoreButton>
+          <FindMoreButton href='/'>
+            <Translate id='FIND_MORE' />
+          </FindMoreButton>
         </a>
       </ButtonContainer>
     </Container>

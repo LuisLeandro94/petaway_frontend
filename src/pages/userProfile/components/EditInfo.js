@@ -4,6 +4,7 @@ import {Input} from 'antd'
 import {PropTypes} from 'prop-types'
 import FileBase64 from 'react-file-base64'
 import {Field, Form} from 'react-final-form'
+import {Translate} from 'react-localize-redux'
 
 import {EditUser} from '../../../infra/requests/UserRequests'
 import {
@@ -90,7 +91,9 @@ const EditInfo = ({user}) => {
                 <Field name='email'>
                   {({input, meta}) => (
                     <>
-                      <Title>E-Mail</Title>
+                      <Title>
+                        <Translate id='EMAIL' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -107,7 +110,9 @@ const EditInfo = ({user}) => {
                 <Field name='firstName'>
                   {({input, meta}) => (
                     <>
-                      <Title>First Name</Title>
+                      <Title>
+                        <Translate id='FIRST_NAME' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -124,7 +129,9 @@ const EditInfo = ({user}) => {
                 <Field name='lastName'>
                   {({input, meta}) => (
                     <>
-                      <Title>Last Name</Title>
+                      <Title>
+                        <Translate id='LAST_NAME' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -143,7 +150,9 @@ const EditInfo = ({user}) => {
                 <Field name='address_1'>
                   {({input, meta}) => (
                     <>
-                      <Title>Address Line 1</Title>
+                      <Title>
+                        <Translate id='ADDRESS_LINE_1' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -160,7 +169,9 @@ const EditInfo = ({user}) => {
                 <Field name='address_2'>
                   {({input, meta}) => (
                     <>
-                      <Title>Address Line 2</Title>
+                      <Title>
+                        <Translate id='ADDRESS_LINE_2' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -177,7 +188,9 @@ const EditInfo = ({user}) => {
                 <Field name='city'>
                   {({input, meta}) => (
                     <>
-                      <Title>City</Title>
+                      <Title>
+                        <Translate id='CITY' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -194,7 +207,9 @@ const EditInfo = ({user}) => {
                 <Field name='state'>
                   {({input, meta}) => (
                     <>
-                      <Title>State</Title>
+                      <Title>
+                        <Translate id='STATE' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -211,7 +226,9 @@ const EditInfo = ({user}) => {
                 <Field name='zip'>
                   {({input, meta}) => (
                     <>
-                      <Title>Zip Code</Title>
+                      <Title>
+                        <Translate id='ZIP_CODE' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -228,7 +245,9 @@ const EditInfo = ({user}) => {
                 <Field name='country'>
                   {({input, meta}) => (
                     <>
-                      <Title>Country</Title>
+                      <Title>
+                        <Translate id='COUNTRY' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -245,7 +264,9 @@ const EditInfo = ({user}) => {
                 <Field name='birthdate'>
                   {({input, meta}) => (
                     <>
-                      <Title>Birthdate</Title>
+                      <Title>
+                        <Translate id='BIRTHDATE' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -262,7 +283,9 @@ const EditInfo = ({user}) => {
                 <Field name='phoneNumber'>
                   {({input, meta}) => (
                     <>
-                      <Title>Phone Number</Title>
+                      <Title>
+                        <Translate id='PHONE_NUMBER' />
+                      </Title>
                       <Input
                         {...input}
                         type='text'
@@ -277,7 +300,9 @@ const EditInfo = ({user}) => {
                 </Field>
               </HalfScreen>
               <ButtonContainer>
-                <SubmitButton disabled={submitting}>Submit</SubmitButton>
+                <SubmitButton disabled={submitting}>
+                  <Translate id='SUBMIT' />
+                </SubmitButton>
               </ButtonContainer>
             </FormWrapper>
           )}

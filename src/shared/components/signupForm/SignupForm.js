@@ -2,6 +2,7 @@ import React from 'react'
 
 import {sha256} from 'js-sha256'
 import {Form} from 'react-final-form'
+import {Translate} from 'react-localize-redux'
 import {useHistory} from 'react-router'
 
 import {SignUp} from '../../../infra/requests/AuthRequests'
@@ -56,7 +57,9 @@ const SignUpForm = () => {
   return (
     <BodyWrapper>
       <FormWrapper>
-        <FormTitle>Sign up for PetAway</FormTitle>
+        <FormTitle>
+          <Translate id='SIGN_UP_PETAWAY' />
+        </FormTitle>
         <Form
           onSubmit={SignUpResponse}
           validate={validate}
@@ -65,7 +68,9 @@ const SignUpForm = () => {
               <InputField name='firstName'>
                 {({input, meta}) => (
                   <InputWrapper>
-                    <InputTitle>First Name</InputTitle>
+                    <InputTitle>
+                      <Translate id='FIRST_NAME' />
+                    </InputTitle>
                     <SignupInput {...input} type='text' meta={meta} />
                   </InputWrapper>
                 )}
@@ -73,7 +78,9 @@ const SignUpForm = () => {
               <InputField name='lastName'>
                 {({input, meta}) => (
                   <InputWrapper>
-                    <InputTitle>Last Name</InputTitle>
+                    <InputTitle>
+                      <Translate id='LAST_NAME' />
+                    </InputTitle>
                     <SignupInput {...input} type='text' meta={meta} />
                   </InputWrapper>
                 )}
@@ -81,7 +88,9 @@ const SignUpForm = () => {
               <InputField name='postalCode'>
                 {({input, meta}) => (
                   <InputWrapper>
-                    <InputTitle>Postal Code</InputTitle>
+                    <InputTitle>
+                      <Translate id='POSTAL_CODE' />
+                    </InputTitle>
                     <SignupInput {...input} type='text' meta={meta} />
                   </InputWrapper>
                 )}
@@ -89,7 +98,9 @@ const SignUpForm = () => {
               <InputField name='email'>
                 {({input, meta}) => (
                   <InputWrapper>
-                    <InputTitle>E-Mail</InputTitle>
+                    <InputTitle>
+                      <Translate id='EMAIL' />
+                    </InputTitle>
                     <SignupInput {...input} type='text' meta={meta} />
                   </InputWrapper>
                 )}
@@ -97,28 +108,38 @@ const SignUpForm = () => {
               <InputField name='password'>
                 {({input, meta}) => (
                   <InputWrapper>
-                    <InputTitle>Create Password</InputTitle>
+                    <InputTitle>
+                      <Translate id='CREATE_PASSWORD' />
+                    </InputTitle>
                     <PasswordInput {...input} meta={meta} />
                   </InputWrapper>
                 )}
               </InputField>
               <Disclaimer>
-                By signing in or signing up, I agree to PetAway.com's{' '}
-                <DisclaimerLinks>Terms of Service</DisclaimerLinks> and{' '}
-                <DisclaimerLinks>Privacy Policy</DisclaimerLinks>, confirm
-                that I am 18 years of age or older, and consent to
-                receiving email communication.
+                <Translate id='TERMS1' />{' '}
+                <DisclaimerLinks>
+                  <Translate id='TERMS2' />
+                </DisclaimerLinks>{' '}
+                <Translate id='TERMS3' />{' '}
+                <DisclaimerLinks>
+                  <Translate id='TERMS4' />
+                </DisclaimerLinks>
+                <Translate id='TERMS5' />
               </Disclaimer>
               <ButtonContainer>
-                <SignUpButton disabled={submitting}>Sign Up</SignUpButton>
+                <SignUpButton disabled={submitting}>
+                  <Translate id='SIGNUP' />
+                </SignUpButton>
               </ButtonContainer>
             </FormContainer>
           )}
         />
         <Separator />
         <LoginRedirect>
-          Already have a PetAway account?{' '}
-          <LoginRedirectLink href='/login'>Sign in now.</LoginRedirectLink>
+          <Translate id='ALREADY_HAVE_ACCOUNT' />{' '}
+          <LoginRedirectLink href='/login'>
+            <Translate id='SIGNIN_NOW' />
+          </LoginRedirectLink>
         </LoginRedirect>
       </FormWrapper>
     </BodyWrapper>

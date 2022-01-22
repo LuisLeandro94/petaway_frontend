@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import Modal from 'antd/lib/modal/Modal'
+import {Translate, withLocalize} from 'react-localize-redux'
 import {useHistory} from 'react-router'
 
 import {GetAllPets} from '../../infra/requests/PetsRequests'
@@ -9,7 +10,7 @@ import {GoToProfileBtn} from '../../shared/components/header/HeaderStyles'
 import SearchFilters from '../../shared/components/searchForm/SearchForm'
 import SearchResults from '../../shared/components/searchResults/SearchResults'
 
-const Search = () => {
+const Search = ({translate}) => {
   const [petList, setPetList] = useState([])
   const [serviceList, setServiceList] = useState([])
   const [searchResult, setSearchResult] = useState([])
@@ -34,7 +35,7 @@ const Search = () => {
   return (
     <>
       <Modal
-        title='Request has been sent to the Walker!'
+        title={translate('REQUEST_SENT')}
         visible={resultState}
         onOk={redirectToHome}
         footer={[
@@ -47,13 +48,12 @@ const Search = () => {
               borderColor: '#00A6AA'
             }}
           >
-            Go To Home
+            <Translate id='GO_HOME' />
           </GoToProfileBtn>
         ]}
       >
         <p>
-          Your request has been sent successfully. Wait for our Walker to
-          get in touch with you about the service you requested! 💚
+          <Translate id='REQUEST_SENT_ANSWER' />
         </p>
       </Modal>
       <SearchFilters
@@ -74,4 +74,4 @@ const Search = () => {
   )
 }
 
-export default Search
+export default withLocalize(Search)

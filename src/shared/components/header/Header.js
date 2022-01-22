@@ -25,7 +25,6 @@ import {
 } from '../../../infra/requests/EventsRequests'
 import {GetUserByJwt} from '../../../infra/requests/UserRequests'
 import {GetWalkerByUId} from '../../../infra/requests/WalkerRequests'
-import start from '../../../redux/thunks/AppStartup'
 import {DarkGray} from '../../styles/_colors'
 import EventContainer from './components/EventContainer'
 import MobileMenu from './components/MobileMenu'
@@ -64,7 +63,6 @@ const Header = ({
   languages,
   activeLanguage,
   setActiveLanguage,
-  setLanguage,
   active
 }) => {
   const [isOpen, setOpen] = useState(false)
@@ -115,7 +113,6 @@ const Header = ({
   const toggleLanguage = (e) => {
     store.dispatch(setActiveLanguage(parseInt(e.target.value, 10)))
     localStorage.setItem(ActiveLang, parseInt(e.target.value, 10))
-    console.log(activeLanguage)
   }
 
   const getEventList = async () => {
