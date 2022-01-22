@@ -6,14 +6,18 @@ import '@szhsin/react-menu/dist/index.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
 import {Badge, Tabs} from 'antd'
 import Modal from 'antd/lib/modal/Modal'
-import {Translate} from 'react-localize-redux'
+import {Translate, withLocalize} from 'react-localize-redux'
+import {useStore} from 'react-redux'
 import {useHistory} from 'react-router'
 
 import Heart from '../../../assets/Heart.png'
 import PetAway from '../../../assets/logo.png'
 import Paw from '../../../assets/Paw.png'
 import Search from '../../../assets/Search.png'
-import {AuthTokenKey} from '../../../infra/config/LocalStorageKeys'
+import {
+  ActiveLang,
+  AuthTokenKey
+} from '../../../infra/config/LocalStorageKeys'
 import {
   GetUserEvents,
   GetWalkerEvents,
@@ -21,6 +25,7 @@ import {
 } from '../../../infra/requests/EventsRequests'
 import {GetUserByJwt} from '../../../infra/requests/UserRequests'
 import {GetWalkerByUId} from '../../../infra/requests/WalkerRequests'
+import start from '../../../redux/thunks/AppStartup'
 import {DarkGray} from '../../styles/_colors'
 import EventContainer from './components/EventContainer'
 import MobileMenu from './components/MobileMenu'
@@ -47,12 +52,21 @@ import {
   GoBackBtn,
   GoToProfileBtn,
   NotificationDrawer,
-  NotificationTabs
+  NotificationTabs,
+  LangOption,
+  LanguageSelector
 } from './HeaderStyles'
 
 const {TabPane} = Tabs
 
-const Header = () => {
+const Header = ({
+  translate,
+  languages,
+  activeLanguage,
+  setActiveLanguage,
+  setLanguage,
+  active
+}) => {
   const [isOpen, setOpen] = useState(false)
   const [visible, setVisible] = useState(false)
   const [notification, setNotification] = useState(false)
@@ -63,6 +77,7 @@ const Header = () => {
   const [incomingEvents, setIncomingEvents] = useState([])
   const [outgoingEvents, setOutgoingEvents] = useState([])
   const history = useHistory()
+  const store = useStore()
   const showDrawer = () => {
     setVisible(true)
   }
@@ -96,6 +111,12 @@ const Header = () => {
       GetWalker()
     }
   }, [user])
+
+  const toggleLanguage = (e) => {
+    store.dispatch(setActiveLanguage(parseInt(e.target.value, 10)))
+    localStorage.setItem(ActiveLang, parseInt(e.target.value, 10))
+    console.log(activeLanguage)
+  }
 
   const getEventList = async () => {
     setNotification(!notification)
@@ -179,13 +200,13 @@ const Header = () => {
   return (
     <>
       <Modal
-        title='Warning: Profile must be filled'
+        title={translate('WARNING_FILLED')}
         visible={filledFields}
         onOk={redirectToProfile}
         onCancel={closeAndStay}
         footer={[
           <GoBackBtn key='back' onClick={closeAndStay}>
-            Go Back
+            <Translate id='GO_BACK' />
           </GoBackBtn>,
           <GoToProfileBtn
             key='submit'
@@ -196,13 +217,13 @@ const Header = () => {
               borderColor: '#00A6AA'
             }}
           >
-            Go To Profile
+            <Translate id='GO_PROFILE' />
           </GoToProfileBtn>
         ]}
       >
-        <p>In order to become a part of our community of Walkers,</p>
-        <p>you have to fill your personal information.</p>
-        <p>Please do that before you proceed.</p>
+        <p>
+          <Translate id='FILL_PERSONAL_INFO' />
+        </p>
       </Modal>
       <Container>
         <LogoContainer href='/'>
@@ -246,6 +267,20 @@ const Header = () => {
         </LinksWrapper>
         {logged === 0 && (
           <OperationWrapper>
+            <LanguageSelector
+              value={activeLanguage?.code || 2}
+              active={active}
+              name='language'
+              id='lang'
+              tag='select'
+              onChange={(e) => toggleLanguage(e)}
+            >
+              {languages.map((language, index) => (
+                <LangOption key={index} value={language.code}>
+                  {language.abrev}
+                </LangOption>
+              ))}
+            </LanguageSelector>
             <Operations href='/signup'>
               <Translate id='SIGNUP' />
               <Underline />
@@ -268,7 +303,7 @@ const Header = () => {
                 </Notifications>
               </Badge>
               <NotificationDrawer
-                title='Service Requests'
+                title={translate('SERVICES_REQUESTS')}
                 visible={notification}
                 onClose={() => setNotification(!notification)}
                 contentWrapperStyle={{
@@ -285,7 +320,7 @@ const Header = () => {
               >
                 <NotificationTabs>
                   <Tabs type='card' defaultActiveKey='1'>
-                    <TabPane tab='Incoming' key='1'>
+                    <TabPane tab={translate('INCOMING')} key='1'>
                       {incomingEvents.map((event) => (
                         <EventContainer
                           event={event}
@@ -295,7 +330,7 @@ const Header = () => {
                         />
                       ))}
                     </TabPane>
-                    <TabPane tab='Outgoing' key='2'>
+                    <TabPane tab={translate('OUTGOING')} key='2'>
                       {outgoingEvents.map((event) => (
                         <EventContainer event={event} />
                       ))}
@@ -331,17 +366,17 @@ const Header = () => {
                 transition
               >
                 <UserMenuListItem href='/profile'>
-                  Profile
+                  <Translate id='PROFILE' />
                 </UserMenuListItem>
                 <UserMenuListItem
                   style={{color: 'red'}}
                   onClick={checkRequiredFields}
                 >
-                  Become a Walker
+                  <Translate id='BECOME_WALKER' />
                 </UserMenuListItem>
                 <MenuDivider />
                 <UserMenuListItem onClick={() => logoutAndRedirect()}>
-                  Log out
+                  <Translate id='LOGOUT' />
                 </UserMenuListItem>
               </UserMenu>
             </UserWrapper>
@@ -351,4 +386,4 @@ const Header = () => {
     </>
   )
 }
-export default Header
+export default withLocalize(Header)

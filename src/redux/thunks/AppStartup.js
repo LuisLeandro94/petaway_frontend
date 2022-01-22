@@ -1,29 +1,30 @@
 import {initialize, addTranslationForLanguage} from 'react-localize-redux'
 
-import {AuthTokenKey} from '../../infra/config/LocalStorageKeys'
+import {
+  AuthTokenKey,
+  ActiveLang
+} from '../../infra/config/LocalStorageKeys'
+import {Languages} from '../../infra/translations/AvailableTranslations'
 import EN from '../../infra/translations/en'
 import {updateInfo} from '../data/info/InfoActions'
 import {userSave} from '../data/user/UserActions'
 
-const DefaultLangs = [
-  {name: 'Portuguese', code: 1, languageId: 1, abrev: 'pt'},
-  {name: 'English', code: 2, languageId: 2, abrev: 'en'}
-]
-
 export default function start() {
-  return async (dispatch) => {
+  return async (dispatch, activeLanguage, setActiveLanguage) => {
     try {
+      const deflang = localStorage.getItem(ActiveLang)
+      console.log(deflang)
       dispatch(
         initialize({
-          languages: DefaultLangs,
+          languages: Languages,
           options: {
             renderToStaticMarkup: false,
-            defaultLanguage: 2
+            defaultLanguage: parseInt(deflang, 10)
           }
         })
       )
-      DefaultLangs.forEach((lang) => {
-        dispatch(addTranslationForLanguage(EN, lang.code))
+      Languages.forEach((lang) => {
+        dispatch(addTranslationForLanguage(lang.file, lang.code))
       })
 
       const authToken = localStorage.getItem(AuthTokenKey)
