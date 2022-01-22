@@ -5,6 +5,7 @@ import {
   TextColor,
   White
 } from '../../../shared/styles/_colors'
+import {device} from '../../../shared/styles/_responsive'
 import {
   FilterTitle,
   HeaderMenus,
@@ -15,6 +16,11 @@ export const EachFieldWrapper = styled.div`
   padding-top: 10px;
   padding-left: 10px;
   border-bottom: 1px solid ${SecondaryColor};
+
+  @media ${device.tabletL} {
+    display: flex;
+    flex-direction: column;
+  }
 
   &:first-of-type {
     border-bottom: none;
@@ -39,6 +45,10 @@ export const Wrapper = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+
+  @media ${device.tabletL} {
+    overflow: scroll;
+  }
 `
 
 export const BlackText = styled.h1`
@@ -65,4 +75,11 @@ export const Text = styled.span`
   left: 150px;
   padding-left: 10px;
   border-left: 1px solid ${SecondaryColor};
+
+  @media ${device.tabletL} {
+    left: 0;
+    padding-left: 0;
+    border-left: 0;
+    position: relative;
+  }
 `

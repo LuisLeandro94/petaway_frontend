@@ -46,6 +46,8 @@ const SearchFilters = ({
   setSearchResult,
   setRequestPet,
   setRequestService,
+  showFilters,
+  setShowFilters,
   translate
 }) => {
   const servicesChildren = services.map((service) => (
@@ -62,6 +64,7 @@ const SearchFilters = ({
       setRequestService(parseInt(data.services, 10))
       setRequestPet(data.pets)
       GetAllWalkers(data).then((res) => setSearchResult(res.data.result))
+      setShowFilters(false)
     } catch (e) {
       console.error(e)
     }
@@ -69,7 +72,7 @@ const SearchFilters = ({
 
   return (
     <>
-      <FilterWrapper>
+      <FilterWrapper showFilters={showFilters}>
         <Form
           onSubmit={SearchWalkers}
           validate={validate}

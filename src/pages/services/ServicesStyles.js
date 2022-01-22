@@ -202,6 +202,10 @@ export const Content = styled.div`
   text-align: center;
   flex-direction: column;
   margin: auto;
+
+  @media ${device.tablet} {
+    width: 90%;
+  }
 `
 
 export const ServiceTitle = styled.h1`
@@ -209,6 +213,10 @@ export const ServiceTitle = styled.h1`
   font-size: ${ServiceDesc};
   color: ${White};
   font-weight: bold;
+
+  @media ${device.tablet} {
+    font-size: 22px;
+  }
 `
 
 export const ServiceSubtitle = styled.h2`
@@ -217,6 +225,10 @@ export const ServiceSubtitle = styled.h2`
   color: ${White};
   font-weight: normal;
   font-style: italic;
+
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
 `
 
 export const BookNowButton = styled.button`
@@ -238,6 +250,7 @@ export const BookNowButton = styled.button`
   @media ${device.laptopS} {
     width: 70%;
     height: 50px;
+    font-size: 16px;
   }
   &:hover {
     background: ${PrimaryColor};

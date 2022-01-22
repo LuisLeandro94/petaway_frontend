@@ -55,6 +55,10 @@ export const Wrapper = styled.div`
   align-items: center;
 
   @media ${device.tablet} {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 0;
     width: 100%;
   }
 `
@@ -71,6 +75,15 @@ export const HalfPage = styled.div`
     height: 580px;
     margin: 10px;
     border-radius: 10px;
+
+    @media ${device.tabletL} {
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  @media ${device.tabletL} {
+    margin-top: 20px;
   }
 `
 
@@ -82,6 +95,10 @@ export const UserName = styled.h1`
   color: ${TextColor};
   margin: 0;
   margin-top: 20px;
+
+  @media ${device.tabletL} {
+    margin-top: 10px;
+  }
 `
 
 export const UserEmail = styled.p`

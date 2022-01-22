@@ -31,10 +31,6 @@ export const Container = styled.div`
   align-content: center;
   align-items: center;
   padding-top: 100px;
-
-  @media ${device.mobileL} {
-    height: 100%;
-  }
 `
 
 export const FormWrapper = styled.div`
