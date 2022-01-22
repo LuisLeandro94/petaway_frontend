@@ -68,6 +68,10 @@ export const FormTitle = styled.h1`
     font-size: ${SignUpText};
     padding-top: 40px;
   }
+
+  @media ${device.tabletL} {
+    font-size: 22px;
+  }
 `
 
 export const InputWrapper = styled.div`
@@ -136,6 +140,9 @@ export const SignUpButton = styled.button`
   @media ${device.laptopS} {
     width: 70%;
     height: 50px;
+  }
+  @media ${device.tabletL} {
+    font-size: 14px;
   }
   &:hover {
     background: rgba(0, 166, 170, 0.8);

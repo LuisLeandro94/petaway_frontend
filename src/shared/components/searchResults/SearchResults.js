@@ -31,7 +31,8 @@ const SearchResults = ({
   requestService,
   requestPet,
   setResultState,
-  resultState
+  resultState,
+  showFilters
 }) => {
   const SendRequest = (data) => {
     try {
@@ -53,7 +54,7 @@ const SearchResults = ({
 
   return (
     <>
-      <ResultsWrapper>
+      <ResultsWrapper showFilters={showFilters}>
         {searchResult.length !== 0 && (
           <ResultsContainer>
             {searchResult.map((walker, index) => (
@@ -61,9 +62,9 @@ const SearchResults = ({
                 <AvatarWrapper>
                   <Avatar
                     size={{
-                      xs: 100,
-                      sm: 100,
-                      md: 100,
+                      xs: 50,
+                      sm: 50,
+                      md: 50,
                       lg: 100,
                       xl: 120,
                       xxl: 140

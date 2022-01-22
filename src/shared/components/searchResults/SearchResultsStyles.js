@@ -23,7 +23,7 @@ export const ResultsWrapper = styled.div`
   flex-direction: row no-wrap;
 
   @media ${device.tablet} {
-    width: 60%;
+    width: ${({showFilters}) => (showFilters ? '0%' : '100%')};
     right: 0;
     bottom: 0;
   }
@@ -50,12 +50,21 @@ export const CardWrapper = styled.div`
   justify-content: center;
   flex-direction: row;
   align-items: center;
+
+  @media ${device.tabletL} {
+    flex-direction: column;
+  }
 `
 
 export const AvatarWrapper = styled.div`
   width: 35%;
   display: flex;
   justify-content: center;
+
+  @media ${device.tabletL} {
+    height: 20%;
+    display: none;
+  }
 `
 
 export const DetailsWrapper = styled.div`
@@ -65,6 +74,11 @@ export const DetailsWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
+  @media ${device.tabletL} {
+    width: 100%;
+    height: 70%;
+  }
 `
 
 export const NameContainer = styled.h1`
@@ -72,6 +86,11 @@ export const NameContainer = styled.h1`
   font-family: ${Poppins};
   font-weight: 500;
   color: ${TextColor};
+
+  @media ${device.tabletL} {
+    margin: 0;
+    font-size: 14px;
+  }
 `
 
 export const CityContainer = styled.h2`
@@ -80,6 +99,11 @@ export const CityContainer = styled.h2`
   font-weight: 400;
   color: ${DarkGray};
   font-style: italic;
+
+  @media ${device.tabletL} {
+    margin: 0;
+    font-size: 12px;
+  }
 `
 
 export const NumberContainer = styled.p`
@@ -87,6 +111,11 @@ export const NumberContainer = styled.p`
   font-family: ${Poppins};
   font-weight: 400;
   color: ${DarkGray};
+
+  @media ${device.tabletL} {
+    margin: 0;
+    font-size: 14px;
+  }
 `
 
 export const EmailContainer = styled.p`
@@ -94,6 +123,11 @@ export const EmailContainer = styled.p`
   font-family: ${Poppins};
   font-weight: 400;
   color: ${DarkGray};
+
+  @media ${device.tabletL} {
+    margin: 0;
+    font-size: 13px;
+  }
 `
 
 export const NoResultsWrapper = styled.div`
@@ -108,6 +142,10 @@ export const NoResultsContainer = styled.div`
   width: 100%;
   height: 30%;
   text-align: center;
+
+  @media ${device.tabletL} {
+    height: 70%;
+  }
 `
 
 export const NoResultsHeader = styled.h1`
@@ -127,14 +165,43 @@ export const NoResultsText = styled.p`
 
 export const RequestWrapper = styled.div`
   width: 30%;
-  height: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+
+  @media ${device.tabletL} {
+    width: 60%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
 `
 
 export const RequestService = styled.button`
-  height: 20%;
+  height: 100%;
+  width: 100%;
   margin-bottom: 10%;
   margin-right: 10%;
+  border: none;
+  border-radius: 10px;
+  border: 3px solid ${PrimaryColor};
+  background-color: transparent;
+  color: ${TextColor}
+  font-family: 'Poppins';
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 1s ease;
+
+  &:hover {
+    background-color: ${PrimaryColor};
+    color: white;
+  }
+
+  @media ${device.tabletL} {
+    margin-bottom: 0;
+    line-height: 1;
+    height: 70%;
+    margin-right: 0;
+    font-size: 12px;
+  }
 `

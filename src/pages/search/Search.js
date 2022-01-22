@@ -9,6 +9,7 @@ import {GetAllServices} from '../../infra/requests/ServicesRequests'
 import {GoToProfileBtn} from '../../shared/components/header/HeaderStyles'
 import SearchFilters from '../../shared/components/searchForm/SearchForm'
 import SearchResults from '../../shared/components/searchResults/SearchResults'
+import {FiltersButton} from './SearchStyles'
 
 const Search = ({translate}) => {
   const [petList, setPetList] = useState([])
@@ -17,6 +18,7 @@ const Search = ({translate}) => {
   const [requestPet, setRequestPet] = useState(0)
   const [requestService, setRequestService] = useState(0)
   const [resultState, setResultState] = useState(false)
+  const [showFilters, setShowFilters] = useState(true)
   const history = useHistory()
 
   useEffect(() => {
@@ -56,12 +58,20 @@ const Search = ({translate}) => {
           <Translate id='REQUEST_SENT_ANSWER' />
         </p>
       </Modal>
+      <FiltersButton
+        onClick={() => setShowFilters(true)}
+        showFilters={showFilters}
+      >
+        Filters
+      </FiltersButton>
       <SearchFilters
         pets={petList}
         services={serviceList}
         setRequestPet={setRequestPet}
         setRequestService={setRequestService}
         setSearchResult={setSearchResult}
+        showFilters={showFilters}
+        setShowFilters={setShowFilters}
       />
       <SearchResults
         searchResult={searchResult}
@@ -69,6 +79,8 @@ const Search = ({translate}) => {
         requestService={requestService}
         setResultState={setResultState}
         resultState={resultState}
+        showFilters={showFilters}
+        setShowFilters={setShowFilters}
       />
     </>
   )

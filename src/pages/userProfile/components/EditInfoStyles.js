@@ -29,6 +29,7 @@ export const Wrapper = styled.div`
 
   @media ${device.tablet} {
     width: 100%;
+    margin-top: 0 !important;
   }
 `
 

@@ -44,7 +44,7 @@ export const LogoContainer = styled.a`
   text-align: center;
 
   @media ${device.tabletL} {
-    width: 100%;
+    width: 33%;
     order: 2;
     text-align: right;
     padding: 15px;
@@ -100,8 +100,8 @@ export const OperationWrapper = styled.div`
   display: flex;
 
   @media ${device.tabletL} {
-    width: 100%;
-    display: none;
+    width: 33%;
+    order: 3;
   }
 `
 
@@ -189,9 +189,9 @@ export const HamburgerContainer = styled.div`
   padding: 15px;
 
   @media ${device.tabletL} {
+    width: 33%;
     order: 1;
     display: block;
-    width: 100%;
   }
 `
 
@@ -266,6 +266,10 @@ export const UserMenu = styled(Menu)`
     color: ${PrimaryColor};
     min-width: 6rem;
     left: -100px !important;
+
+    @media ${device.tabletL} {
+      left: -200px !important;
+    }
   }
 `
 

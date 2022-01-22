@@ -25,9 +25,11 @@ export const FilterWrapper = styled.div`
   border-radius: 5px;
 
   @media ${device.tablet} {
-    width: 39%;
+    width: ${({showFilters}) => (showFilters ? '100%' : '0%')};
     left: 0;
     bottom: 0;
+    z-index: 2;
+    display: ${({showFilters}) => (showFilters ? 'block' : 'none')};
   }
 `
 
