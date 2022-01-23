@@ -20,45 +20,44 @@ import {
   RejectButton
 } from '../HeaderStyles'
 
-const EventContainer = ({event, acceptEvent, rejectEvent, incoming}) => {
+const EventContainer = ({evt, acceptEvent, rejectEvent, inc}) => {
   const [dateString, setDateString] = useState('')
   const [timeString, setTimeString] = useState('')
 
   useEffect(() => {
-    const index = event?.date.indexOf('T')
-    setDateString(event?.date.substring(0, index))
-    const tempTime = event?.date.substring(
-      index + 1,
-      event?.date.length - 1
-    )
-    const tempIndex = tempTime.indexOf('.')
-    setTimeString(tempTime.substring(0, tempIndex))
+    if (evt.date) {
+      const index = evt?.date.indexOf('T')
+      setDateString(evt?.date.substring(0, index))
+      const tempTime = evt?.date.substring(index + 1, evt?.date.length - 1)
+      const tempIndex = tempTime.indexOf('.')
+      setTimeString(tempTime.substring(0, tempIndex))
+    }
   })
 
   return (
-    <EventCard eventStatus={event?.status}>
+    <EventCard eventStatus={evt?.status}>
       <EventDetails>
         <EventSender>
           <Translate id='FROM' />
         </EventSender>
         <DetailsWrapper>
           <EventName>
-            {event?.user?.userData?.firstName}{' '}
-            {event?.user?.userData?.lastName}
+            {evt?.user?.userData?.firstName}{' '}
+            {evt?.user?.userData?.lastName}
           </EventName>
           <EventPet>
             <ItalicSpan>
               <Translate id='PET' />:
             </ItalicSpan>
             {'  '}
-            {event?.pet?.type}
+            {evt?.pet?.type}
           </EventPet>
           <EventService>
             <ItalicSpan>
               <Translate id='SERVICE' />:
             </ItalicSpan>
             {'  '}
-            {event?.service?.type}
+            {evt?.service?.type}
           </EventService>
         </DetailsWrapper>
       </EventDetails>
@@ -66,22 +65,22 @@ const EventContainer = ({event, acceptEvent, rejectEvent, incoming}) => {
         <EventDate>{dateString}</EventDate>
         <EventDate>{timeString}</EventDate>
         <EventButtons>
-          {event?.status === 1 && incoming && (
+          {evt?.status === 1 && inc && (
             <>
-              <RejectButton onClick={() => rejectEvent(event?.id)}>
+              <RejectButton onClick={() => rejectEvent(evt?.id)}>
                 <Translate id='REJECT' />
               </RejectButton>
-              <AcceptButton onClick={() => acceptEvent(event?.id)}>
+              <AcceptButton onClick={() => acceptEvent(evt?.id)}>
                 <Translate id='ACCEPT' />
               </AcceptButton>
             </>
           )}
-          {event?.status === 2 && (
+          {evt?.status === 2 && (
             <CloseCircleOutlined
               style={{fontSize: '26px', color: 'red'}}
             />
           )}
-          {event?.status === 3 && (
+          {evt?.status === 3 && (
             <CheckCircleOutlined
               style={{fontSize: '26px', color: 'green'}}
             />
@@ -93,10 +92,17 @@ const EventContainer = ({event, acceptEvent, rejectEvent, incoming}) => {
 }
 
 EventContainer.propTypes = {
-  event: PropTypes.object.isRequired,
-  acceptEvent: PropTypes.func.isRequired,
-  rejectEvent: PropTypes.func.isRequired,
-  incoming: PropTypes.array.isRequired
+  evt: PropTypes.object,
+  acceptEvent: PropTypes.func,
+  rejectEvent: PropTypes.func,
+  inc: PropTypes.bool
+}
+
+EventContainer.defaultProps = {
+  evt: {},
+  acceptEvent: () => {},
+  rejectEvent: () => {},
+  inc: false
 }
 
 export default EventContainer
