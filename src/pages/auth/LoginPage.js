@@ -5,10 +5,12 @@ import {values} from 'lodash'
 import {PropTypes} from 'prop-types'
 import {Field, Form} from 'react-final-form'
 import {Translate, withLocalize} from 'react-localize-redux'
+import {useDispatch} from 'react-redux'
 import {useHistory} from 'react-router'
 
 import {AuthTokenKey} from '../../infra/config/LocalStorageKeys'
 import {Login} from '../../infra/requests/AuthRequests'
+import {GetUserByJwt} from '../../infra/requests/UserRequests'
 import FormValidator from '../../infra/services/validations/FormValidator'
 import {userSave} from '../../redux/data/user/UserActions'
 import Header from '../../shared/components/header/Header'
@@ -36,22 +38,31 @@ const validate = FormValidator.make({
   password: 'required'
 })
 
-const LoginPage = ({dispatch, translate}) => {
+const LoginPage = ({translate}) => {
   const formData = {}
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const LoginResponse = async (response) => {
     try {
       const pwd = sha256(response.password + process.env.SECRET)
-      const data = {
+      const userValues = {
         ...response,
         password: pwd
       }
-      const result = await Login(data)
+      const result = await Login(userValues)
 
       if (result.success) {
         localStorage.setItem(AuthTokenKey, result.data.result)
-        dispatch(userSave({email: values.email, name: values.firstName}))
+        const GetUser = async () => {
+          const {data, success} = await GetUserByJwt()
+
+          if (success) {
+            dispatch(userSave(data.result))
+            localStorage.setItem('user', JSON.stringify(data.result))
+          }
+        }
+        GetUser()
         history.push('/')
       }
     } catch (e) {

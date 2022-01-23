@@ -69,13 +69,14 @@ const Header = ({
   const [visible, setVisible] = useState(false)
   const [notification, setNotification] = useState(false)
   const [logged, setLogged] = useState(0)
-  const [user, setUser] = useState({})
   const [walker, setWalker] = useState({})
   const [filledFields, setFilledFields] = useState(false)
   const [incomingEvents, setIncomingEvents] = useState([])
   const [outgoingEvents, setOutgoingEvents] = useState([])
   const history = useHistory()
   const store = useStore()
+  const tempUser = localStorage.getItem('user')
+  const user = JSON.parse(tempUser)
   const showDrawer = () => {
     setVisible(true)
   }
@@ -84,39 +85,22 @@ const Header = ({
     const token = localStorage.getItem(AuthTokenKey)
     if (token !== null && token !== 'null') {
       setLogged(1)
-      const GetUser = async () => {
-        const {data, success} = await GetUserByJwt()
+      if (user.isWalker) {
+        const GetWalker = async () => {
+          const {data, success} = await GetWalkerByUId(user.id)
 
-        if (success) {
-          setUser(data.result)
+          if (success) {
+            setWalker(data.result)
+          }
         }
+        GetWalker()
       }
-      GetUser()
     } else {
       setLogged(0)
     }
   }, [])
 
   useDidMountEffect(() => {
-    if (user.isWalker) {
-      const GetWalker = async () => {
-        const {data, success} = await GetWalkerByUId(user.id)
-
-        if (success) {
-          setWalker(data.result)
-        }
-      }
-      GetWalker()
-    }
-  }, [user])
-
-  const toggleLanguage = (e) => {
-    store.dispatch(setActiveLanguage(parseInt(e.target.value, 10)))
-    localStorage.setItem(ActiveLang, parseInt(e.target.value, 10))
-  }
-
-  const getEventList = async () => {
-    setNotification(!notification)
     if (user.isWalker) {
       const GetOutgoingWalkerEvents = async () => {
         const {data, success} = await GetUserEvents()
@@ -143,8 +127,12 @@ const Header = ({
       }
       GetAllUserEvents()
     }
-  }
+  }, [walker])
 
+  const toggleLanguage = (e) => {
+    store.dispatch(setActiveLanguage(parseInt(e.target.value, 10)))
+    localStorage.setItem(ActiveLang, parseInt(e.target.value, 10))
+  }
   const logoutAndRedirect = () => {
     localStorage.setItem(AuthTokenKey, 'null')
     history.push('/')
@@ -193,6 +181,8 @@ const Header = ({
       console.error(e)
     }
   }
+
+  console.log(incomingEvents, outgoingEvents)
 
   return (
     <>
@@ -292,7 +282,11 @@ const Header = ({
         {logged !== 0 && (
           <>
             <UserWrapper>
-              <Badge count={5} size='small' onClick={getEventList}>
+              <Badge
+                count={incomingEvents.length + outgoingEvents.length}
+                size='small'
+                onClick={() => setNotification(!notification)}
+              >
                 <Notifications>
                   <BellOutlined
                     style={{fontSize: '24px', color: '#cecece'}}
@@ -318,18 +312,19 @@ const Header = ({
                 <NotificationTabs>
                   <Tabs type='card' defaultActiveKey='1'>
                     <TabPane tab={translate('INCOMING')} key='1'>
-                      {incomingEvents.map((event) => (
+                      {incomingEvents.map((event, index) => (
                         <EventContainer
-                          event={event}
-                          incoming
+                          key={index}
+                          evt={event}
+                          inc
                           rejectEvent={rejectEvent}
                           acceptEvent={acceptEvent}
                         />
                       ))}
                     </TabPane>
                     <TabPane tab={translate('OUTGOING')} key='2'>
-                      {outgoingEvents.map((event) => (
-                        <EventContainer event={event} />
+                      {outgoingEvents.map((event, index) => (
+                        <EventContainer event={event} key={index} />
                       ))}
                     </TabPane>
                   </Tabs>
