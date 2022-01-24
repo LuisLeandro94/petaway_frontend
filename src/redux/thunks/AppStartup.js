@@ -5,21 +5,19 @@ import {
   ActiveLang
 } from '../../infra/config/LocalStorageKeys'
 import {Languages} from '../../infra/translations/AvailableTranslations'
-import EN from '../../infra/translations/en'
 import {updateInfo} from '../data/info/InfoActions'
 import {userSave} from '../data/user/UserActions'
 
 export default function start() {
-  return async (dispatch, activeLanguage, setActiveLanguage) => {
+  return async (dispatch) => {
     try {
-      const deflang = localStorage.getItem(ActiveLang)
-      console.log(deflang)
       dispatch(
         initialize({
           languages: Languages,
           options: {
             renderToStaticMarkup: false,
-            defaultLanguage: parseInt(deflang, 10)
+            defaultLanguage:
+              parseInt(localStorage.getItem(ActiveLang), 10) || 2
           }
         })
       )
@@ -39,7 +37,7 @@ export default function start() {
         })
       )
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
