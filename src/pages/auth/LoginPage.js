@@ -1,8 +1,6 @@
 import React from 'react'
 
 import {sha256} from 'js-sha256'
-import {values} from 'lodash'
-import {PropTypes} from 'prop-types'
 import {Field, Form} from 'react-final-form'
 import {Translate, withLocalize} from 'react-localize-redux'
 import {useDispatch} from 'react-redux'
@@ -150,10 +148,6 @@ const LoginPage = ({translate}) => {
       </Container>
     </>
   )
-}
-
-LoginPage.propTypes = {
-  dispatch: PropTypes.func.isRequired
 }
 
 export default withLocalize(LoginPage)

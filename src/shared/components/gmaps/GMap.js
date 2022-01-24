@@ -14,8 +14,6 @@ export default function SimpleMap() {
     key: process.env.REACT_APP_MAPS
   }
 
-  console.log(defaultProps)
-
   return (
     <div style={{height: '100vh', width: '100%'}}>
       <GoogleMapReact

@@ -1,4 +1,4 @@
-import {Input, Select} from 'antd'
+import {Input} from 'antd'
 import {Field} from 'react-final-form'
 import styled from 'styled-components'
 

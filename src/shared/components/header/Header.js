@@ -23,7 +23,6 @@ import {
   GetWalkerEvents,
   UpdateEventStatus
 } from '../../../infra/requests/EventsRequests'
-import {GetUserByJwt} from '../../../infra/requests/UserRequests'
 import {GetWalkerByUId} from '../../../infra/requests/WalkerRequests'
 import {DarkGray} from '../../styles/_colors'
 import EventContainer from './components/EventContainer'
@@ -66,7 +65,6 @@ const Header = ({
   active
 }) => {
   const [isOpen, setOpen] = useState(false)
-  const [visible, setVisible] = useState(false)
   const [notification, setNotification] = useState(false)
   const [logged, setLogged] = useState(0)
   const [walker, setWalker] = useState({})
@@ -77,9 +75,6 @@ const Header = ({
   const store = useStore()
   const tempUser = localStorage.getItem('user')
   const user = JSON.parse(tempUser)
-  const showDrawer = () => {
-    setVisible(true)
-  }
 
   useEffect(() => {
     const token = localStorage.getItem(AuthTokenKey)
@@ -164,7 +159,7 @@ const Header = ({
         eventId: id,
         status: 2
       }
-      const result = await UpdateEventStatus(data)
+      await UpdateEventStatus(data)
     } catch (e) {
       console.error(e)
     }
@@ -176,13 +171,11 @@ const Header = ({
         eventId: id,
         status: 3
       }
-      const result = await UpdateEventStatus(data)
+      await UpdateEventStatus(data)
     } catch (e) {
       console.error(e)
     }
   }
-
-  console.log(incomingEvents, outgoingEvents)
 
   return (
     <>
@@ -339,7 +332,6 @@ const Header = ({
                         backgroundColor: {DarkGray}
                       }}
                       size='large'
-                      onClick={showDrawer}
                     >
                       {user?.userData?.firstName[0].toUpperCase()}
                       {user?.userData?.lastName[0].toUpperCase()}
@@ -347,7 +339,6 @@ const Header = ({
                   ) : (
                     <UserAvatar
                       size='large'
-                      onClick={showDrawer}
                       src={user?.userData?.profilePhoto}
                       style={{
                         border: '2px solid #cecece'

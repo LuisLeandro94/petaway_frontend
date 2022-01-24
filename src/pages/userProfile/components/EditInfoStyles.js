@@ -1,10 +1,8 @@
 import styled from 'styled-components'
 
 import {
-  BorderColor,
   DarkGray,
   PrimaryColor,
-  TextColor,
   White
 } from '../../../shared/styles/_colors'
 import {device} from '../../../shared/styles/_responsive'
