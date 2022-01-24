@@ -46,7 +46,6 @@ export const LogoContainer = styled.a`
   @media ${device.tabletL} {
     width: 33%;
     order: 2;
-    text-align: right;
     padding: 15px;
   }
 `
@@ -102,6 +101,7 @@ export const OperationWrapper = styled.div`
   @media ${device.tabletL} {
     width: 33%;
     order: 3;
+    display: none;
   }
 `
 

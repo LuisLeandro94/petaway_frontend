@@ -27,6 +27,8 @@ const MobileMenu = ({
   active
 }) => {
   const store = useStore()
+  const tempUser = localStorage.getItem('user')
+  const user = JSON.parse(tempUser)
 
   const toggleLanguage = (e) => {
     store.dispatch(setActiveLanguage(parseInt(e.target.value, 10)))
@@ -36,14 +38,24 @@ const MobileMenu = ({
   return (
     <Wrapper toggled={toggled}>
       <List>
-        {MenuList.map((menu) => (
-          <ListItem key={menu.id}>
-            <ListLink href={menu.link}>
-              <Translate id={menu.name} />
-              <Underline />
-            </ListLink>
-          </ListItem>
-        ))}
+        {!user &&
+          MenuList.map((menu) => (
+            <ListItem key={menu.id}>
+              <ListLink href={menu.link}>
+                <Translate id={menu.name} />
+                <Underline />
+              </ListLink>
+            </ListItem>
+          ))}
+        {user &&
+          MenuList.filter((x) => x.logged === true).map((menu) => (
+            <ListItem key={menu.id}>
+              <ListLink href={menu.link}>
+                <Translate id={menu.name} />
+                <Underline />
+              </ListLink>
+            </ListItem>
+          ))}
       </List>
       <LanguageWrapper>
         <MobileLanguageSelector
