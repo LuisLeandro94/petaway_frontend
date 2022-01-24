@@ -5,6 +5,7 @@ import {PropTypes} from 'prop-types'
 
 import {
   AlertContainer,
+  AlertBar,
   CloseIcon,
   AlertTitle,
   AlertDescription

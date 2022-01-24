@@ -27,6 +27,8 @@ const Search = ({translate}) => {
     GetAllServices().then((res) => setServiceList(res.data.result))
   }, [])
 
+  console.log(searchResult)
+
   const redirectToHome = () => {
     setResultState(!resultState)
     history.push('/')

@@ -40,7 +40,7 @@ const Services = ({user}) => {
       }
       history.push('/search')
     } catch (e) {
-      console.error(e)
+      console.log(e)
     }
   }
 

@@ -1,5 +1,5 @@
 import {Menu, MenuItem} from '@szhsin/react-menu'
-import {Avatar, Button, Drawer} from 'antd'
+import {Avatar, Button, Drawer, Tabs} from 'antd'
 import {Sling as Hamburger} from 'hamburger-react'
 import styled, {keyframes} from 'styled-components'
 
