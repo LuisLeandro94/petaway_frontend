@@ -57,7 +57,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot](https://imgur.com/a/9s7zkJt)](https://petaway-dwm.herokuapp.com/)
+[![Product Name Screen Shot](src/assets/screenshot.png)](https://petaway-dwm.herokuapp.com/)
 
 When you need somewhere to take care of your pet while you are gone what do you do? Family? We all know that is not always an option. That's where PetAway comes into play. Just open our software, sign up, and start searching for the best pet-walkers and pet-sitters in your area. Treat your pets with only the best quality services!
 
