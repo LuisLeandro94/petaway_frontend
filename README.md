@@ -1,36 +1,15 @@
 <div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
-
-
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/LuisLeandro94/petaway_frontend">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="src/assets/Logo_PetAway_V1.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">PetAway Frontend</h3>
@@ -84,7 +63,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `LuisLeandro94`, `petaway_frontend`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `PetAway Frontend`, `project_description`
+When you need somewhere to take care of your pet while you are gone what do you do? Family? We all know that is not always an option. That's where PetAway comes into play. Just open our software, sign up, and start searching for the best pet-walkers and pet-sitters in your area. Treat your pets with only the best quality services!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -92,14 +71,10 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Built With
 
-* [Next.js](https://nextjs.org/)
 * [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [Styled-Components](https://styled-components.com/)
+* [Ant Design](https://ant.design/)
+* [GMaps API](https://developers.google.com/maps)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -108,12 +83,11 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Make sure you have the latest npm version running on your machine.
 * npm
   ```sh
   npm install npm@latest -g
@@ -121,66 +95,32 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/LuisLeandro94/petaway_frontend.git
    ```
-3. Install NPM packages
+2. Clone the API repo
+   ```sh
+   git clone https://github.com/LuisLeandro94/petaway-backend.git
+   ```
+3. Get the API up and running following the steps over in `PetAway-Backend`
+   ```sh
+   https://github.com/LuisLeandro94/petaway-backend.git
+   ```
+5. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+   or
+   ```sh
+   npm i
+   ```
+4. Run the app
+   ```sh
+   npm start
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/LuisLeandro94/petaway_frontend/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- LICENSE -->
 ## License
@@ -194,23 +134,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/LuisLeandro94/petaway_frontend](https://github.com/LuisLeandro94/petaway_frontend)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
+Project Link: [Frontend](https://github.com/LuisLeandro94/petaway_frontend)
+Backend Link: [Backend](https://github.com/LuisLeandro94/petaway-backend)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
