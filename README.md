@@ -9,7 +9,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/LuisLeandro94/petaway_frontend">
-    <img src="src/assets/Logo_PetAway_V1.png" alt="Logo" width="80" height="80">
+    <img src="src/assets/Logo_PetAway_V1.png" alt="Logo" width="240" height="90.14">
   </a>
 
 <h3 align="center">PetAway Frontend</h3>
@@ -17,7 +17,7 @@
   <p align="center">
     A software for the best Pet Owners.
     <br />
-    <a href="https://github.com/LuisLeandro94/petaway_frontend"><strong>Explore the docs »</strong></a>
+    <a href="https://documenter.getpostman.com/view/14342837/UVXkoF1X"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://petaway-dwm.herokuapp.com/">View Live Version</a>
@@ -47,12 +47,8 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -61,7 +57,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot](https://imgur.com/a/9s7zkJt)](https://petaway-dwm.herokuapp.com/)
 
 When you need somewhere to take care of your pet while you are gone what do you do? Family? We all know that is not always an option. That's where PetAway comes into play. Just open our software, sign up, and start searching for the best pet-walkers and pet-sitters in your area. Treat your pets with only the best quality services!
 
